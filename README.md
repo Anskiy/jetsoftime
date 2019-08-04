@@ -35,7 +35,7 @@ A: They are secondary locations that provide generally high tier equipment, or e
 from Taban, the Northern Ruins are a great source of sealed chests and allow Frog to upgrade his Masamune, and Ozzie's Fort drops the prices in
 Medina's shop, which is geared to give better-than-normal items.
 
-Q:How do I get to Lavos?
+Q: How do I get to Lavos?
 
 A: You must either find a way to the Ocean Palace, or open up Death Peak with the Clone and C.Trigger. This opens up something special.
 
