@@ -22,17 +22,21 @@ grinding to beat him.
 --FAQ--
 
 Q: Which locations hold key items?
+
 A: Usually, locations that rewarded you with those items vanilla. A list is provided in Locations.txt.
 
 Q: Why isn't my character gaining more techs?
+
 A: Chrono, Marle, Lucca and Frog are deliberately set not to learn techs beyond a point vanilla. Take them to the End of Time to let them gain techs.
 
 Q: What does Heckran Cave/Northern Ruins/Ozzie's Fort do?
+
 A: They are secondary locations that provide generally high tier equipment, or extra benefits. Finishing Heckran Cave lets you get a good helm 
 from Taban, the Northern Ruins are a great source of sealed chests and allow Frog to upgrade his Masamune, and Ozzie's Fort drops the prices in
 Medina's shop, which is geared to give better-than-normal items.
 
 Q:How do I get to Lavos?
+
 A: You must either find a way to the Ocean Palace, or open up Death Peak with the Clone and C.Trigger. This opens up something special.
 
 --HOW TO USE--
