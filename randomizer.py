@@ -3,8 +3,10 @@ import struct as st
 from os import stat
 from time import time
 import treasurewriter as treasures
+import specialwriter as hardcoded_items
 import shopwriter as shops
 import characterwriter as char_slots
+import logicwriter as keyitems
 import random as rand
 def tenthousands_digit(digit):
     digit = st.unpack(">B",digit)
@@ -71,10 +73,10 @@ Also, try writing the extension(.sfc/smc)."""
         f.write(data)
         f.close()
      print "Applying patch. This might take a while."
-     p = open("Wings of Time 2.ips","r+b")
+     p = open("patch.ips","r+b")
      position = 5
      f = open(outfile,'r+b')
-     while position < 351676:
+     while position < 351306:
        p.seek(position)
        pointer1 = p.read(1)
        pointer1 = tenthousands_digit(pointer1)
@@ -90,9 +92,12 @@ Also, try writing the extension(.sfc/smc)."""
      f.close
      print "Randomizing treasures..."
      treasures.randomize_treasures(outfile)
+     hardcoded_items.randomize_hardcoded_items(outfile)
      print "Randomizing shops..."
      shops.randomize_shops(outfile)
      print "Randomizing character locations..."
      char_locs = char_slots.randomize_char_positions(outfile)
+     print "Now placing key items..."
+     keyitems.randomize_keys(char_locs,outfile)
      print "Randomization completed successfully."
      raw_input("Press Enter to exit.")
