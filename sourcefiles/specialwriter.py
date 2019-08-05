@@ -34,7 +34,7 @@ trade_helms = [0x8B,0x88,0x92,0x93,0x8A,0x91,0x86]
 helm_trades = [0x3902AC,0x3902B9]
 rocks = [0xAE,0xAF,0xB0,0xB1,0xB2]
 study_rock = [0x397916,0x397919]
-def randomize_hardcoded_items(outfile)
+def randomize_hardcoded_items(outfile):
    f = open(outfile,"r+b")
    i = 0
    while i < len(sealed_pointers) - 1:
