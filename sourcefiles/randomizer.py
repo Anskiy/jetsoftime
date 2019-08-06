@@ -8,6 +8,7 @@ import shopwriter as shops
 import characterwriter as char_slots
 import logicwriter as keyitems
 import random as rand
+import patcher as patches
 def tenthousands_digit(digit):
     digit = st.unpack(">B",digit)
     digit = int(digit[0]) * 0x10000
@@ -45,6 +46,7 @@ def get_data():
         data = int(data[0])
         return data
 if __name__ == "__main__":
+     flags = ""
      sourcefile = raw_input("Enter ROM please.")
      seed = raw_input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
@@ -52,9 +54,18 @@ if __name__ == "__main__":
      seed = int(seed)
      seed = seed % (10**10)
      rand.seed(seed)
+     glitch_fixes = raw_input("Would you like to disable (most known) glitches? Y/N ")
+     if glitch_fixes == "Y":
+        flags = flags + "g"
+     fast_move = raw_input("Would you like to move faster on the overworld/Epoch? Y/N ")
+     if fast_move == "Y":
+        flags = flags + "s"
+     sense_dpad = raw_input("Would you like faster dpad inputs in menus? Y/N ")
+     if sense_dpad == "Y":
+        flags = flags + "d"
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
-     outfile = "%s.%d.sfc"%(outfile,seed)
+     outfile = "%s.%s.%d.sfc"%(outfile,flags,seed)
      try:
         size = stat(sourcefile).st_size
      except WindowsError:
@@ -90,6 +101,17 @@ Also, try writing the extension(.sfc/smc)."""
        position = write_data(length,pointer,position)
      p.close
      f.close
+     patches.patch_file("patches\patch_codebase.txt",outfile)
+     if glitch_fixes == "Y":
+        patches.patch_file("patches\save_anywhere_patch.txt",outfile)
+        patches.patch_file("patches\unequip_patch.txt",outfile)
+        patches.patch_file("patches\\fadeout_patch.txt",outfile)
+        patches.patch_file("patches\hp_overflow_patch.txt",outfile)
+     if fast_move == "Y":
+        patches.patch_file("patches\\fast_overworld_walk_patch.txt",outfile)
+        patches.patch_file("patches\\faster_epoch_patch.txt",outfile)
+     if sense_dpad == "Y":
+        patches.patch_file("patches\\faster_menu_dpad.txt",outfile)
      print "Randomizing treasures..."
      treasures.randomize_treasures(outfile)
      hardcoded_items.randomize_hardcoded_items(outfile)
