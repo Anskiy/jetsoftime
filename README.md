@@ -10,6 +10,8 @@ Contact: https://discord.gg/PKXrWrf
          
 Email:   cecilraster475@gmail.com
 
+IMPORTANT: Read this, Locations.txt and Key Items.txt before playing a seed.
+
 --ABOUT--
 
 Wings of Time is a randomizer that attempts to make Chrono Trigger play like an open ended RPG. To do this, a lock and key system using certain
