@@ -54,9 +54,9 @@ if __name__ == "__main__":
      seed = int(seed)
      seed = seed % (10**10)
      rand.seed(seed)
-     glitch_fixes = raw_input("Would you like to disable (most known) glitches? Y/N ")
+     """glitch_fixes = raw_input("Would you like to disable (most known) glitches? Y/N ")
      if glitch_fixes == "Y":
-        flags = flags + "g"
+        flags = flags + "g" """
      fast_move = raw_input("Would you like to move faster on the overworld/Epoch? Y/N ")
      if fast_move == "Y":
         flags = flags + "s"
@@ -69,8 +69,8 @@ if __name__ == "__main__":
      try:
         size = stat(sourcefile).st_size
      except WindowsError:
-        print """Try placing the ROM in the same folder as this program.
-Also, try writing the extension(.sfc/smc)."""
+        raw_input("""Try placing the ROM in the same folder as this program.
+Also, try writing the extension(.sfc/smc).""")
      if size % 0x400 == 0:
         copyfile(sourcefile, outfile)
      elif size % 0x200 == 0:
@@ -101,17 +101,17 @@ Also, try writing the extension(.sfc/smc)."""
        position = write_data(length,pointer,position)
      p.close
      f.close
-     patches.patch_file("patches\patch_codebase.txt",outfile)
-     if glitch_fixes == "Y":
-        patches.patch_file("patches\save_anywhere_patch.txt",outfile)
-        patches.patch_file("patches\unequip_patch.txt",outfile)
-        patches.patch_file("patches\\fadeout_patch.txt",outfile)
-        patches.patch_file("patches\hp_overflow_patch.txt",outfile)
+     patches.patch_file("patches/patch_codebase.txt",outfile)
+     """if glitch_fixes == "Y":
+        patches.patch_file("patches/save_anywhere_patch.txt",outfile)
+        patches.patch_file("patches/unequip_patch.txt",outfile)
+        patches.patch_file("patches/fadeout_patch.txt",outfile)
+        patches.patch_file("patches/hp_overflow_patch.txt",outfile)"""
      if fast_move == "Y":
-        patches.patch_file("patches\\fast_overworld_walk_patch.txt",outfile)
-        patches.patch_file("patches\\faster_epoch_patch.txt",outfile)
+        patches.patch_file("patches/fast_overworld_walk_patch.txt",outfile)
+        patches.patch_file("patches/faster_epoch_patch.txt",outfile)
      if sense_dpad == "Y":
-        patches.patch_file("patches\\faster_menu_dpad.txt",outfile)
+        patches.patch_file("patches/faster_menu_dpad.txt",outfile)
      print "Randomizing treasures..."
      treasures.randomize_treasures(outfile)
      hardcoded_items.randomize_hardcoded_items(outfile)
