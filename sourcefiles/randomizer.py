@@ -54,9 +54,9 @@ if __name__ == "__main__":
      seed = int(seed)
      seed = seed % (10**10)
      rand.seed(seed)
-     """glitch_fixes = raw_input("Would you like to disable (most known) glitches? Y/N ")
+     glitch_fixes = raw_input("Would you like to disable (most known) glitches? Y/N ")
      if glitch_fixes == "Y":
-        flags = flags + "g" """
+        flags = flags + "g" 
      fast_move = raw_input("Would you like to move faster on the overworld/Epoch? Y/N ")
      if fast_move == "Y":
         flags = flags + "s"
@@ -102,11 +102,11 @@ Also, try writing the extension(.sfc/smc).""")
      p.close
      f.close
      patches.patch_file("patches/patch_codebase.txt",outfile)
-     """if glitch_fixes == "Y":
+     if glitch_fixes == "Y":
         patches.patch_file("patches/save_anywhere_patch.txt",outfile)
         patches.patch_file("patches/unequip_patch.txt",outfile)
         patches.patch_file("patches/fadeout_patch.txt",outfile)
-        patches.patch_file("patches/hp_overflow_patch.txt",outfile)"""
+        patches.patch_file("patches/hp_overflow_patch.txt",outfile)
      if fast_move == "Y":
         patches.patch_file("patches/fast_overworld_walk_patch.txt",outfile)
         patches.patch_file("patches/faster_epoch_patch.txt",outfile)
