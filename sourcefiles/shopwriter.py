@@ -52,28 +52,35 @@ def pick_items(shop,rand_num):
     return item
 def write_slots(file_pointer,shop_start,items,shop_address):
     buffer = []
+    req_item_count = 0
     while items > 0:
-        if items == 1:
-          if shop_start == 0xC2C6D:
-              if 0xC8 not in buffer:
-                 file_pointer.seek(0x1AFC29)
+       if shop_start == 0xC2C6D:
+            if req_item_count < 1:
+                 buffer.append(0xC8)
+                 file_pointer.seek(shop_address)
                  file_pointer.write(st.pack("B",0xC8))
-              if 0xC7 not in buffer:
-                 file_pointer.seek(0x1AFC2A)
+                 shop_address += 1
+                 buffer.append(0xC7)
+                 file_pointer.seek(shop_address)
                  file_pointer.write(st.pack("B",0xC7))
-              if 0xC1 not in buffer:
-                 file_pointer.seek(0x1AFC2B)
+                 shop_address += 1
+                 buffer.append(0xC1)
+                 file_pointer.seek(shop_address)
                  file_pointer.write(st.pack("B",0xC1))
-          item = 0x00
-        else:
-          rand_num = rand.randrange(0,16,1)	
-          item = pick_items(shop_start,rand_num)
-        if item in buffer:
+                 shop_address += 1
+                 items -= 3
+                 req_item_count = 1
+       if items == 1:
+            item = 0x00
+       else:
+            rand_num = rand.randrange(0,16,1)	
+            item = pick_items(shop_start,rand_num)
+       if item in buffer:
             continue
-        buffer.append(item)
-        file_pointer.seek(shop_address)
-        file_pointer.write(st.pack("B",item))
-        """if shop_start == 0xC2C6D and item == 0xC8:
+       buffer.append(item)
+       file_pointer.seek(shop_address)
+       file_pointer.write(st.pack("B",item))
+       """if shop_start == 0xC2C6D and item == 0xC8:
             print("Loop entered.")
             ShelterPlaced = 1
         if shop_start == 0xC2C6D and item == 0xC7:
@@ -82,8 +89,8 @@ def write_slots(file_pointer,shop_start,items,shop_address):
         if shop_start == 0xC2C6D and item == 0xC1:
             print("Loop entered.")
             MidEtherPlaced = 1"""
-        shop_address += 1
-        items -= 1
+       shop_address += 1
+       items -= 1
     return shop_address
 def randomize_shops(outfile):
    shop_pointer = 0xFC29
