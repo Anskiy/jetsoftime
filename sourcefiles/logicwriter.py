@@ -109,7 +109,7 @@ def randomize_keys(char_locs,outfile):
           if "desert" in loclist and "endoftime" in loclist and "desert" not in lockeys:
               lockeys.append("desert")
           if "sword1" in loclist and "sword2" in loclist and "sword3" in loclist and "sword4" in loclist\
-          "endoftime" in loclist and "reptite" not in lockeys:
+          and "endoftime" in loclist and "reptite" not in lockeys:
               lockeys.append("reptite")
               lockeys.append("woe")
               determine_char_locks(loclist,char_locs,"dactyl")
