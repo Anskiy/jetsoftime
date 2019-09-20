@@ -6,6 +6,8 @@ def determine_char_locks(loclist,charlocs,charkey):
        loclist.append("desert")
     if char == 1:
        loclist.append("trial1")
+    if char == 4:
+       loclist.append("sword4")
 def parse_keys(provided_key):
     if provided_key == "pop":
         provided_key = 0xE3
@@ -42,7 +44,7 @@ def parse_keys(provided_key):
     return provided_key
 def randomize_keys(char_locs,outfile):
     loclist = []
-    complete_list = [2300,"sword1","sword2","sword3","desert","giant","trial1","trial2","melchior1",
+    complete_list = [2300,"sword1","sword2","sword3","sword4","desert","giant","trial1","trial2","melchior1",
     "melchior2","burrow","ruins","endoftime","palace","omen1","omen2"]
     char_keys = ["start","start2","cathedral","castle","proto","burrow","dactyl"]
     iterations = 0
@@ -106,7 +108,7 @@ def randomize_keys(char_locs,outfile):
               lockeys.append("burrow")
           if "desert" in loclist and "endoftime" in loclist and "desert" not in lockeys:
               lockeys.append("desert")
-          if "sword1" in loclist and "sword2" in loclist and "sword3" in loclist and \
+          if "sword1" in loclist and "sword2" in loclist and "sword3" in loclist and "sword4" in loclist\
           "endoftime" in loclist and "reptite" not in lockeys:
               lockeys.append("reptite")
               lockeys.append("woe")
