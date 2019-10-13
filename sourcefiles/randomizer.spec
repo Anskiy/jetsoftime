@@ -1,4 +1,4 @@
-# -*- mode: python -*-
+# -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
 
@@ -33,4 +33,5 @@ coll = COLLECT(exe,
                a.datas,
                strip=False,
                upx=True,
+               upx_exclude=[],
                name='randomizer')
