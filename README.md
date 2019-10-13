@@ -41,11 +41,16 @@ Q: How do I get to Lavos?
 
 A: You must either find a way to the Ocean Palace, or open up Death Peak with the Clone and C.Trigger. This opens up something special.
 
+--KNOWN BUGS--
+Attempting to land the Epoch on blocked ground during the intro cutscene causes softlocks.
+Doing Denadoro Mountains after opening the Magic Cave with Frog causes one of Frog's flashbacks to play, and softlocks
+the game.
+
 --HOW TO USE--
 
 Download by clicking the "Clone or download repository" button. Unzip the contents to a new folder. Windows users can directly copy their ROM
 to this folder and run randomizer.exe. For Linux or Mac users, copy the ROM to the sourcefiles folder instead, and run randomizer.py in Python.
-Note that this randomizer was made with Python 2.7.
+This randomizer runs on Python 3, but older files from Python 2.7 are located in sourcefiles/python2.
 
 Please use a fresh North American ROM while randomizing. An unheadered ROM is recommended, but a headered one can work too, though this has not
 been tested.
