@@ -47,20 +47,20 @@ def get_data():
         return data
 if __name__ == "__main__":
      flags = ""
-     sourcefile = input("Enter ROM please.")
-     seed = input("Enter seed(or leave blank if you want to randomly generate one).")
+     sourcefile = raw_input("Enter ROM please.")
+     seed = raw_input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
         seed = time()
      seed = int(seed)
      seed = seed % (10**10)
      rand.seed(seed)
-     glitch_fixes = input("Would you like to disable (most known) glitches? Y/N ")
+     glitch_fixes = raw_input("Would you like to disable (most known) glitches? Y/N ")
      if glitch_fixes == "Y":
         flags = flags + "g" 
-     fast_move = input("Would you like to move faster on the overworld/Epoch? Y/N ")
+     fast_move = raw_input("Would you like to move faster on the overworld/Epoch? Y/N ")
      if fast_move == "Y":
         flags = flags + "s"
-     sense_dpad = input("Would you like faster dpad inputs in menus? Y/N ")
+     sense_dpad = raw_input("Would you like faster dpad inputs in menus? Y/N ")
      if sense_dpad == "Y":
         flags = flags + "d"
      outfile = sourcefile.split(".")
@@ -69,12 +69,12 @@ if __name__ == "__main__":
      try:
         size = stat(sourcefile).st_size
      except WindowsError:
-        input("""Try placing the ROM in the same folder as this program.
+        raw_input("""Try placing the ROM in the same folder as this program.
 Also, try writing the extension(.sfc/smc).""")
      if size % 0x400 == 0:
         copyfile(sourcefile, outfile)
      elif size % 0x200 == 0:
-        print("SNES header detected. Removing header from output file.")
+        print "SNES header detected. Removing header from output file."
         f = open(sourcefile, 'r+b')
         data = f.read()
         f.close()
@@ -83,7 +83,7 @@ Also, try writing the extension(.sfc/smc).""")
         f = open(outfile, 'r+b')
         f.write(data)
         f.close()
-     print("Applying patch. This might take a while.")
+     print "Applying patch. This might take a while."
      p = open("patch.ips","r+b")
      position = 5
      f = open(outfile,'r+b')
@@ -112,14 +112,14 @@ Also, try writing the extension(.sfc/smc).""")
         patches.patch_file("patches/faster_epoch_patch.txt",outfile)
      if sense_dpad == "Y":
         patches.patch_file("patches/faster_menu_dpad.txt",outfile)
-     print("Randomizing treasures...")
+     print "Randomizing treasures..."
      treasures.randomize_treasures(outfile)
      hardcoded_items.randomize_hardcoded_items(outfile)
-     print("Randomizing shops...")
+     print "Randomizing shops..."
      shops.randomize_shops(outfile)
-     print("Randomizing character locations...")
+     print "Randomizing character locations..."
      char_locs = char_slots.randomize_char_positions(outfile)
-     print("Now placing key items...")
+     print "Now placing key items..."
      keyitems.randomize_keys(char_locs,outfile)
-     print("Randomization completed successfully.")
-     input("Press Enter to exit.")
+     print "Randomization completed successfully."
+     raw_input("Press Enter to exit.")

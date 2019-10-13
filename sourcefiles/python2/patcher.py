@@ -21,5 +21,5 @@ def patch_file(patch,outfile):
      f.close
      p.close
 if __name__ == "__main__":
-    file = input("Enter patch name.")
+    file = raw_input("Enter patch name.")
     patch_file(file,"Projectfile.smc")

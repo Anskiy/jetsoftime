@@ -120,7 +120,7 @@ def randomize_keys(char_locs,outfile):
           i += 1
        iterations += 1
     if iterations == 3600:
-       print("Oops, ran out of attempts. Please try again!")
+       print "Oops, ran out of attempts. Please try again!"
     else:
        ordered_keys = ["zenan" ,"denadoro1" ,"denadoro2" ,"snail" ,"toma" ,"burrow" ,"carpenter" ,"trial" ,
        "melchior" ,"claw" ,"desert" ,"arris" ,"geno" ,"sun" ,"reptite" ,"woe"]
