@@ -42,7 +42,9 @@ Q: How do I get to Lavos?
 A: You must either find a way to the Ocean Palace, or open up Death Peak with the Clone and C.Trigger. This opens up something special.
 
 --KNOWN BUGS--
+
 Attempting to land the Epoch on blocked ground during the intro cutscene causes softlocks.
+
 Doing Denadoro Mountains after opening the Magic Cave with Frog causes one of Frog's flashbacks to play, and softlocks
 the game.
 
