@@ -1,0 +1,316 @@
+-Gave Marle and Lucca the same Hit growth as the Power growth Chrono has.
+
+-Dropped the power of the Darkscythe from 120 to 60.
+
+-Raised the power of all other scythes by 20 each.
+
+-Made magical characters learn 3 techs before unlocking magic.
+
+-Standardized learn rates for the first 3 techs to be 5-10-50.
+
+-Nerfed Ogan's HP to 50.
+
+-Made the rock in Denadoro Mts random.
+
+-Nerfed Mohavor's evasion to 25, set their Lightning and Fire resistances to normal.
+
+-Nerfed Hexapod's offense to 56, HP to 200, and set their Lightning and Fire resistances to normal. Nerfed special attack of Hexapod from 25 to
+16 attack power.
+
+-Nerfed Sentry HP to 250. Nerfed their XP to 250, their gold to 200, and their TP to 4, since they are extremely farmable. Also set their Fire resistance to normal 
+and their Charm to Full Ethers.
+
+-Nerfed Defunct HP to 400. Nerfed their offense to 75. Nerfed their XP to 250, their gold to 250, and their TP to 4, since they are very farmable. Also set their 
+Fire and Lightning weakness to 133% and their Charm to Lapises.
+
+-Nerfed Reaper HP to 400. Nerfed their XP to 250, their gold to 400, and their TP to 4, since they are very farmable. Also, set their Fire and Lightning weaknesses
+to 133% and removed their Charm.
+
+-Nerfed Base HP to 20. Also nerfed their magic to 60, and their level to 20. Nerfed their XP to 150, their gold to 300, and their TP to 4, since they are very 
+farmable.
+
+-Nerfed Departed's HP to 800. Nerfed their offense to 85. Gave a Fire and Lightning weakness of 133%.
+
+-Changed Drill Kick to use 125% power from both Chrono and Ayla.
+
+-Changed Bubble Snap to use 150% power from both Robo and Frog.
+
+-Changed Volt Bite to use 150% power from both Chrono and Ayla.
+
+-Buffed Guard HP to 100, their offense to 50, and their defense to 140. Raised their XP to 200, their TP to 3, and their gold to 220. Upgraded their drop to Mid 
+Tonics.
+
+-Buffed Omnicrone HP to 200, and their offense to 100. Raised their XP to 300, their TP to 4, and their gold to 350. Upgraded their drop to Mid Ethers.
+
+-Buffed Decedent HP to 100, and their offense to 75. Raised their XP to 220, their TP to 3, and their gold to 400. Lowered both Fire and Lightning weaknesses to
+133%.
+
+-Removed the stronger attack of Guards.
+
+-Raised the attack power of the grinder's mowdown move from 9 to 25.
+
+-Raised the HP of the Dragon Tank spot to 3500, the offensive power to 50, and the level and magic power both to 25. Raised XP to 1200, TP to 16, and gold to 1600.
+Set the Fire and Lightning resistances of the Dragon Tank and the Grinder to normal.
+
+-Buffed Octopod's HP to 400, their offense to 100, and their defense to 127. Raised their XP to 250, their TP to 4, and their gold to 400. Gave them Mid Ethers
+as a drop.
+
+-Raised power of special attack 0xA to 5.
+
+-Buffed Meat Eater's HP to 600, their offense to 100, their magic to 16, and their speed to 8. Raised their XP to 300, gold to 330, and TP to 5. Upgraded their
+drop to Mid Ethers.
+
+-Altered Octopod's AI to use their drain move followed by a regular attack.
+
+-Buffed Crater's HP to 400, their offense to 120, and their magic defense to 55. Raised their XP to 250, their TP to 4, and their gold to 300.
+
+-Altered Crater's AI to use Volcano on alternate turns, rather than randomly.
+
+-Buffed Debugger's HP to 400, their offense to 60, their level to 10 and their magic to 10. Nerfed their speed to 8. Set their Fire resistance to neutral. 
+Buffed their XP to 300, their TP to 5, and their gold to 250.
+
+-Changed Debugger's AI to randomly choose between a laser, a regular attack, a special, or wandering.
+
+-Set the enemies in Proto Dome to be Debuggers.
+
+-Set Robo's Tackle to use the regular physical damage formula.
+
+-Made Spin Kick use 150% of Ayla's and Robo's power.
+
+-Reworked all of Magus' non Shadow elemental techs to use 12 instead of 18 spell power.
+
+-Changed Chrono's tech point list to be 5-10-50-100-200-100-250-1000
+
+-Changed Marle's tech point list to be 5-10-50-100-50-200-250-500
+
+-Changed Lucca's tech point list to be 5-10-50-100-50-200-250-1000
+
+-Changed Robo's tech point list to be 5-10-50-100-200-250-100-1000
+
+-Changed Frog's tech point list to be 5-10-50-200-100-200-250-1000
+
+-Changed Ayla's tech point list to be 5-10-50-100-50-150-500-250
+
+-Changed Magus' tech point list to be 50-50-50-100-50-200-100-1000
+
+-Changed Max Cyclone to use 150% of both Robo's and Crono's power.
+
+-Buffed Mutant to have 500 HP, 120 offense, 157 defense, and 60 magic defense. Also made their Shadow weakness 133%. Buffed their XP to 700, their TP to 5 and 
+their gold to 500. Added Full Tonic as a drop to them.
+
+-Allowed the Mutant to use physicals at range
+
+-Changed Slurp Kiss to use Frog's Heal and Ayla's Kiss both.
+
+-Changed Bubble Hit to use 150% of both Ayla's and Frog's power.
+
+-Changed SwordStream to use 150% of both Crono's and Frog's power.
+
+-Changed Spincut to cost 6 MP.
+
+-Made attack index 0x0D a half HP drain.
+
+-Nerfed Robo Tackle to 16 attack power, raised its MP cost to 6.
+
+-Nerfed Rubbles to give 50 TP instead of 100, they would be broken in the new tech point system otherwise. Buffed their HP to 700.
+
+-Made Falcon Hit do 1.25x Cyclone damage for all enemies, it also uses 2 MP from Crono and 4 MP from Ayla now.
+
+-Nerfed Sun of Son spot's speed to 8, its level to 12 and its magic to 13. Nerfed its XP to 1600, its TP to 20, and its gold to 2000.
+
+-Nerfed enemy Flare's spell power to 10.
+
+-Gave Guardian 3000 HP, a level of 20 and 20 magic. Nerfed its speed to 7, and gave it new moves while reviving bits. Gave it 2000 XP, 20 TP, and 2000 gold.
+
+-Gave bits 500 HP, 75 offense, level 20 and 20 magic. Nerfed their speed to 8.
+
+-Buffed Proto 2's HP to 300 and their offense to 75. Raised their XP to 200, their TP to 3 and their gold to 220. Upgraded their drop to Mid Tonics, and gave them 
+Mid Ethers as a charm. Changed their Shadow resistance to normal.
+
+-Buffed Bugger's HP to 200, their level to 20, their magic to 20 and their offense to 120. Raised their XP to 100, their TP to 2 and their gold to 150.
+
+-Made it possible to skip the Geno Dome gauntlet after you've beat it once.
+
+-Made Antipode use 1.25x the power of Marle and Lucca.
+
+-Made Fire Punch use 125% of the power of Lucca and Robo.
+
+-Raised the strength of Marle, Lucca and Frog's level 1 spells to 12.
+
+-Raised the spell power of Frog's Heal to 10, and the MP cost to 4.
+
+-Set Crono's starting magic defense to 15, and the growth rate to 46. This leads to magic defense scaling slowly, but being more controllable.
+
+-Set Marle's starting magic defense to 25, and the growth rate to 46.
+
+-Set Lucca's starting magic defense to 25, and the growth rate to 46.
+
+-Set Robo's starting magic defense to 10, and the growth rate to 46.
+
+-Set Frog's starting magic defense to 15, and the growth rate to 46.
+
+-Set Ayla's starting magic defense to 10, and the growth rate to 46.
+
+-Set Magus' starting magic defense to 30, and the growth rate to 60.
+
+-Gave Magus the same magic growth as Marle.
+
+-Gave Frog a magic growth of 80.
+
+-Gave Magus the same power growth as Frog.
+
+-Made the imps' cupboard lead to Prehistory, with the Mystic Mountain portal leading to the End of Time.
+
+-Removed the Dreamstone requirement for forging the Masamune.
+
+-Nerfed Big Flame Breath of the Rust/Black Tyrano to 10 spell power.
+
+-Nerfed Rust Tyrano's level to 16 and magic to 15.
+
+-Nerfed Rust Tyrano's HP to 3000.
+
+-Nerfed Gigasaur's HP to 500, their speed to 8, their level to 9 and their magic to 8.
+
+-Nerfed Leaper's HP to 300, their speed to 11, their offense to 50 and their defense to 152.
+
+-Nerfed Fossil Ape's HP to 500, their speed to 8, their offense to 75 and their defense to 76.
+
+-Fixed bug with Porre mayor's sealed chest.
+
+-Fixed bug with Guardia Forest, Middle Ages' sealed chest.
+
+-Nerfed Lizardactyl's HP to 500.
+
+-Removed Toma's key item. The Bike Key was also removed from the pool.
+
+-Debuffed Zombor's Doom move to 10 spell power.
+
+-Nerfed Zombor's spot level to 6.
+
+-Changed Kiss to be a stronger heal, but cost 4 MP. This also buffs Slurp Kiss.
+
+-Raised Masa & Mune's strong attack to 18 power.
+
+-Raised Masa & Mune's spot offense to 100.
+
+-Nerfed the power of Masa & Mune's wind move to 10.
+
+-Nerfed Masa & Mune's level to 10, raised magic to 9.
+
+-Reverted Ice Toss to its old power.
+
+-Raised the MP cost of level 1 spells to 4.
+
+-Raised the MP cost of Laser Spin to 6.
+
+-Raised the spell power of Laser Spin to 12.
+
+-Changed Rocket Roll to use 125% of Crono's and Robo's power.
+
+-Raised the MP cost of Rock Throw to 6.
+
+-Nerfed Tail Spin to 12 spell power.
+
+-Changed Tail Spin to ignore target defense.
+
+-Changed Tail Spin to be a freely targetable, single target move.
+
+-Nerfed the MP cost of Tail Spin to 4.
+
+-Nerfed the offense of Yakra XIII's spot to 66.
+
+-Nerfed Yakra XIII spot's HP to 4500.
+
+-Buffed Yakra XIII spot's level to 17.
+
+-Nerfed Yakra XIII spot's magic to 18.
+
+-Made Yakra XIII fire normal needles on the appropriate turns.
+
+-Changed Yakra XIII's AI to use multitarget needles more often.
+
+-Fixed the textbox for Middle Ages Guardia's king being broken at odd places.
+
+-Changed Proto 3's AI to operate on a fixed script, using an attack followed by Laser Spin, and then a few more attacks.
+
+-Buffed Proto 3 to have 600 HP, 10 Level, 10 Magic, and 65 offense. Gave them rewards of 400 XP, 300 Gold, and 6 TP. Also made their drops Full Tonics.
+
+-Gave Proto 3s a 133% weakness to Lightning. Removed their weakness to Shadow.
+
+-Raised R Series spot's HP to 4000, offense to 105, level to 20 and magic to 15. Raised the spot rewards to 1600 XP, 1200 Gold and 24 TP.
+
+-Removed Fire resistance from R Series.
+
+-Changed Acid's AI to use Fireball more often.
+
+-Changed Alkaline's AI to use its regular attacks more often.
+
+-Gave Acid a level of 16 and a magic of 15.
+
+-Gave Alkaline 20 HP, a level of 23, magic of 23, and an offense of 57.
+
+-Buffed Edgers to have 350 HP and 75 magic defense.
+
+-Gave Edgers rewards of 250 XP, 250 Gold, and 3 TP.
+
+-Removed the Shadow weakness of Edgers.
+
+-Set Edger's defense to 127.
+
+-Changed Edgers to counter with an HP drain move.
+
+-Replaced all of Geno Dome's conveyor enemies with Proto 3s and Debuggers.
+
+-Raised Lucca's speed to 8 and Robo's speed to 9.
+
+-Changed Proto 4's level and magic to 11 and 12 respectively.
+
+-Upgraded Proto 4's HP to 750.
+
+-Upgraded Proto 4's rewards to 500 XP, 400 Gold, and 5 TP.
+
+-Gave Proto 4 Barriers as a drop, and Power Seals as a charm.
+
+-Upgraded Debuggest's HP to 700.
+
+-Changed Debuggest's level and magic to 10 each.
+
+-Nerfed Debuggest's offense to 65.
+
+-Upgraded Debuggest's rewards to 400 XP, 300 Gold, and 7 TP.
+
+-Gave Debuggests Shields as a drop, and Magic Rings as a charm.
+
+-Nerfed Mother Brain spot's HP to 3000, and offense to 100.
+
+-Changed Mother Brain spot's magic to 15.
+
+-Raised Kilwala's HP to 200.
+
+-Set Kilwala's rewards to 150 XP, 100 Gold and 2 TP.
+
+-Raised Runner's HP to 300.
+
+-Raised Runner's offense to 35.
+
+-Set Runner's rewards to 200 XP, 100 Gold and 2 TP.
+
+-Replaced Cave Ape with Winged Apes in Dactyl Nest.
+
+-Nerfed Winged Ape's defense to 76.
+
+-Buffed their offense to 57.
+
+-Gave Winged Apes 300 XP, 200 Gold and 3 TP.
+
+-Buffed Shists to have 400 HP. Similarly, raised Pahoehoe's HP to 400 to not have any HP cut out during the transform.
+
+-Gave Pahoehoes 61 offense.
+
+-Raised Pahoehoe's rewards to 200 XP, 100 Gold and 3 TP.
+
+-Set Shists to have the same rewards as the Pahoehoes.
+
+-Set Avian Rex to have 300 HP, 10 Speed, and 53 offense.
+
+-Gave Avian Rex 150 XP, 150 Gold and 2 TP as rewards.
