@@ -67,4 +67,4 @@ def randomize_treasures(outfile):
       f.write(st.pack("B",writeitem))
    f.close
 if __name__ == "__main__":
-        randomize_treasures()
+   randomize_treasures("Project.sfc")
