@@ -1,10 +1,10 @@
-Wings of Time: An Open Ended Chrono Trigger Randomizer
+Jets of Time: An Open Ended Chrono Trigger Randomizer
 
-Version: 1.0a (Alpha)
+Version: 0.01a
 
-Date: August 04, 2019
+Date: November 1, 2019
 
-URL: https://github.com/Anskiy/wingsoftime/
+URL: https://github.com/Anskiy/jetsoftime/
 
 Contact: https://discord.gg/PKXrWrf
          
@@ -14,48 +14,8 @@ IMPORTANT: Read this, Locations.txt and Key Items.txt before playing a seed.
 
 --ABOUT--
 
-Wings of Time is a randomizer that attempts to make Chrono Trigger play like an open ended RPG. To do this, a lock and key system using certain
-plot/quest items from the base game was created. In addition, characters, shops, treasure chests and several event based rewards have all been randomized.
+Jets of Time is a remake of Wings of Time, with the intent of making the game more flexible for randomization while taking a few liberties with the gameplay. It is currently in development, expect progress to be posted here in the future!
 
-In addition, the difficulty curve was rescaled to better fit the progression, so certain end game locations are easier, while things like Magus'
-Castle and the Ocean Palace are noticeably harder. Also, Lavos was rescaled to be beatable by level 35 parties, so as to eliminate the need for
-grinding to beat him.
-
---FAQ--
-
-Q: Which locations hold key items?
-
-A: Usually, locations that rewarded you with those items vanilla. A list is provided in Locations.txt.
-
-Q: Why isn't my character gaining more techs?
-
-A: Chrono, Marle, Lucca and Frog are deliberately set not to learn techs beyond a point vanilla. Take them to the End of Time to let them gain techs.
-
-Q: What does Heckran Cave/Northern Ruins/Ozzie's Fort do?
-
-A: They are secondary locations that provide generally high tier equipment, or extra benefits. Finishing Heckran Cave lets you get a good helm 
-from Taban, the Northern Ruins are a great source of sealed chests and allow Frog to upgrade his Masamune, and Ozzie's Fort drops the prices in
-Medina's shop, which is geared to give better-than-normal items.
-
-Q: How do I get to Lavos?
-
-A: You must either find a way to the Ocean Palace, or open up Death Peak with the Clone and C.Trigger. This opens up something special.
-
---KNOWN BUGS--
-
-Attempting to land the Epoch on blocked ground during the intro cutscene causes softlocks.
-
-Doing Denadoro Mountains after opening the Magic Cave with Frog causes one of Frog's flashbacks to play, and softlocks
-the game.
-
---HOW TO USE--
-
-Download by clicking the "Clone or download repository" button. Unzip the contents to a new folder. Windows users can directly copy their ROM
-to this folder and run randomizer.exe. For Linux or Mac users, copy the ROM to the sourcefiles folder instead, and run randomizer.py in Python.
-This randomizer runs on Python 3, but older files from Python 2.7 are located in sourcefiles/python2.
-
-Please use a fresh North American ROM while randomizing. An unheadered ROM is recommended, but a headered one can work too, though this has not
-been tested.
 
 --CREDITS--
 
