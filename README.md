@@ -10,8 +10,6 @@ Contact: https://discord.gg/PKXrWrf
          
 Email:   cecilraster475@gmail.com
 
-IMPORTANT: Read this, Locations.txt and Key Items.txt before playing a seed.
-
 --ABOUT--
 
 Jets of Time is a remake of Wings of Time, with the intent of making the game more flexible for randomization while taking a few liberties with the gameplay. It is currently in development, expect progress to be posted here in the future!
