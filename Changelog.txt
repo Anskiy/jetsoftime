@@ -318,3 +318,7 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Added some guaranteed weapons to Melchior's fair shop.
 
 -Gave the player 20,000 gold at the start.
+
+-Nerfed Mohavor HP to 100, and magic to 5.
+
+-Nerfed Hexapod defense to 153.
