@@ -58,4 +58,4 @@ def randomize_hardcoded_items(outfile):
        i += 1
    f.close
 if __name__ == "__main__":
-   randomize_hardcoded_items("Projectfile.smc")
+   randomize_hardcoded_items("Project.sfc")
