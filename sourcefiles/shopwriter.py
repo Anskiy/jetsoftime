@@ -1,7 +1,7 @@
 import struct as st
 import random as rand
-shop_starts = list(range(0xC2C6D,0xC2C9D,2))
-regular_shops = [0xC2C6D,0xC2C6F,0xC2C73,0xC2C77,0xC2C79,0xC2C85] + list(range(0xC2C89,0xC2C91,2))
+shop_starts = list(range(0xC2C6F,0xC2C9D,2))
+regular_shops = [0xC2C6F,0xC2C73,0xC2C77,0xC2C79,0xC2C85] + list(range(0xC2C89,0xC2C91,2))
 good_shops = [0xC2C71,0xC2C75,0xC2C7D,0xC2C81,0xC2C83,0xC2C87,0xC2C93,0xC2C97,0xC2C99]
 best_shops = [0xC2C7B,0xC2C7F,0xC2C9B]
 forbid_shops = [0xC2C91,0xC2C95]
@@ -54,22 +54,6 @@ def write_slots(file_pointer,shop_start,items,shop_address):
     buffer = []
     req_item_count = 0
     while items > 0:
-       if shop_start == 0xC2C6D:
-            if req_item_count < 1:
-                 buffer.append(0xC8)
-                 file_pointer.seek(shop_address)
-                 file_pointer.write(st.pack("B",0xC8))
-                 shop_address += 1
-                 buffer.append(0xC7)
-                 file_pointer.seek(shop_address)
-                 file_pointer.write(st.pack("B",0xC7))
-                 shop_address += 1
-                 buffer.append(0xC1)
-                 file_pointer.seek(shop_address)
-                 file_pointer.write(st.pack("B",0xC1))
-                 shop_address += 1
-                 items -= 3
-                 req_item_count = 1
        if items == 1:
             item = 0x00
        else:
@@ -80,45 +64,38 @@ def write_slots(file_pointer,shop_start,items,shop_address):
        buffer.append(item)
        file_pointer.seek(shop_address)
        file_pointer.write(st.pack("B",item))
-       """if shop_start == 0xC2C6D and item == 0xC8:
-            print("Loop entered.")
-            ShelterPlaced = 1
-        if shop_start == 0xC2C6D and item == 0xC7:
-            print("Loop entered.")
-            RevivePlaced = 1
-        if shop_start == 0xC2C6D and item == 0xC1:
-            print("Loop entered.")
-            MidEtherPlaced = 1"""
        shop_address += 1
        items -= 1
     return shop_address
+def warranty_shop(file_pointer):
+    shop_address = 0x1AFC29
+    guaranteed_items = [0x0,0xC8,0xC7,rand.choice([0x6,0x7]),rand.choice([0x15,0x16]),rand.choice([0x24,0x25]),
+    rand.choice([0x31,0x32]),0x3E]
+    shop_size = len(guaranteed_items) - 1
+    while shop_size > -1:
+            print(shop_size)
+            shop_address = write_guarantee(file_pointer,shop_address,guaranteed_items[shop_size],shop_size)
+            shop_size -= 1
+    shop_pointer = 0xFC29 + len(guaranteed_items)
+def write_guarantee(file_pointer,shop_address,item,shop_size):
+    file_pointer.seek(shop_address)
+    file_pointer.write(st.pack("B",item))
+    shop_address += 1
+    return shop_address
 def randomize_shops(outfile):
-   shop_pointer = 0xFC29
-   shop_address = 0x1AFC29
-   """ShelterPlaced = 0
-   RevivePlaced = 0
-   MidEtherPlaced = 0"""
+   shop_pointer = 0xFC31
+   shop_address = 0x1AFC31
    f = open(outfile,"r+b")
+   warranty_shop(f)
    for start in shop_starts:
      if start in forbid_shops:
         f.seek(start)
         f.write(st.pack("H",shop_pointer + 1))
         continue
      shop_items = rand.randrange(4,10)
-     if start != 0xC2C6D:
-        f.seek(start)
-        f.write(st.pack("H",shop_pointer))
+     f.seek(start)
+     f.write(st.pack("H",shop_pointer))
      shop_pointer += shop_items
      shop_address = write_slots(f,start,shop_items,shop_address)
-   """if not ShelterPlaced:
-    f.seek(0x1AFC29)
-    f.write(st.pack("B",0xC8))
-   if not RevivePlaced:
-    f.seek(0x1AFC2A)
-    f.write(st.pack("B",0xC7))
-   if not MidEtherPlaced:
-    f.seek(0x1AFC2B)
-    f.write(st.pack("B",0xC1))
-   f.close"""
 if __name__ == "__main__":
    randomize_shops("Project.sfc")
