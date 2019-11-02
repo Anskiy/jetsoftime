@@ -314,3 +314,7 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Set Avian Rex to have 300 HP, 10 Speed, and 53 offense.
 
 -Gave Avian Rex 150 XP, 150 Gold and 2 TP as rewards.
+
+-Added some guaranteed weapons to Melchior's fair shop.
+
+-Gave the player 20,000 gold at the start.
