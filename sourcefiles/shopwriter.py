@@ -73,9 +73,9 @@ def warranty_shop(file_pointer):
     rand.choice([0x31,0x32]),0x3E]
     shop_size = len(guaranteed_items) - 1
     while shop_size > -1:
-            shop_address = write_guarantee(file_pointer,shop_address,guaranteed_items[shop_size],shop_size)
+            shop_address = write_guarantee(file_pointer,shop_address,guaranteed_items[shop_size])
             shop_size -= 1
-def write_guarantee(file_pointer,shop_address,item,shop_size):
+def write_guarantee(file_pointer,shop_address,item):
     file_pointer.seek(shop_address)
     file_pointer.write(st.pack("B",item))
     shop_address += 1
