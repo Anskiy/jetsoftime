@@ -12,7 +12,7 @@ Email:   cecilraster475@gmail.com
 
 --ABOUT--
 
-Jets of Time is a remake of Wings of Time, with the intent of making the game more flexible for randomization while taking a few liberties with the gameplay. It is currently in development, expect progress to be posted here in the future!
+Jets of Time is a remake of Wings of Time, intended to make the game more flexible for randomization while taking a few liberties with the gameplay. It is currently in development, expect progress to be posted here in the future!
 
 
 --CREDITS--
