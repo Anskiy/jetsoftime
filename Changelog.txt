@@ -330,3 +330,17 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Nerfed the Retinite's XP to 500, gold to 1500, and tech points to 10
 
 -Nerfed the TP gains from Gigasaurs, Leapers, Dactyls and Fossil Apes to 8, 5, 4 and 6 respectively.
+
+-Moved a key item to Taban. Requires beating Heckran.
+
+-Raised Rolypoly's, Octoblush's, and Cave Bat's XP to 50.
+
+-Raised Jinn Bottle's XP to 100.
+
+-Raised Tempurite's XP to 75.
+
+-Raised Hench's HP to 100.
+
+-Raised Hench(Heckran Cave)'s XP to 150.
+
+-Gave Heckran 600 XP.
