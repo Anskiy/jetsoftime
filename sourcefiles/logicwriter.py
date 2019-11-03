@@ -53,9 +53,9 @@ def randomize_keys(char_locs,outfile):
        loclist = []
        keyitems = ["pop","hilt","blade","stone","knife","gate","jerky","pendant","moon","prism","tools","clone",
        "trigger","medal","ribbon"]
-       locations = {"zenan": "","denadoro1": "","denadoro2": "","snail": "","burrow": "","carpenter": "","trial": "",
+       locations = {"zenan": "","taban": "","denadoro": "","snail": "","burrow": "","carpenter": "","trial": "",
        "melchior": "","claw": "","desert": "","arris": "","geno": "","sun": "","reptite": "","woe": ""}
-       lockeys = ["zenan","denadoro1","denadoro2","snail","carpenter"]
+       lockeys = ["zenan","taban","denadoro","snail","carpenter"]
        for loc in locations:
           chosen = rand.choice(keyitems)
           locations[loc] = chosen
@@ -127,11 +127,11 @@ def randomize_keys(char_locs,outfile):
     if iterations == 3600:
        print("Oops, ran out of attempts. Please try again!")
     else:
-       ordered_keys = ["zenan" ,"denadoro1" ,"denadoro2" ,"snail" ,"burrow" ,"carpenter" ,"trial" ,
+       ordered_keys = ["zenan" ,"taban" ,"denadoro" ,"snail" ,"burrow" ,"carpenter" ,"trial" ,
        "melchior" ,"claw" ,"desert" ,"arris" ,"geno" ,"sun" ,"reptite" ,"woe"]
-       pointer1 = [0x393C82,0x37742F,0x18D40A,0x380C42,0x3891D5,0x3966B,0x38045D,0x3805DE,0x1B8AEC,
+       pointer1 = [0x393C82,0x35F8B7,0x37742F,0x380C42,0x3891D5,0x3966B,0x38045D,0x3805DE,0x1B8AEC,
        0x6EF5E,0x392F4C,0x1B1844,0x1B8D89,0x18FC2C,0x381010]
-       pointer2 = [0x393C84,0x377432,0x18D40C,0x380C5B,0x3891D7,0x3966D,0x38045F,0x3805E0,
+       pointer2 = [0x393C84,0x35F8B9,0x377432,0x380C5B,0x3891D7,0x3966D,0x38045F,0x3805E0,
        0x1B8AEF,0x6EF61,0x392F4E,0x1B1846,0x1B8D8B,0x18FC2F,0x381013]
        i = 0
        while i < len(ordered_keys):

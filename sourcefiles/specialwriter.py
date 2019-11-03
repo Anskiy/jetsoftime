@@ -14,7 +14,7 @@ sealed_treasures = [0xA1,0xBF,0xC2,0xC4,0xB7,0xA8,0x9F,0xB9,0x0A,0x0B,0x10,0x17,
 
 taban_gift_weapon = [0x35F891,0x35F893]
 taban_gift_helm = [0x35F8A4,0x35F8A6]
-taban_gift_armor = [0x35F8B7,0x35F8B9]
+#taban_gift_armor = [0x35F8B7,0x35F8B9]
 
 taban_helms = [0x8B,0x8E,0x89,0x92,0x93,0x90,0x8A,0x91,0x86,0x8F]
 taban_armors = [0x79,0x68,0x69,0x6E,0x70,0x7A,0x6A,0x6B,0x6D,0x6C]
@@ -44,9 +44,9 @@ def randomize_hardcoded_items(outfile):
        f.seek(sealed_pointers[i+1])
        f.write(st.pack("B",treasure))
        i += 2
-   oneoffs = [taban_gift_weapon,taban_gift_armor,taban_gift_helm,ranged_trades,acces_trades,tab_trades,wep_trades,
+   oneoffs = [taban_gift_weapon,taban_gift_helm,ranged_trades,acces_trades,tab_trades,wep_trades,
    armor_trades,helm_trades,denadoro_rock]
-   oneoffitems = [taban_weapons,taban_armors,taban_helms,trade_rangeweps,trade_acces,trade_tabs,trade_weps,
+   oneoffitems = [taban_weapons,taban_helms,trade_rangeweps,trade_acces,trade_tabs,trade_weps,
    trade_armors,trade_helms,rocks]
    i = 0
    while i < len(oneoffs):
