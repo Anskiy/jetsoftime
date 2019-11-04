@@ -85,9 +85,10 @@ Also, try writing the extension(.sfc/smc).""")
         f.close()
      print("Applying patch. This might take a while.")
      p = open("patch.ips","r+b")
+     patch_size = stat("patch.ips").st_size
      position = 5
      f = open(outfile,'r+b')
-     while position < 351306:
+     while position < patch_size - 4:
        p.seek(position)
        pointer1 = p.read(1)
        pointer1 = tenthousands_digit(pointer1)
