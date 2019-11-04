@@ -48,6 +48,7 @@ def get_data():
 if __name__ == "__main__":
      flags = ""
      sourcefile = input("Enter ROM please.")
+     sourcefile = sourcefile.strip("\"")
      seed = input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
         seed = time()
