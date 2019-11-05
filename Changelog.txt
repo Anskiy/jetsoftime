@@ -344,3 +344,35 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Raised Hench(Heckran Cave)'s XP to 150.
 
 -Gave Heckran 600 XP.
+
+-Made the Heckran Cave exit smoother.
+
+-Removed Frog's cutscene from Denadoro Mts.
+
+-Set up a Dreamstone lock on Tyrano Lair.
+
+-Nerfed Mother Brain's displays to 10 magic and speed.
+
+-Nerfed Mother Brain's speed to 10.
+
+-Nerfed Krakker's HP to 600 and speed to 10.
+
+-Buffed Krakker's magic defense to 60.
+
+-Buffed Krakker's XP to 250, gold to 300, and TP to 4.
+
+-Nerfed the fire and lightning weaknesses of Macabre to 1.33x
+
+-Nerfed Macabre's HP to 750, their speed to 8 and their magic defense to 40.
+
+-Buffed Macabre's physical defense to 153.
+
+-Assigned Macabre's XP to 400, gold to 300, and TP to 5.
+
+-Removed two boss spots from Death Peak.
+
+-Nerfed Lavos Spawn shell's offense to 75 and speed to 10.
+
+-Nerfed Lavos Spawn head's HP to 5000, offense to 75, level to 15 and magic to 16.
+
+-Assigned Lavos Spawn head's XP to 2500, gold to 2000 and TP to 20. 
