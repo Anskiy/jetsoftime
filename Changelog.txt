@@ -375,4 +375,28 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 
 -Nerfed Lavos Spawn head's HP to 5000, offense to 75, level to 15 and magic to 16.
 
--Assigned Lavos Spawn head's XP to 2500, gold to 2000 and TP to 20. 
+-Assigned Lavos Spawn head's XP to 2500, gold to 2000 and TP to 20.
+
+-Removed Mega Mutant's spot.
+
+-Set Incognito's magic and level to 40.
+
+-Gave Incognito 200 XP, 250 gold and 4 TP.
+
+-Nerfed Martello's HP to 700, level to 12, speed to 9 and magic to 11.
+
+-Set Martello's XP to 300, gold to 350 and TP to 5.
+
+-Set Martello's lightning weakness to 1.33x.
+
+-Nerfed Synchrite's HP to 700, level to 12, speed to 9 and magic to 16.
+
+-Set Synchrite's XP to 300, gold to 400 and TP to 5.
+
+-Nerfed Goon's HP to 1000, level to 10, speed to 6, magic to 15 and offense to 60.
+
+-Nerfed Sickle toss's power to 30.
+
+-Nerfed Goon Tornado's power to 10.
+
+-Assigned Goon 500 XP, 600 gold and 10 TP.
