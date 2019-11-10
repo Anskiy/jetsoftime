@@ -393,10 +393,102 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 
 -Set Synchrite's XP to 300, gold to 400 and TP to 5.
 
--Nerfed Goon's HP to 1000, level to 10, speed to 6, magic to 15 and offense to 60.
+-Nerfed Synchrite's lightning weakness to 133%.
+
+-Nerfed Goon's HP to 1000, level to 10, speed to 8, magic to 15 and offense to 60.
 
 -Nerfed Sickle toss's power to 30.
 
 -Nerfed Goon Tornado's power to 10.
 
 -Assigned Goon 500 XP, 600 gold and 10 TP.
+
+-Nerfed Panel's HP to 750, speed to 9, level to 20 and magic to 26.
+
+-Gave Panel 400 XP, 350 gold, and 4 TP.
+
+-Nerfed Boss Orb's HP to 500, level to 22 and magic to 22.
+
+-Gave Side Kicks 500 HP. 
+
+-Nerfed the TP gain from Side Kicks to 50.
+
+-Nerfed Metal Mute's HP to 600, level to 10, magic to 15, and speed to 12.
+
+-Assigned Metal Mutes 400 XP, 350 gold, and 4 TP.
+
+-Made Metal Mutes use a half HP drain for their regular attack.
+
+-Nerfed Flyclops's HP to 300.
+
+-Set Flyclops's rewards to 250 XP, 200 gold, and 3 TP.
+
+-Nerfed Cybot's HP to 600.
+
+-Set Cybot's rewards to 250 XP, 200 gold and 3 TP.
+
+-Set Ruminator's HP to 400, defense to 153 and magic defense to 60.
+
+-Gave Tubster 1500 HP and 113 offense.
+
+-Set Tubster's XP to 500, gold to 600 and TP to 6.
+
+-Gave Alien 900 HP.
+
+-Set Alien's XP to 600, gold to 750, and TP to 5.
+
+-Gave Blob 800 HP.
+
+-Set Blob's XP to 450, gold to 600, and TP to 3.
+
+-Raised the power of Marle's Cure, set its MP cost to 4.
+
+-Buffed Frog's Heal, set its cost to 8.
+
+-Buffed Ice 2.
+
+-Restored Cube Toss to its original strength.
+
+-Buffed Napalm and Fire 2.
+
+-Reduced Antipode 2's boosts.
+
+-Buffed Water 2.
+
+-Lowered the boosts on Glacier.
+
+-Nerfed total HP of Giga Mutant to 10,000.
+
+-Set Giga Mutant back to its original AI.
+
+-Made Mutant Gas (Poison) scale off magic.
+
+-Nerfed Mutant Gas (Poison)'s power slightly to make it scale properly.
+
+-Buffed up Giga Mutant's speed to 11.
+
+-Made Cure 2 heal status effects and be an actual full heal.
+
+-Nerfed Terra Mutant's HP to 5000, level to 19 and magic to 21.
+
+-Buffed Destruction Zone to make it a worthwhile move for Black Omen Lavos Spawn.
+
+-Buffed Dark Bomb for similar reasons.
+
+-Lowered the power of Sleep Mist, raised chance of status affliction to compensate.
+
+-Made Sleep Mist evadable.
+
+-Lowered the offense of Black Omen Lavos Spawn to 153.
+
+-Nerfed Black Omen Lavos Spawn's level to 28 and magic to 32.
+
+-Restored Terra Mutant's AI to its old routine.
+
+-Raised Chaotic Zone's status infliction rates.
+
+-Nerfed Terra Mutant's bottom's HP to 10,000.
+
+-Standardized hit rate of bosses as 30.
+
+-Gave Fire Whirl a better damage ratio off its components.
