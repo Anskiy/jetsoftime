@@ -492,3 +492,73 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Standardized hit rate of bosses as 30.
 
 -Gave Fire Whirl a better damage ratio off its components.
+
+-Nerfed Manoria Cathedral Hench back to 49 HP.
+
+-Nerfed Hench's HP to 400, defense to 153, level to 10, speed to 8 and offense to 75.
+
+-Set Hench's Fire weakness to 133%.
+
+-Set Hench's rewards to 350 XP, 400 gold, and 4 TP.
+
+-Gave Hench Mid Tonics.
+
+-Nerfed Vamp's HP to 200, offense to 60, and speed to 12.
+
+-Set Vamp's XP to 200, gold to 150, and TP to 3.
+
+-Gave Vamp Ethers.
+
+-Nerfed Sorcerer to 300 HP, level 10, 20 magic, and 10 speed.
+
+-Set Sorcerer's Fire weakness to 133%.
+
+-Set Sorceror's XP to 250, gold to 200, and TP to 3.
+
+-Nerfed Decedent II's HP to 300, speed to 10 and offense to 75.
+
+-Set Fire and Lightning weaknesses of Decedent II to 133%.
+
+-Set rewards of Decedent II to 250 XP, 300 gold, 4 TP and Mid Tonics.
+
+-Nerfed Slash to have 4000 HP, level 10, 120 offense and 12 speed.
+
+-Set rewards of Slash to 2800 XP, 4200 gold and 25 TP.
+
+-Nerfed Flea to 3800 HP, level 15, 15 magic, and 100 offense.
+
+-Set rewards of Flea to 2500 XP, 4800 gold and 30 TP.
+
+-Set Grimalkin to 300 HP, 12 speed and 85 offense.
+
+-Set rewards of Grimalkins to 250 XP, 250 gold, and 5 TP.
+
+-Nerfed Grimalkin's Fire weakness to 133%.
+
+-Set Juggler to have 1000 HP, level 20 and 20 magic.
+
+-Set rewards of Juggler to 500 XP, 650 gold and 10 TP.
+
+-Nerfed Juggler's Fire weakness to 133%.
+
+-Set Outlaw to 350 HP, level 10, 10 magic, 75 offense, and 12 speed.
+
+-Set rewards of Outlaw to 300 XP, 400 gold and 4 TP.
+
+-Set Roly Bomber to level 10, 10 magic.
+
+-Set Flunky to 400 HP, 10 speed, and 70 offense.
+
+-Removed the elemental weaknesses of Flunky.
+
+-Set Flunky's rewards to 350 XP, 500 gold and 5 TP.
+
+-Set Groupie to 500 HP, 7 speed, and 85 offense.
+
+-Set Groupie's rewards to 300 XP, 350 gold and 8 TP.
+
+-Removed elemental weaknesses of Groupie.
+
+-Set Magus to have 5000 HP, level 20, 20 magic, 140 offense and 253 defense.
+
+-Set Magus's rewards to 3700 XP, 5200 gold and 50 TP.
