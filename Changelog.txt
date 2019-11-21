@@ -562,3 +562,49 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Set Magus to have 5000 HP, level 20, 20 magic, 140 offense and 253 defense.
 
 -Set Magus's rewards to 3700 XP, 5200 gold and 50 TP.
+
+-Lowered MP cost of Magic Wall to 6.
+
+-Made the end of the fight at Manoria Cathedral's storeroom less janky.
+
+-Removed the dialogue at the entrance of the ruined Tyrano Lair in 600 AD.
+
+-Set cost of Ayla's Kiss to 2 MP.
+
+-Made Slurp Kiss use Ayla's Kiss for healing.
+
+-Set cost of Robo's Cure Beam to 1 MP.
+
+-Made Aura Beam use Cure Beam for healing.
+
+-Redid scripting in Tata's house to account for him not giving you key items.
+
+-Set Evilweevils to 250 HP, 40 magic defense, 170 physical defense, and 80 offense.
+
+-Set Evilweevil's rewards to 300 XP, 400 gold, and 3 TP.
+
+-Set Flytraps to 350 HP and 127 defense.
+
+-Set Flytrap's rewards to 200 XP, 300 gold, and 3 TP.
+
+-Set Megasaurs to 500 HP, level 10, 15 magic and 95 offense.
+
+-Set Megasaur's rewards to 400 XP, 600 gold and 5 TP.
+
+-Set Green Reptites to 300 HP, level 8, 8 magic, 75 offense, 40 magic defense and 170 physical defense.
+
+-Set Green Reptite's rewards to 200 XP, 250 gold and 4 TP.
+
+-Set Winged Apes to 95 offense and 102 defense.
+
+-Set Winged Ape's rewards to 370 XP, 530 gold and 4 TP.
+
+-Set Shitakes to 200 HP and 40 magic defense.
+
+-Set Shitake's rewards to 150 XP, 200 gold, and 3 TP.
+
+-Fixed softlock that happened while exiting Sun Palace without collecting the reward.
+
+-Set Nizbel to 5000 HP, 125 offense, level 10 and 15 magic.
+
+-Set Nizbel's rewards to 3000 XP, 2200 gold and 35 TP.
