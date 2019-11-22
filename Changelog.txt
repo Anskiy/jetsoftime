@@ -608,3 +608,47 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Set Nizbel to 5000 HP, 125 offense, level 10 and 15 magic.
 
 -Set Nizbel's rewards to 3000 XP, 2200 gold and 35 TP.
+
+-Set Cave Ape to 700 HP, 130 offense and 102 defense.
+
+-Set Cave Ape's rewards to 400 XP, 800 gold and 5 TP.
+
+-Set Grey Reptite to 400 HP, 95 offense and 169 defense.
+
+-Set Grey Reptite's rewards to 200 XP, 300 gold and 3 TP.
+
+-Set Terrasaur to 700 HP, level 15 and 30 magic.
+
+-Set Terrasaur's rewards to 380 XP, 600 gold and 7 TP.
+
+-Lowered eruption of Volcano to 7 spell power.
+
+-Lowered eruption of Volcano aimed at enemies to 3 spell power.
+
+-Made the single target eruption a magic attack.
+
+-Lowered the single target eruption to 7 spell power.
+
+-Set Volcano to 400 HP, level 10, and 25 magic.
+
+-Set Volcano's rewards to 210 XP, 250 gold and 3 TP.
+
+-Nerfed Water weakness of Volcano to 133%.
+
+-Set Nizbel II to 5400 HP, level 15, 20 magic and 135 offense.
+
+-Set Nizbel II's rewards to 3500 XP, 3100 gold and 46 TP.
+
+-Reverted Nizbel's II's shock status to a stackable 32 defense cut.
+
+-Made attacks raise Nizbel II's defense by 10.
+
+-Set Azala to 1000 HP, 100 offense, and 10 speed.
+
+-Set Azala's rewards to 500 XP, 750 gold and 8 TP.
+
+-Set Black Tyrano to 6000 HP, 12 speed, level 20 and 25 magic.
+
+-Set Black Tyrano's rewards to 4200 XP, 1200 gold and 32 TP.
+
+-Upped XP of Mother Brain to 2500.
