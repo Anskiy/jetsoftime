@@ -652,3 +652,11 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Set Black Tyrano's rewards to 4200 XP, 1200 gold and 32 TP.
 
 -Upped XP of Mother Brain to 2500.
+
+-Lowered Tank Head's magic to 20.
+
+-Set Tank Head's HP to 1000.
+
+-Fixed errors with Proto Dome.
+
+-Redid script to dejank the rock throwing Free Lancer at Denadoro Mts.
