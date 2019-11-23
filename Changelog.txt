@@ -664,3 +664,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Made Taban always show up in Lucca's workshop.
 
 -Made Sun of Son stay if the player leaves the palace without collecting the key item.
+
+-Repointed addresses to account for Taban always being present.
