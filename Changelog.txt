@@ -660,3 +660,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Fixed errors with Proto Dome.
 
 -Redid script to dejank the rock throwing Free Lancer at Denadoro Mts.
+
+-Made Taban always show up in Lucca's workshop.
