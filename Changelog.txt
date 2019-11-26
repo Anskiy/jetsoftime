@@ -666,3 +666,11 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Made Sun of Son stay if the player leaves the palace without collecting the key item.
 
 -Repointed addresses to account for Taban always being present.
+
+-Made Zeal Palace's door open with just the Ruby Knife.
+
+-Made the player teleport directly to the Prison Catwalks if they turn in the Pendant.
+
+-Lowered Swordstream's damage multipliers.
+
+-Lowered Drill Kick's damage multipliers.
