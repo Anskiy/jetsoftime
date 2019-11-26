@@ -674,3 +674,7 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Lowered Swordstream's damage multipliers.
 
 -Lowered Drill Kick's damage multipliers.
+
+-Shortened the intro.
+
+-Buffed the TP of Heckran Cave enemies.
