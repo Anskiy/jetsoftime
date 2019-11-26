@@ -678,3 +678,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Shortened the intro.
 
 -Buffed the TP of Heckran Cave enemies.
+
+-Fixed post Heckran overworld jump breaking with Crono as the lead.
