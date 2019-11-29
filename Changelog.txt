@@ -680,3 +680,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Buffed the TP of Heckran Cave enemies.
 
 -Fixed post Heckran overworld jump breaking with Crono as the lead.
+
+-Nerfed Guardian's level and magic to 13.
