@@ -682,3 +682,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Fixed post Heckran overworld jump breaking with Crono as the lead.
 
 -Nerfed Guardian's level and magic to 13.
+
+-Made the logic write placed characters to the spoiler log.

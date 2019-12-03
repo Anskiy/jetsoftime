@@ -9,6 +9,25 @@ def determine_char_locks(loclist,charlocs,charkey):
        loclist.append("trial1")
     if char == 4:
        loclist.append("sword3")
+def rename_chars(charlocs):
+    for charkey in charlocs:
+        char = charlocs [charkey] [0]
+        if char == 0:
+           char = "Chrono"
+        if char == 1:
+           char = "Marle"
+        if char == 2:
+           char = "Lucca"
+        if char == 3:
+           char = "Robo"
+        if char == 4:
+           char = "Frog"
+        if char == 5:
+           char = "Ayla"
+        if char == 6:
+           char = "Magus"
+        charlocs [charkey] = char
+    return charlocs
 def parse_keys(provided_key):
     if provided_key == "pop":
         provided_key = 0xE3
@@ -145,7 +164,8 @@ def randomize_keys(char_locs,outfile):
            i += 1
            f.close
     f = open("spoiler_log.txt","w+")
-    f.write(str(locations))
+    rename_chars(char_locs)
+    f.write(f"{str(locations)}\n{str(char_locs)}")
     f.close
 if __name__ == "__main__":
     char_locations = chars.randomize_char_positions("Project.sfc")
