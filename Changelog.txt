@@ -684,3 +684,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Nerfed Guardian's level and magic to 13.
 
 -Made the logic write placed characters to the spoiler log.
+
+-Implemented randomized drops and charms.

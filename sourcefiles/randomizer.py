@@ -9,6 +9,7 @@ import characterwriter as char_slots
 import logicwriter as keyitems
 import random as rand
 import patcher as patches
+import enemywriter as enemystuff
 def tenthousands_digit(digit):
     digit = st.unpack(">B",digit)
     digit = int(digit[0]) * 0x10000
@@ -117,6 +118,8 @@ Also, try writing the extension(.sfc/smc).""")
      print("Randomizing treasures...")
      treasures.randomize_treasures(outfile)
      hardcoded_items.randomize_hardcoded_items(outfile)
+     print("Randomizing enemy loot...")
+     enemystuff.randomize_enemy_stuff(outfile)
      print("Randomizing shops...")
      shops.randomize_shops(outfile)
      print("Randomizing character locations...")
