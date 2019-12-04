@@ -95,5 +95,6 @@ def randomize_shops(outfile):
      f.write(st.pack("H",shop_pointer))
      shop_pointer += shop_items
      shop_address = write_slots(f,start,shop_items,shop_address)
+   f.close
 if __name__ == "__main__":
    randomize_shops("Project.sfc")
