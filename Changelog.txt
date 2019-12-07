@@ -686,3 +686,31 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Made the logic write placed characters to the spoiler log.
 
 -Implemented randomized drops and charms.
+
+-Removed Mud Imp fight.
+
+-Nerfed Bantam Imps to 300 HP, 153 offense, 10 speed, level 20 and 30 magic.
+
+-Set Bantam Imps' rewards to 500 XP, 600 gold and 10 TP.
+
+-Set Stone Imps to 400 HP, 192 offense, and 10 speed.
+
+-Set Stone Imps' rewards to 400 XP, 500 gold and 5 TP.
+
+-Set Gargoyles to 500 HP, 153 offense and 12 speed.
+
+-Set Gargoyles' rewards to 400 XP, 450 gold and 7 TP.
+
+-Set Man Eaters to 350 HP, level 10, 20 magic and 10 speed.
+
+-Set Man Eaters' rewards to 300 XP, 300 gold and 6 TP.
+
+-Buffed the base power of Giga Gaia's Dark Plasma a bit.
+
+-Nerfed the base power of Giga Gaia's Double Blaster.
+
+-Set Giga Gaia to 7000 HP.
+
+-Set Giga Gaia's rewards to 4000 XP, 6000 gold and 80 TP.
+
+-Set Giga Gaia's arms to level 10, 25 magic, and 12 speed.
