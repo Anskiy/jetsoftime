@@ -714,3 +714,61 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Set Giga Gaia's rewards to 4000 XP, 6000 gold and 80 TP.
 
 -Set Giga Gaia's arms to level 10, 25 magic, and 12 speed.
+
+-Removed the Nus at the entrance of Zeal's palace.
+
+-Fixed the music trigger for picking up the Speed Tab at Kajar's laboratory.
+
+-Removed Kajar Nu's random shops.
+
+-Made a cheeky FF5 reference.
+
+-Set Golem to 6000 HP, 192 offense, level 15, 30 hit, 25 magic and 12 speed.
+
+-Set Golem's rewards to 2500 XP, 4000 gold and 40 TP.
+
+-Set Scouters to 200 HP, level 10, 30 magic and 8 speed.
+
+-Set Scouter's rewards to 300 XP, 500 gold and 10 TP.
+
+-Set Mages to 750 HP and 38 offense.
+
+-Set Mage's rewards to 800 XP, 1000 gold and 25 TP.
+
+-Set Blue Scout and Red Scout's stats to Scouter's.
+
+-Set Barghests to 750 HP, level 15, 10 speed, 30 magic and 176 offense.
+
+-Set Barghest's rewards to 800 XP, 1200 gold and 20 TP.
+
+-Set Jinns to 750 HP.
+
+-Set Jinn's rewards to 300 XP, 400 gold and 5 TP.
+
+-Set Trashers to 500 HP, 215 offense, and 10 speed.
+
+-Set Trasher's rewards to 500 XP, 700 gold and 15 TP.
+
+-Set Lashers to 600 HP, 150 offense and 10 speed.
+
+-Set Lasher's rewards to 500 XP, 800 gold and 10 TP.
+
+-Lowered speed of Ocean Palace golems to 12.
+
+-Set outer shell Lavos to 12000 HP, 32 offense, level 13 and 14 magic.
+
+-Set left arm of Lavos to 3000 HP, level 32, 32 magic, 30 hit and 121 offense.
+
+-Set right arm of Lavos to 3800 HP, level 32, 30 hit, 32 magic and 121 offense.
+
+-Set inner Lavos to level 10, 30 hit and 9 magic.
+
+-Significantly lowered the power of Lavos' Doors of Doom.
+
+-Set Lavos' left bit to 1500 HP, 12 speed, 14 offense, level 32 and 32 magic.
+
+-Significantly nerfed the base power of Invading Light.
+
+-Set Lavos' center component to 18 offense, 12 speed, level 2, and 3 magic.
+
+-Set Lavos' right bit to level 24, 31 magic and 26 offense.
