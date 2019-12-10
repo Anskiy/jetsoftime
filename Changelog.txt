@@ -776,3 +776,31 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Raised Heal Beam cost to 4.
 
 -Made Zeal's true form skip Lavos' outer shell upon defeat.
+
+-Buffed Doors of Doom to 9 base power.
+
+-Buffed offense of inner Lavos' arms to 225.
+
+-Buffed HP of left arm to 4000 and HP of right arm to 5000.
+
+-Buffed inner Lavos' magic to 15.
+
+-Buffed Lavos core's offense to 50.
+
+-Buffed Lavos core's attack's base power to 250.
+
+-Buffed Lavos' left bit to 3000 HP.
+
+-Buffed Invading Light's base power to 11.
+
+-Buffed Sickle Toss to 40 base power.
+
+-Buffed Lavos' bits' level to 33 and magic to 36.
+
+-Buffed Lavos core's magic to 5.
+
+-Buffed Lavos core's speed to 14.
+
+-Buffed Lavos left bit's speed to 14.
+
+-Buffed Lavos' bits' offense to 66.
