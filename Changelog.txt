@@ -772,3 +772,7 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Set Lavos' center component to 18 offense, 12 speed, level 2, and 3 magic.
 
 -Set Lavos' right bit to level 24, 31 magic and 26 offense.
+
+-Raised Heal Beam cost to 4.
+
+-Made Zeal's true form skip Lavos' outer shell upon defeat.
