@@ -804,3 +804,11 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Buffed Lavos left bit's speed to 14.
 
 -Buffed Lavos' bits' offense to 66.
+
+-Fixed softlock in the Ocean Palace cutscene.
+
+-Nerfed the offense of inner Lavos' arms to 200.
+
+-Nerfed the offense of Lavos' bits to 46.
+
+-Nerfed the offense of Lavos' center to 30.
