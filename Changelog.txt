@@ -812,3 +812,7 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Nerfed the offense of Lavos' bits to 46.
 
 -Nerfed the offense of Lavos' center to 30.
+
+-Raised the base power of Tyrano's flame breath to 16.
+
+-Raised the base power of Son of Sun's Flare to 16.
