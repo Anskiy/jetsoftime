@@ -818,3 +818,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Raised the base power of Son of Sun's Flare to 16.
 
 -Fixed janky animation of Lavos Spawn's intro on Death Peak.
+
+-Lowered Lavos' left bit by 20 levels to nerf Invading Light.
