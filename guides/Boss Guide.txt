@@ -1,0 +1,223 @@
+Yakra
+
+Fairly straightforward fight. Yakra will counter attacks if the character is far away, so try to attack with characters near him. Note that while using dual techs,
+the character selecting it is the one counters are aimed at.
+
+
+Zenan Bridge Ozzie
+
+The skeletons have high defenses, but attacking Ozzie directly 3 times is enough to end each encounter.
+
+
+Zombor
+
+Also a fairly simple boss if you bring some healing, either in the form of items or techs. Zombor has high physical and magical defense, and both parts absorb two
+elements. Focus your attacks on the head; it has a nasty aoe laser that can fry early game parties easily. Killing the legs makes the head use this as "their" 
+death counter, so beware!
+
+
+Retinite
+
+Has high evasion and some nasty attacks, however you can avoid seeing most of them by being prudent. Use non elemental dual techs to get around its evasion, or 
+make it vulnerable with Water magic. Keep the core for last; if it dies, both parts will go berserk. The core can be healed with any element except Water, so use
+that if the situation looks dicey. This boss nulls all elements, so don't attack it if you have weak physicals.
+
+
+Heckran
+
+Only vulnerable to magic, so keep that in mind while forming an offensive party. Mostly uses strong Water moves, so Water absorption will come in handy.
+
+
+Masa and Mune
+
+Both bosses have counters, Masa counters with an X Strike while Mune counters with a Chaos inflicting move. However, these depend on both being active, and they 
+are vulnerable to many statuses. If you don't have a way to inflict them, choose Masa(the one starting on the left) as your target.
+
+
+Masa&Mune
+
+A fairly formidable boss, Masa & Mune starts by pounding the party with mild physicals. However, they soon escalate to an airborne toss, and begin "storing tornado
+energy". During this phase, they will counter every attack with a wind slash, so choose your moves carefully. They end this phase by launching a strong aoe, then
+deliver significantly stronger physicals before going back to storing energy. The wind slash and aoe are both Lightning elemental, so absorb gear is useful. Try to
+bring lots of revives and strong physical teams for this fight.
+
+
+Yakra XIII
+
+The hardest boss of Present Day(though that isn't saying much), Yakra XIII likes to surprise you with deadly needles when he's at half HP. Getting good armor or 
+the earrings is recommended before you face him, though grinding out some levels also works. Be especially careful about the health of the team; he shoots aoe 
+needles from time to time, and counters his death with them.
+
+
+Dragon Tank
+
+It's made of 3 parts, and the most durable part, the head, nullifies both Lightning and Fire. The grinder is a good first target to deprive it of its strong 
+physical aoe, after that it's generally good to beat up the head, since the body counters every attack with a laser once the grinder is down. Good magical aoes 
+that aren't Lightning or Fire really help in this fight.
+
+
+Rust Tyrano
+
+Countdown boss. Try to get in as much damage as possible, and bring some Fire protection if needed.
+
+
+Guardian
+
+Dispatch the two bits as soon as you can; they have only 500 HP, but can pull some nasty moves. The Guardian also uses a deadly spell to counter when any bit is 
+up. Pound the Guardian hard, but remember to heal the party since it will pull a strong Fire and a strong Shadow aoe before resurrecting its bits. 
+
+
+Son of Sun
+A "puzzle" boss. Wait for it to shuffle its flames once, then check them by attacking them. The correct flame will do damage to the eyeball when hit. Remember that 
+hitting the right flame with techs will not hurt the eyeball, but will still draw counters from the wrong flames. This can be useful for quickly identifying the 
+correct flame. Fire protection is recommended for this fight.
+
+
+Lavos Spawn
+
+Opens with a fairly strong physical aoe, then uses a very strong Fire spell, a Sleep spell, and Chaos. Generally how hard this is depends a lot on your equipment, 
+but remember to only attack the head.
+
+
+R Series
+
+The gimmick here is that the robots start pulling nasty counters as more of them fall. So manage your damage carefully, and try to take note of how much each robot
+has been hurt. Good magical aoes and strong single target moves help ease this fight.
+
+
+Mother Brain
+
+Her panels heal her incredibly well, so you want to deal with them fast. At the same time, you want to keep atleast one panel alive, since otherwise 
+Mother Brain will go berserk and destroy the party. As for Mother Brain, she has a moderately strong Shadow aoe and Chaos. Nothing notable, though she is rather 
+fast. Statuses are very effective on the panels. It's recommended to leave one of the panels on the sides intact, since the one right above Mother Brain is 
+vulnerable to many limited aoes.
+
+
+Nizbel
+
+Likes to alternate between moderately strong smacks and a physical aoe. Has absurdly high physical defense unless zapped with Lightning. Be careful, as after being 
+shocked, he will release a Lightning aoe. Generally, magical teams, or teams with Lightning combined with strong physical moves are recommended.
+
+
+Nizbel II
+
+Like his brother, he starts with absurdly high defense. Zapping him doesn't shock him, but lowers his defense by a bit. Afterwards, he releases a lightning aoe, 
+which lowers his defense to normal levels. This is the best time to strike him. Otherwise, he uses physical attacks, physical aoes, and a Sleep move. Every attack 
+on him raises defense by a bit, so it's advisable to try and use high power combos.
+
+
+Azala and the Black Tyrano
+
+Azala uses a few strong physical moves, but can be killed easily. Just remember that she has high physical defense, and unlike the other bosses in Prehistory, 
+there is no way to remove it. Statuses also work on her.
+The Black Tyrano is a countdown boss. Once either Azala is killed or disabled with statuses, or enough time 
+has passed, it removes its defenses and begins counting down. Pound it with everything you have. If it does manage to get off a huge Fire breath, it will partially 
+restore its defenses and chomp on the party before resetting the cycle. This can be enough to sneak in some damage.
+
+
+Slash
+
+Slash uses nothing but wind slashes until he's at half HP. At that point, he starts retaliating with very strong physical attacks, and even begins to 
+counterattack. Slash is generally resistant to magic, and immune to Ice, so don't bring mages to attack him.
+
+
+Flea
+
+Flea uses a bevy of statuses to irritate the team and make them ineffectual. Thankfully, most of the dangerous statuses are limited to single targets, so a stack 
+of heals should work. Of note is that it mildly resists every element except Fire. Status immunity items are tremendously helpful for this fight. At half HP, it 
+counters any possible attack with a nasty aoe. However, being down one party member prevents this.
+
+
+Magus
+Magus counters every attack with strong spells and interjects these with physical attacks and aoes of his own. He makes himself weak to the element of the spell he 
+casts. The Masamune(unupgraded) also saps his magic defense if it hits him once after every counter. At half HP, he will start counting down to a devastating 
+Shadow spell, so unload on him fast.
+
+
+Giga Gaia
+
+Begins the fight with a strong Fire and a strong Shadow aoe. Take out both the hands quickly. The right hand resists magic, while the left hand resists physicals. 
+When both are gone, the head will revive them with half HP, so it should be simple to take them down with aoes.
+
+
+Golem
+
+Has high power physical attacks, so switch it to another element by attacking with elemental moves. Fire and Ice are generally good choices, since it uses a single 
+target spell before unloading a aoe. When it switches modes, it resets its cycle, so juggling elements, or elements and physicals is quite effective.  It is 
+susceptible to every status except Chaos.
+
+
+Golem Twins
+
+Significantly more threatening than a single Golem, however most of the same tactics apply. If they really give trouble, setting them to an element the team 
+resists or absorbs can come in very handy. They are also susceptible to every status except Chaos.
+
+
+Giga Mutant
+
+Has high physical defense, so attack it with magic. The top part is the attacker, and will spam a lot of strong spells, including a Sleep inducing spell and a 
+Poison aoe. The base mostly throws a physical from time to time. If the top is killed first, it starts spamming the Poison aoe and Lifeshaver, which sets a 
+character to 1 HP. Generally speaking, you want to target both at the same time, which should be quite possible by the Omen.
+
+
+Terra Mutant
+
+Like the other mutant, it's only vulnerable to magic. Terra Mutant has a bunch of nasty attacks, but they all can be mitigated a bit. Of particular note is its red 
+rocks move, which hurts the entire party with heavy Fire damage, and Chaotic Zone, which attempts to set Chaos on the whole party. Terra Mutant heals itself by 
+sucking HP off its base, and self destructs when only one part is alive, so you can stonewall it to win.
+
+
+Lavos Spawn(Black Omen)
+
+Uses high power physical and magical aoes, but isn't as much a threat as the mutants. Just remember to target the head and not the shell.
+
+
+Zeal
+Largely unimpressive. She will knock down the party to 1 HP with Hallation, but not do much legitimately threatening. Kill her off quickly to get to the rest of 
+the Omen's final gauntlet.
+
+Mammon Machine
+Raises defenses with attacks, raises magic power with magic. In effect, a countdown boss. The Masamune(both versions) can sap its energy, which helps if the team 
+isn't able to damage rush it.
+
+Zeal 2
+
+Spams a lot of Skygates, with the hands using Shadow lasers. Eventually, she escalates first with Dark Gear, a strong Shadow aoe, and later Hexagon Mist, an insane 
+Water physical aoe. The hands have very nasty counters, so make sure only to attack her face. When at half HP, she will first knock the party with Hallation, use 
+MP Buster, then bring up Hexagon Mist. Be prepared for this onslaught, and don't hesitate to use a Megalixir if things go awry.
+
+
+Outer Lavos
+
+Uses a strong physical aoe, Chaotic Zone, and a strong non elemental magic aoe in that order. Bring in status protection, and remember to hold back and heal when 
+needed.
+
+
+Inner Lavos
+It greets you with a strong magical aoe, so be prepared for it. You want to quickly take out the hands, as they spam strong physicals and allow Lavos to use its 
+strong lasers. The right hand has more HP than the left, so focus on it a little to even them out. Letting a single hand stand on its own will make it heal the 
+center, disable any status protection from equipment, and attempt to Stop party members. When both hands are down, the center will respond by casting Obstacle
+(a fancy take on Chaotic Zone), and throw a bunch of spells until it unleashes a huge aoe.
+
+
+Final Lavos
+
+There isn't any single good strategy to this fight. What should be understood is that this is a test of how well the team can besiege strong defenses to get at the
+enemy. There are three parts to the boss, all playing their own role. 
+
+
+The left bit is the support, healing the center and stripping status immunities from the team. It also steals MP and hurls a bunch of physical moves on its own. 
+
+
+The center is the attacker, and is considerably durable. It has a bevy of nasty moves, the most notable being Grand Stone, an overwhelming physical aoe, Dreamless,
+its magical cousin, and Invading Light, a joint move with the left bit that does a bunch of magic damage and sets Slow.
+ 
+
+The right bit is the main target. It seldom throws out a spell and a physical move. Most of the time, it's guarded by its absurd defenses, and the only way to 
+lower them is to defeat one of the other two parts. This makes it busy reviving its allies, which drops its defenses to normal values. Keep in mind that when it's
+done reviving, the revived bits gain back all their HP.
+
+
+Often, it's considered a good idea to take out the left bit first, since it has the lowest HP. Keep in mind that it absorbs every element however. Remember that 
+buffs are quite strong, especially against overwhelming moves like Grand Stone or Dreamless. Also remember to bring a stack of heals, status immunities are not 
+guaranteed to last through the fight. Stop and Sleep in particular can be very devastating.

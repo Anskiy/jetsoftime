@@ -1,0 +1,19 @@
+Basic Changes
+-The player starts with the Epoch, and can travel to many sites around 600 and 1000 AD freely.
+
+-Eras besides the two are locked, and require completing quests to unlock. Certain key spots, like Magus' Castle, are also locked.
+
+-Characters who need to unlock magic now learn 3 techs before their Spekkio visit.
+
+-All characters except Magus have a standardized tech point distribution of 5->10->50 for their first three techs.
+
+-Characters in general take a LOT less time to learn their techs than in vanilla. 
+
+-Enemies are generally tweaked to support the progression. Yakra XIII and Retinite for instance are much more easier than they were in vanilla.
+
+-Enemies in locations relevant to the progression give a lot more XP than in vanilla, and the gains grow bigger as you visit more in depth locations.
+
+-Characters are slightly adjusted to fit the gameplay of the randomizer; Robo starts with a speed of 9, Lucca with a speed of 8, and Frog fits the role of a hybrid fighter/mage much better.
+
+-Lavos was adjusted to not require high levels. Generally, levels around 30 or above should do, though equipment and tech combos play a big role.
+

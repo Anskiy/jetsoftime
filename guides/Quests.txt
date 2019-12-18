@@ -1,0 +1,90 @@
+Present Day :1000 AD 
+Snail Stop(Key)
+Simply buy the key item for 9900 G. The shopkeeper will let you know what the item is before buying it.
+
+Choras Carpenter(Key)
+First talk to the carpenter(the man drinking soda) in Choras Inn. Then go to the house below it and talk to his wife.
+
+Heckran Cave(Key)
+Go through the cave and beat Heckran. Then talk to Taban in Lucca's house.
+
+Prison
+Talk to the lawyer at the entrance of Guardia Castle when you have the Pendant. This leads to the character in the first slot being imprisoned. Completing the prison sequence opens the Future.
+
+King's Trial(Key)
+Talk to the king in Guardia Castle in 600 AD when you have the PrismShard. In case you've activated Zenan Bridge and haven't completed it, he'll be in his tower. Then head to the right wing of Guardia Castle in 1000 AD. Note that Marle is needed for this quest.
+
+Moon Stone(Key)
+This is a quest spanning multiple eras. To complete it, you must have finished King's Trial. First, go to Prehistory and place the Moon Stone in the Sun Keep. Give the Jerky to the woman in Porre's Mayor's House in 600 AD. Visit the Sun Keep in 1000 AD, then visit Porre's Mayor's Manor in 1000 AD and talk with the Mayor. If everything went right, he should give back the Moon Stone. Place it back in the Sun Keep and travel to the Future. Collect the powered up Sun Stone, and travel to the basement of Guardia's Castle in 1000 AD. Melchior should forge a key item. Note that some triggers will not trip if you move too fast, but in most cases you can simply repeat the event to collect the item.
+
+Forging the Masamune
+Visit Melchior's house near Heckran Cave with both the Bent Hilt and Bent Sword to forge the Masamune.
+
+Medina Closet
+The lowermost house in Medina has a locked closet that leads to Prehistory. Simply interact with it when you have the Gate Key to open it. On the other side, take the portal to visit the End of Time.
+
+Middle Ages: 600 AD
+Manoria Cathedral
+Defeat the first four enemies to earn a character, defeat Yakra then check the queen's tower in Guardia Castle for another.
+
+Zenan Bridge(Key)
+Talk to the knight on the bridge, then go down to the kitchen in Guardia Castle and talk to the chef. Wait until he finishes his conversation with the maid, then head back upstairs. He should give you the key item. You will be immediately sent to battle, but will be completely healed.
+
+Hero's Medal(Key)
+Visit Frog's Burrow in the Cursed Woods with the Hero's Medal and open the left chest. It contains a key item.
+
+Sunken Desert(Key)
+Defeat Retinite, then speak with Fiona. Visit 1000 AD and retrieve Robo from her shrine for a key item. You need Robo to complete this, obviously.
+
+Denadoro Mountains(Key)
+Pretty straightforward, complete the dungeon to earn a key item.
+
+Giant's Claw(Key)
+To start this, travel to Choras in 1000 AD with Toma's Pop in hand, and visit Toma's grave. This opens up the claw in 600 AD. Everything afterwards is fairly straightforward.
+
+Magic Cave
+To start this, you must have completed Forging the Masamune. Visit the cave on the Choras side of the continent with Frog in your active party, and watch him cut a path to Magus' Castle. Note that once this happens, you can fly directly to Magus Castle's island and enter it on foot.
+
+Magus' Castle
+Complete it to enter the Dark Ages.
+
+Northern Ruins
+Give the Tools to the worker in Choras Cafe, then visit his workshop. Keep clearing out parts of the Ruins as they open up, then go back to the workshop and pay him. Note that this gives no key items, but the sealed chests do contain valuable treasure and can be opened without the pendant. After he repairs the Ruins twice, you can visit it with Frog as an active member in 1000 AD and upgrade the Masamune in Cyrus' tomb. See also Forging the Masamune.
+
+Future: 2300 AD
+Arris Dome(Key)
+Defeat Guardian, catch the rat, then visit the terminal at the end of the right side, and climb back out.
+
+Sun Palace(Key)
+Pretty straightforward.
+
+Proto Dome
+Visit this for a character. It also holds a path to the End of Time.
+
+Death Peak
+Visit Keeper's Dome with both the Clone and C. Trigger. Climb up Death Peak until the summit, then watch what happens. This is an alternate path to Lavos.
+
+Geno Dome(Key)
+Collect two dolls by solving puzzles, then open the door to Mother Brain and defeat her.
+
+Factory
+Defeat the R Series to open the door to End of Time at Proto Dome.
+
+Prehistory: 65 million BC
+Reptite Lair(Key)
+Fairly straightforward.
+
+Dactyl Nest
+Provides a character.
+
+Tyrano Lair
+Most of the castle opens with the Dreamstone. After completing it, enter the ruins to visit the Dark Ages.
+
+Dark Ages: 12000 BC
+Mt. Woe(Key)
+Visit Algetty and head through the caves to reach Mt. Woe. Complete it for a key item.
+
+Ocean Palace
+Visit Zeal Palace with Ruby Knife in inventory. It leads to Lavos. Visit the Mammom Machine to power up the Pendant.
+
+If you lose the fight against Lavos at the Ocean Palace, you still get another chance, as both the bucket at the End of Time and 1999 AD on the Epoch open up.
