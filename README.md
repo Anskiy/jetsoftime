@@ -24,4 +24,4 @@ Technical Assistance: Mauron, Myself086, Lagolunatic
 
 Notable Testers: Muppetsinspace, MisterLichTV, TheBigSalarius
 
-Guides: MisterLichTV
+Guides: MisterLichTV, TrintonGL
