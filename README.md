@@ -23,4 +23,6 @@ Developers: Anskiy, Abyssonym, Myself086
 
 Technical Assistance: Mauron, Myself086, Lagolunatic
 
-Notable Testers: Fathlo23, Muppetsinspace, Avonis, TrintonGL
+Notable Testers: Muppetsinspace, MisterLichTV, TheBigSalarius
+
+Guides: MisterLichTV
