@@ -12,8 +12,7 @@ Email:   cecilraster475@gmail.com
 
 --ABOUT--
 
-Jets of Time is a remake of Wings of Time, intended to make the game more flexible for randomization while taking a few liberties with the gameplay. It is currently in development, expect progress to be posted here in the future!
-
+Jets of Time is a remake of Wings of Time, intended to create faster seeds while taking more liberties with the gameplay. The progression has been altered greatly, to the point that a player can be in the depths of the Ocean Palace as early as 1:30:00. While the gameplay is *still* mostly classic Chrono Trigger, there are a few changes that may surprise even veterans. It is highly recommended that you go through atleast the Basic Changes and maps in the guides folder before playing.
 
 --CREDITS--
 
