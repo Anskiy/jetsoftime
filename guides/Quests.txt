@@ -18,7 +18,7 @@ Moon Stone(Key)
 This is a quest spanning multiple eras. To complete it, you must have finished King's Trial. First, go to Prehistory and place the Moon Stone in the Sun Keep. Give the Jerky to the woman in Porre's Mayor's House in 600 AD. Visit the Sun Keep in 1000 AD, then visit Porre's Mayor's Manor in 1000 AD and talk with the Mayor. If everything went right, he should give back the Moon Stone. Place it back in the Sun Keep and travel to the Future. Collect the powered up Sun Stone, and travel to the basement of Guardia's Castle in 1000 AD. Melchior should forge a key item. Note that some triggers will not trip if you move too fast, but in most cases you can simply repeat the event to collect the item.
 
 Forging the Masamune
-Visit Melchior's house near Heckran Cave with both the Bent Hilt and Bent Sword to forge the Masamune.
+Visit Melchior's house near Heckran Cave with both the Bent Hilt and Bent Sword to forge the Masamune. This also opens up the recruit in Frog's Burrow.
 
 Medina Closet
 The lowermost house in Medina has a locked closet that leads to Prehistory. Simply interact with it when you have the Gate Key to open it. On the other side, take the portal to visit the End of Time.
