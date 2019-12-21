@@ -820,3 +820,15 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Fixed janky animation of Lavos Spawn's intro on Death Peak.
 
 -Lowered Lavos' left bit by 20 levels to nerf Invading Light.
+
+-Lowered hit rate of outer Lavos to 30.
+
+-Buffed Martello's XP to 500.
+
+-Buffed Synchrite's XP to 600.
+
+-Buffed Cybot's XP to 350.
+
+-Buffed Tubster's XP to 1000.
+
+-Buffed Goon's XP to 1000.
