@@ -832,3 +832,9 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Buffed Tubster's XP to 1000.
 
 -Buffed Goon's XP to 1000.
+
+-Lowered Giga Mutant and Terra Mutant's hit to 30.
+
+-Fixed broken chests in Tyrano Lair throneroom.
+
+-Set Drill Kick to 125% power of Rollo Kick and Cyclone.
