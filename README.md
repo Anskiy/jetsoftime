@@ -2,7 +2,7 @@ Jets of Time: An Open Ended Chrono Trigger Randomizer
 
 Version: 1.00
 
-Date: November 1, 2019
+Date: December 22, 2019
 
 URL: https://github.com/Anskiy/jetsoftime/
 
