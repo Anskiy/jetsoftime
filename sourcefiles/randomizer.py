@@ -52,9 +52,9 @@ if __name__ == "__main__":
      sourcefile = sourcefile.strip("\"")
      seed = input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
-        seed = time()
-     seed = int(seed)
-     seed = seed % (10**10)
+        seed = "".join(rand.choice(["chrono","marle","lucca","robo","frog","ayla","magus","lavos","zeal","melchior",
+        "belthazar","gaspar","schala","azala","ozzie","slash","flea","time","middle","present","future","prehistory", 
+        "darkages","apocalypse"]) for i in range(2))
      rand.seed(seed)
      glitch_fixes = input("Would you like to disable (most known) glitches? Y/N ")
      if glitch_fixes == "Y":
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         flags = flags + "d"
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
-     outfile = "%s.%s.%d.sfc"%(outfile,flags,seed)
+     outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
      try:
         size = stat(sourcefile).st_size
      except WindowsError:
