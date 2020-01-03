@@ -4,7 +4,7 @@
 
 - Switching the party leader to a new character when coming in with a party of 2 will cause the game to behave weirdly. It is recommended that you move out of the room, then switch around characters.
 
-- Occasionally, the transition from the whirpool out of Heckran Cave will lock up, often with parties using Crono. Generally, it's fixed by simply switching around party order before jumping in.
+- Occasionally, the transition from the whirpool out of Heckran Cave will lock up, often with parties using Crono. Generally, it's fixed by simply switching around party order before jumping in, or saving and loading.
 
 - Some events that are activated by pressing A can break if you press it too fast. Try to be patient and avoid spamming buttons.
 
