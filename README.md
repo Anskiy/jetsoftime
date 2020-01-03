@@ -1,6 +1,6 @@
 Jets of Time: An Open Ended Chrono Trigger Randomizer
 
-Version: 1.00
+Version: 1.1
 
 Date: December 22, 2019
 
@@ -12,9 +12,11 @@ Contact: https://discord.gg/PKXrWrf
          
 Email:   cecilraster475@gmail.com
 
+IMPORTANT: Read the files in the guides folder and Known Bugs.txt before playing.
+
 --ABOUT--
 
-Jets of Time is a remake of Wings of Time, intended to create faster seeds while taking more liberties with the gameplay. The progression has been altered greatly, to the point that a player can be in the depths of the Ocean Palace as early as 1:30:00. While the gameplay is *still* mostly classic Chrono Trigger, there are a few changes that may surprise even veterans. It is highly recommended that you go through atleast the Basic Changes and maps in the guides folder before playing.
+Jets of Time is a remake of Wings of Time, intended to create faster seeds while taking more liberties with the gameplay. The progression has been altered greatly, and seeds can usually be beat within the 2:30:00 mark. The gameplay is *still* mostly classic Chrono Trigger, so being good at the base game helps a lot.
 
 --USAGE--
 
