@@ -34,6 +34,8 @@ trade_helms = [0x8B,0x88,0x92,0x93,0x8A,0x91,0x86]
 helm_trades = [0x3902AC,0x3902B9]
 rocks = [0xAE,0xAF,0xB0,0xB1,0xB2]
 denadoro_rock = [0x38EB03,0x38EB06]
+jerky_trades = [0xA3,0xBB,0x0E,0x55,0x19,0x28,0x38,0x39,0x4E,0x91,0x86,0x8F,0x6B,0x6D,0x6C,0x7A]
+jerky_pointers = [0x1BD9B3,0x1BD9B5]
 def randomize_hardcoded_items(outfile):
    f = open(outfile,"r+b")
    i = 0
@@ -45,9 +47,9 @@ def randomize_hardcoded_items(outfile):
        f.write(st.pack("B",treasure))
        i += 2
    oneoffs = [taban_gift_weapon,taban_gift_helm,ranged_trades,acces_trades,tab_trades,wep_trades,
-   armor_trades,helm_trades,denadoro_rock]
+   armor_trades,helm_trades,denadoro_rock,jerky_pointers]
    oneoffitems = [taban_weapons,taban_helms,trade_rangeweps,trade_acces,trade_tabs,trade_weps,
-   trade_armors,trade_helms,rocks]
+   trade_armors,trade_helms,rocks,jerky_trades]
    i = 0
    while i < len(oneoffs):
        f.seek(oneoffs[i][0])

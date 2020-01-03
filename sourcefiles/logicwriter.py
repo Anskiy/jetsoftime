@@ -64,8 +64,8 @@ def parse_keys(provided_key):
     return provided_key
 def randomize_keys(char_locs,outfile):
     loclist = []
-    complete_list = [2300,"sword1","sword2","sword3","dream","desert","giant","trial1","trial2","melchior1",
-    "melchior2","burrow","ruins","endoftime","palace","omen1","omen2"]
+    complete_list = [2300,"sword1","sword2","sword3","dream","desert","giant","trial1","trial2","melchior",
+    "burrow","ruins","endoftime","palace","omen1","omen2"]
     char_keys = ["start","start2","cathedral","castle","proto","burrow","dactyl"]
     iterations = 0
     while len(loclist) != len(complete_list) and iterations != 3600:
@@ -108,12 +108,10 @@ def randomize_keys(char_locs,outfile):
               loclist.append("omen1")
           elif heldkey == "trigger":
               loclist.append("omen2")
-          elif heldkey == "jerky":
-              loclist.append("melchior2")
           elif heldkey == "knife":
               loclist.append("palace")
           elif heldkey == "moon":
-              loclist.append("melchior1")
+              loclist.append("melchior")
           if 2300 in loclist and "arris" not in lockeys: 
               lockeys.append("arris")
               lockeys.append("geno")
@@ -138,8 +136,7 @@ def randomize_keys(char_locs,outfile):
               lockeys.append("woe")
               determine_char_locks(loclist,char_locs,"burrow")
           if "endoftime" in loclist and "trial1" in loclist and "trial2" in loclist \
-          and "melchior1" in loclist and "melchior2" in loclist and 2300 in loclist \
-          and "melchior" not in lockeys:
+          and "melchior" in loclist and 2300 in loclist and "melchior" not in lockeys:
               lockeys.append("melchior")
           i += 1
        iterations += 1
