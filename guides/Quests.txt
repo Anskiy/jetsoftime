@@ -6,7 +6,7 @@ Choras Carpenter(Key)
 First talk to the carpenter(the man drinking soda) in Choras Inn. Then go to the house below it and talk to his wife.
 
 Heckran Cave(Key)
-Go through the cave and beat Heckran. Then talk to Taban in Lucca's house.
+Go through the cave and beat Heckran. Then talk to Taban in Lucca's house. Taban is scripted to give high tier items at several points of progression, so if he doesn't give you a key item, just talk to him more.
 
 Prison
 Talk to the lawyer at the entrance of Guardia Castle when you have the Pendant. This leads to the character in the first slot being imprisoned. Completing the prison sequence opens the Future.
