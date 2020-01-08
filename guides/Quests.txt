@@ -34,7 +34,7 @@ Zenan Bridge(Key)
 Talk to the knight on the bridge, then go down to the kitchen in Guardia Castle and talk to the chef. Wait until he finishes his conversation with the maid, then head back upstairs. He should give you the key item. You will be immediately sent to battle, but will be completely healed.
 
 Hero's Medal(Key)
-Visit Frog's Burrow in the Cursed Woods with the Hero's Medal and open the left chest. It contains a key item.
+Visit Frog's Burrow in the Cursed Woods with the Hero's Medal in inventory(not on Frog) and open the left chest. It contains a key item.
 
 Sunken Desert(Key)
 Defeat Retinite, then speak with Fiona. Visit 1000 AD and retrieve Robo from her shrine for a key item. You need Robo to complete this, obviously.
