@@ -838,3 +838,11 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Fixed broken chests in Tyrano Lair throneroom.
 
 -Set Drill Kick to 125% power of Rollo Kick and Cyclone.
+
+18/01/2020
+
+-Buffed Twister back to 100% Cyclone + 100% Laser Spin + 200% Tail Spin.
+
+-Gave Rusted Tyrano 500 more HP.
+
+-Fixed a bug that allowed collecting multiple key items from Frog's chest.
