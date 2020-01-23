@@ -26,7 +26,7 @@ def set_stats(file_pointer,character,location):
         elif character == ayla:
            char_array = [140,12,16,15,4,12,15,11,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == magus:
-           char_array = [150,22,13,11,13,15,12,32,5,0xF0,0,0xA0,50,0,0]
+           char_array = [150,22,13,11,13,15,12,32,5,0xF0,0,0xA0,50,2,0xC0]
     elif location == "proto" or location == "burrow" or location == "dactyl":
         if character == chrono:
            char_array = [187,26,17,22,8,10,11,19,10,0x30,0x07,650,100,3,0xE0]
@@ -41,7 +41,7 @@ def set_stats(file_pointer,character,location):
         elif character == ayla:
            char_array = [215,22,23,24,5,16,19,14,10,0x30,0x07,650,100,3,0xE0]
         elif character == magus:
-           char_array = [200,32,19,16,18,19,15,35,10,0x30,0x07,650,50,0,0]
+           char_array = [200,32,19,16,18,19,15,35,10,0x30,0x07,650,100,3,0xE0]
     write_stats(file_pointer,character,char_array)
 def write_stats(file_pointer,character,stats):
         start_pointer = 0xC0000 + character[0] * 0x50
