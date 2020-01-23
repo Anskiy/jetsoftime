@@ -846,3 +846,31 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 -Gave Rusted Tyrano 500 more HP.
 
 -Fixed a bug that allowed collecting multiple key items from Frog's chest.
+
+23/01/2020
+
+-Fixed blue palette glitch with the courtiers at the Ocean Palace.
+
+-Made Robo Tackle get bonus damage from Crisis Arm.
+
+-Buffed the base power of Crono's Life to 16.
+
+-Buffed the base power of Lucca's Flare to 50, the same as Luminaire.
+
+-Buffed the base power of Magus' Dark Matter to 42, Flare's old base power.
+
+-Made Magus learn 2 techs if found at Guardia Castle, 3 techs if found at Frog's Burrow, the Dactyl Nest, or Proto Dome.
+
+-Buffed Magus(the boss)' HP to 6000, raised his physical defense to 153.
+
+-Buffed Azala's HP to 2000.
+
+-Buffed the base power of GreenDream's revive to 10.
+
+-Buffed the TP of Goons to 25.
+
+-Buffed the TP of Tubsters to 30.
+
+-Nerfed the magic defense of Lavos Core's central bit to 35, so casters have a less bad time facing it.
+
+-Made the randomizer read names from a text file for seed generation, thus greatly increasing the possible number of seeds and seed name customization.
