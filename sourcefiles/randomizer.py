@@ -46,15 +46,20 @@ def get_data():
         data = st.unpack("B",data)
         data = int(data[0])
         return data
+def read_names():
+        p = open("names.txt","r")
+        names = p.readline()
+        names = names.split(",")
+        p.close
+        return names
 if __name__ == "__main__":
      flags = ""
      sourcefile = input("Enter ROM please.")
      sourcefile = sourcefile.strip("\"")
      seed = input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
-        seed = "".join(rand.choice(["chrono","marle","lucca","robo","frog","ayla","magus","lavos","zeal","melchior",
-        "belthazar","gaspar","schala","azala","ozzie","slash","flea","time","middle","present","future","prehistory", 
-        "darkages","apocalypse"]) for i in range(2))
+        names = read_names()
+        seed = "".join(rand.choice(names) for i in range(2))
      rand.seed(seed)
      glitch_fixes = input("Would you like to disable (most known) glitches? Y/N ")
      if glitch_fixes == "Y":
