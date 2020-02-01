@@ -70,6 +70,12 @@ if __name__ == "__main__":
      sense_dpad = input("Would you like faster dpad inputs in menus? Y/N ")
      if sense_dpad == "Y":
         flags = flags + "d"
+     zeal_end = input("Would you like Zeal 2 to be a final boss? Y/N ")
+     if zeal_end == "Y":
+        flags = flags + "z"
+     quick_pendant = input("Do you want the pendant to be charged earlier? Y/N ")
+     if quick_pendant == "Y":
+        flags = flags + "p"
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
      outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
@@ -120,6 +126,10 @@ Also, try writing the extension(.sfc/smc).""")
         patches.patch_file("patches/faster_epoch_patch.txt",outfile)
      if sense_dpad == "Y":
         patches.patch_file("patches/faster_menu_dpad.txt",outfile)
+     if zeal_end == "Y":
+        patches.patch_file("patches/zeal_end_boss.txt",outfile)
+     if quick_pendant == "Y":
+        patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      print("Randomizing treasures...")
      treasures.randomize_treasures(outfile)
      hardcoded_items.randomize_hardcoded_items(outfile)
