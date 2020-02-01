@@ -842,35 +842,44 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 18/01/2020
 
 -Buffed Twister back to 100% Cyclone + 100% Laser Spin + 200% Tail Spin.
-
 -Gave Rusted Tyrano 500 more HP.
-
 -Fixed a bug that allowed collecting multiple key items from Frog's chest.
 
 23/01/2020
 
 -Fixed blue palette glitch with the courtiers at the Ocean Palace.
-
 -Made Robo Tackle get bonus damage from Crisis Arm.
-
 -Buffed the base power of Crono's Life to 16.
-
 -Buffed the base power of Lucca's Flare to 50, the same as Luminaire.
-
 -Buffed the base power of Magus' Dark Matter to 42, Flare's old base power.
-
 -Made Magus learn 2 techs if found at Guardia Castle, 3 techs if found at Frog's Burrow, the Dactyl Nest, or Proto Dome.
-
 -Buffed Magus(the boss)' HP to 6000, raised his physical defense to 153.
-
 -Buffed Azala's HP to 2000.
-
 -Buffed the base power of GreenDream's revive to 10.
-
 -Buffed the TP of Goons to 25.
-
 -Buffed the TP of Tubsters to 30.
-
 -Nerfed the magic defense of Lavos Core's central bit to 35, so casters have a less bad time facing it.
-
 -Made the randomizer read names from a text file for seed generation, thus greatly increasing the possible number of seeds and seed name customization.
+
+01/02/2020
+
+-Adjusted a lot of loot:
+ - Raised the rank of Star Sword, Big Hand, and other better weapons.
+ - Lowered the rank of Lucca's guns, Marle's bows, Frog's swords and Magus' scythes, except the Doomscythe.
+ - Added more of Frog's swords to the guaranteed weapon pool from Melchior.
+ - Added one of Marle and Lucca's stronger weapons to the guaranteed weapon pool.
+ - Nerfed most visible chests in Prehistory. Note that the hidden chests in Reptite Lair and the chests in Tyrano Castle are still high tier.
+ - Buffed most visible chests in the Future. Gave Geno Dome top tier chests.
+ - Ranked SeraphSong and MuscleRing low tier.
+ - Slightly nerfed Ocean Palace's chests.
+ - Made boss loot more varied and interesting. Bosses can now drop either tabs or high/top tier consumables, armors, weapons, and accessories.
+ - To compensate for the above, made a lot less enemies count as bosses. Ozzie for example is no longer considered a boss outside of his "Great" form for loot placement.
+ - Made the chests in Ozzie's Fort top tier.
+ - High and top tier chests can now hold tabs.
+ - Removed rocks from the chest treasure pool.
+ - Added a random rock to the hidden study room in Kajar.
+ - Raised the rank of Ruby Armor and Sun Shades.
+- Added options to make Zeal 2 count as a final boss and charge the pendant early.
+- Buffed Magus(the boss)' defense to 178.
+- Buffed Lavos Core's center's offense to 37.
+- Nerfed Robo's starting speed to 8.
