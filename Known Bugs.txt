@@ -8,6 +8,14 @@
 
 - Some events that are activated by pressing A can break if you press it too fast. Try to be patient and avoid spamming buttons.
 
-- Sometimes, the men at the end of Ocean Palace will turn blue during the scene. This is purely visual, and doesn't affect gameplay. Reloading a save seems to fix it.
-
 - The Enertron at Proto Dome acts weird for some teams. This is again mostly visual. Simply wait until the team regroups.
+
+- Sometimes, ambient music that continues playing during fights resets after a fight.
+
+- Occasionally, entering the Mystic Mountain portal with a two people team sets their positions wrong and makes them softlock at any encounter in the next room. This is fixed by changing the order of the team.
+
+- Having the randomizer in a folder path with a . generates seeds outside the folder with the . in its name.
+
+- Falling off the waterfalls of Denadoro Mts can sometimes make the screen scroll down too far if you trigger the bird fight at the same time. This corrects itself when you open and close the menu.
+
+- Saving a game on the 600 AD overworld immediately after exiting Denadoro Mts from the top makes the screen scroll weirdly upon reloading the save. Fixed by entering any location on the overworld.

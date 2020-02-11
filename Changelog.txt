@@ -883,3 +883,27 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 - Buffed Magus(the boss)' defense to 178.
 - Buffed Lavos Core's center's offense to 37.
 - Nerfed Robo's starting speed to 8.
+
+09/02/2020
+ - Nerfed Dragon Tank's offense to 25.
+ - Nerfed Dragon Tank's level to 7 and magic to 9.
+ - Nerfed Dragon Head's level to 10 and magic to 10.
+ - Nerfed Dragon Grinder's offense to 21.
+ - Nerfed R Series' offense to 37.
+ - Nerfed R Series' level to 15 and magic to 10.
+ - Nerfed Bit's offense to 19.
+ - Nerfed Bit's level to 10 and magic to 8.
+ - Buffed Mohavor's HP to 250.
+ - Set Mohavor to 30 Evade, 10 Magic and 127 Defense.
+ - Gave Mohavor a 200% weakness to Water.
+ - Buffed Hexapod's HP to 300.
+ - Set Hexapod to 70 Offense.
+ - Gave Hexapod a 200% weakness to Water.
+ - Buffed Retinite's head to 1500 HP, 15 Level, 10 Magic and 30 Evade.
+ - Buffed Retinite's head rewards to 1000 XP and 10 TP.
+ - Buffed Retinite's legs to 1500 HP, 15 Level, 10 Magic, 100 Offense and 30 Evade.
+ - Buffed Retinite's legs rewards to 1000 XP and 10 TP.
+ - Buffed Retinite's core to 500 HP and 30 Evade.
+ - Buffed Retinite's core rewards to 2000 XP and 20 TP.
+ - Made the unavoidable Mystic Mountains encounter place the Epoch in Prehistory, rather than the imp closet.
+ - Added a locked characters mode, which locks the characters at Dactyl Nest and Proto Dome further.
