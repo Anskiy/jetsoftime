@@ -907,3 +907,4 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Buffed Retinite's core rewards to 2000 XP and 20 TP.
  - Made the unavoidable Mystic Mountains encounter place the Epoch in Prehistory, rather than the imp closet.
  - Added a locked characters mode, which locks the characters at Dactyl Nest and Proto Dome further.
+ - Gave Rust Tyrano 5000 HP.
