@@ -135,12 +135,12 @@ def randomize_keys(char_locs,outfile,locked_chars):
               lockeys.append("burrow")
           if "desert" in loclist and "desert" not in lockeys:
               lockeys.append("desert")
-          if "sword1" in loclist and "sword2" in loclist and "sword3" in loclist and \
-          "woe" not in lockeys:
-              lockeys.append("woe")
-              determine_char_locks(loclist,char_locs,"burrow")
-          if "endoftime" in loclist and "trial1" in loclist and "trial2" in loclist \
-          and "melchior" in loclist and 2300 in loclist and "melchior" not in lockeys:
+          if "sword1" in loclist and "sword2" in loclist:
+            if "sword3" in loclist and "woe" not in lockeys:
+                lockeys.append("woe")
+            determine_char_locks(loclist,char_locs,"burrow")
+          if "endoftime" in loclist and "trial" in lockeys and "melchior" in loclist \
+          and 2300 in loclist and "melchior" not in lockeys:
               lockeys.append("melchior")
           i += 1
        iterations += 1
