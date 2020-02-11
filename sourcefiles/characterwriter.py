@@ -1,5 +1,6 @@
 import random as rand
 import struct as st
+import patcher as patch
 chrono = [0,70,8,5,8,5,8,8,15,1,0,0,20,5,0,0]
 marle = [1,65,12,2,6,8,8,6,25,1,0,0,20,5,0,0]
 lucca = [2,62,12,2,6,8,8,7,25,1,0,0,20,5,0,0]
@@ -81,15 +82,24 @@ def write_stats(file_pointer,character,stats):
         file_pointer.write(st.pack("B",stats[13]))
         file_pointer.seek(techlist_pointer)
         file_pointer.write(st.pack("B",stats[14]))
-def write_chars(file_pointer,char_dict):
+def write_chars(file_pointer,char_dict,locked_chars,outfile):
       char_keys = ["start","start2","cathedral","castle","proto","burrow","dactyl"]
       loadchars = [0x57,0x5C,0x62,0x6A,0x68,0x6C,0x6D]
-      charnames = [0x39D7E,0x39D80,0x377090,0x5F6E5,0x372AB7,0x389321,0x3BB90E]
-      chars = [0x39D82,0x39D84,0x376FEB,0x5F5EE,0x372A6F,0x389269,0x3BB8FA]
-      chars2 = [0,0,0x377088,0x5F6DD,0x372AAD,0x389317,0x3BB904]
-      chars3 = [0,0,0x377099,0x5F6E8,0x372AC1,0x38932B,0x3BB916]
-      chars4 = [0,0,0x3770D1,0x5F6E8,0x372ADB,0x389347,0x3BB927]
-      charloads = [0,0,0x3770D2,0x5F6E8,0x372ADC,0x389348,0x3BB928]
+      if locked_chars == "Y":
+          charnames = [0x39D7E,0x39D80,0x377090,0x5F6E5,0x372AB9,0x389321,0x3BB90E]
+          chars = [0x39D82,0x39D84,0x376FEB,0x5F5EE,0x372A6F,0x389269,0x3BB8FA]
+          chars2 = [0,0,0x377088,0x5F6DD,0x372AAF,0x389317,0x3BB904]
+          chars3 = [0,0,0x377099,0x5F6E8,0x372AC3,0x38932B,0x3BB916]
+          chars4 = [0,0,0x3770D1,0x5F6E8,0x372ADD,0x389347,0x3BB927]
+          charloads = [0,0,0x3770D2,0x5F6E8,0x372ADE,0x389348,0x3BB928]
+          patch.patch_file("patches/locked_chars.txt",outfile) 
+      else:
+          charnames = [0x39D7E,0x39D80,0x377090,0x5F6E5,0x372AB7,0x389321,0x3BB90E]
+          chars = [0x39D82,0x39D84,0x376FEB,0x5F5EE,0x372A6F,0x389269,0x3BB8FA]
+          chars2 = [0,0,0x377088,0x5F6DD,0x372AAD,0x389317,0x3BB904]
+          chars3 = [0,0,0x377099,0x5F6E8,0x372AC1,0x38932B,0x3BB916]
+          chars4 = [0,0,0x3770D1,0x5F6E8,0x372ADB,0x389347,0x3BB927]
+          charloads = [0,0,0x3770D2,0x5F6E8,0x372ADC,0x389348,0x3BB928]
       i = 0
       while i < 7:
             char = char_dict[char_keys[i]][0]
@@ -110,7 +120,7 @@ def write_chars(file_pointer,char_dict):
                 file_pointer.seek(charloads[i])
                 file_pointer.write(st.pack("B",loadchars[char]))
             i += 1
-def randomize_char_positions(outfile):
+def randomize_char_positions(outfile,locked_chars):
    f = open(outfile,"r+b")
    character_locations = {"start": "", "start2": "", "cathedral": "", "castle": "", "proto": "", "burrow": "", "dactyl": ""}
    characters = [chrono, marle, lucca, robo, frog, ayla, magus]
@@ -119,8 +129,8 @@ def randomize_char_positions(outfile):
       chosen_char = character_locations[location]
       set_stats(f,chosen_char,location)
       characters.remove(chosen_char)
-   write_chars(f,character_locations)
+   write_chars(f,character_locations,locked_chars,outfile)
    f.close
    return character_locations
 if __name__ == "__main__":
-    randomize_char_positions("Project.sfc")
+    randomize_char_positions("Project.sfc","Y")

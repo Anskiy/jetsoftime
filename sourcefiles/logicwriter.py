@@ -62,7 +62,7 @@ def parse_keys(provided_key):
     if provided_key == "ribbon":
        provided_key = 0xB8
     return provided_key
-def randomize_keys(char_locs,outfile):
+def randomize_keys(char_locs,outfile,locked_chars):
     loclist = []
     complete_list = [2300,"sword1","sword2","sword3","dream","desert","giant","trial1","trial2","melchior",
     "burrow","ruins","endoftime","palace","omen1","omen2"]
@@ -120,9 +120,13 @@ def randomize_keys(char_locs,outfile):
           if "endoftime" in loclist: 
             if "reptite" not in lockeys:
                 lockeys.append("reptite")
-                determine_char_locks(loclist,char_locs,"dactyl")
-            if "dream" in loclist and "woe" not in lockeys:
-                lockeys.append("woe")
+                if locked_chars != "Y":                     
+                    determine_char_locks(loclist,char_locs,"dactyl")
+            if "dream" in loclist:
+                if "woe" not in lockeys:
+                    lockeys.append("woe")
+                if locked_chars == "Y":
+                    determine_char_locks(loclist,char_locs,"dactyl")
           if "giant" in loclist and "claw" not in lockeys:
               lockeys.append("claw")
           if "trial1" in loclist and "trial2" in loclist and "trial" not in lockeys:
@@ -165,5 +169,5 @@ def randomize_keys(char_locs,outfile):
     f.write(f"{str(locations)}\n{str(char_locs)}")
     f.close
 if __name__ == "__main__":
-    char_locations = chars.randomize_char_positions("Project.sfc")
-    randomize_keys(char_locations,"Project.sfc")
+    char_locations = chars.randomize_char_positions("Project.sfc","Y")
+    randomize_keys(char_locations,"Project.sfc","Y")
