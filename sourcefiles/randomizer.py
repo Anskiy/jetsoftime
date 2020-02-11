@@ -70,12 +70,15 @@ if __name__ == "__main__":
      sense_dpad = input("Would you like faster dpad inputs in menus? Y/N ")
      if sense_dpad == "Y":
         flags = flags + "d"
-     zeal_end = input("Would you like Zeal 2 to be a final boss? Y/N ")
+     zeal_end = input("Would you like Zeal 2 to be a final boss? Note that defeating Lavos still ends the game. Y/N ")
      if zeal_end == "Y":
         flags = flags + "z"
      quick_pendant = input("Do you want the pendant to be charged earlier? Y/N ")
      if quick_pendant == "Y":
         flags = flags + "p"
+     locked_chars = input("Do you want characters to be further locked? Y/N ")
+     if locked_chars == "Y":
+        flags = flags + "c"	 
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
      outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
@@ -138,9 +141,9 @@ Also, try writing the extension(.sfc/smc).""")
      print("Randomizing shops...")
      shops.randomize_shops(outfile)
      print("Randomizing character locations...")
-     char_locs = char_slots.randomize_char_positions(outfile)
+     char_locs = char_slots.randomize_char_positions(outfile,locked_chars)
      print("Now placing key items...")
-     keyitems.randomize_keys(char_locs,outfile)
+     keyitems.randomize_keys(char_locs,outfile,locked_chars)
      # Tyrano Castle chest hack
      f = open(outfile,"r+b")
      f.seek(0x35F6D5)
