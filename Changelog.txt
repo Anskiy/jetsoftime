@@ -908,3 +908,6 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Made the unavoidable Mystic Mountains encounter place the Epoch in Prehistory, rather than the imp closet.
  - Added a locked characters mode, which locks the characters at Dactyl Nest and Proto Dome further.
  - Gave Rust Tyrano 5000 HP.
+
+13/02/2020
+ - Gave Zeal 2 a different ending.
