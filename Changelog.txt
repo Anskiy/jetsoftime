@@ -911,3 +911,13 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 
 13/02/2020
  - Gave Zeal 2 a different ending.
+
+21/02/2020
+ - Raised TP for Laser Spin and Rock Throw to 200.
+ - Raised TP for Confuse and Uzzi Punch to 500.
+ - To compensate, lowered TP for Luminaire, Shock and Dino Tail to 750, 600 and 400 respectively.
+ - Fixed an oversight with Rage Bands not being sellable.
+ - Fixed a bug that lowered the treasure tier of Ozzie's Fort chests.
+ - Fixed a bug that made the character check at Dactyl count multiple times.
+ - Added a new option that scales bosses based on progression.
+ - Made Vigil Hat cost 40,000, and Prism Helm 60,0000.
