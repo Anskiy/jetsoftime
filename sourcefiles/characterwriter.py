@@ -21,7 +21,7 @@ def set_stats(file_pointer,character,location):
         elif character == lucca:
            char_array = [114,20,3,9,11,13,8,26,5,0xF0,0,0xA0,0x32,2,0xC0]
         elif character == robo:
-           char_array = [170,14,13,17,5,8,8,11,5,0xF0,0,0xA0,50,2,0xC0]
+           char_array = [170,14,13,17,5,8,8,11,5,0xF0,0,0xA0,200,2,0xC0]
         elif character == frog:
            char_array = [128,17,9,14,9,9,9,16,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == ayla:
@@ -40,7 +40,7 @@ def set_stats(file_pointer,character,location):
         elif character == frog:
            char_array = [188,27,15,22,13,10,11,19,10,0x30,0x07,650,200,3,0xE0]
         elif character == ayla:
-           char_array = [215,22,23,24,5,16,19,14,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [215,22,23,24,5,16,19,14,10,0x30,0x07,650,200,3,0xE0]
         elif character == magus:
            char_array = [200,32,19,16,18,19,15,35,10,0x30,0x07,650,100,3,0xE0]
     write_stats(file_pointer,character,char_array)
