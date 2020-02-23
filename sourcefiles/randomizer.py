@@ -10,6 +10,7 @@ import logicwriter as keyitems
 import random as rand
 import patcher as patches
 import enemywriter as enemystuff
+import bossscaler as boss_scale
 def tenthousands_digit(digit):
     digit = st.unpack(">B",digit)
     digit = int(digit[0]) * 0x10000
@@ -54,7 +55,7 @@ def read_names():
         return names
 if __name__ == "__main__":
      flags = ""
-     sourcefile = input("Enter ROM please.")
+     sourcefile = input("Please enter ROM name or drag it onto the screen.")
      sourcefile = sourcefile.strip("\"")
      seed = input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
@@ -70,6 +71,9 @@ if __name__ == "__main__":
      sense_dpad = input("Would you like faster dpad inputs in menus? Y/N ")
      if sense_dpad == "Y":
         flags = flags + "d"
+     boss_scaler = input("Do you want bosses to scale with progression? Y/N ")
+     if boss_scaler == "Y":
+        flags = flags + "b"
      zeal_end = input("Would you like Zeal 2 to be a final boss? Note that defeating Lavos still ends the game. Y/N ")
      if zeal_end == "Y":
         flags = flags + "z"
@@ -143,7 +147,10 @@ Also, try writing the extension(.sfc/smc).""")
      print("Randomizing character locations...")
      char_locs = char_slots.randomize_char_positions(outfile,locked_chars)
      print("Now placing key items...")
-     keyitems.randomize_keys(char_locs,outfile,locked_chars)
+     keyitems = keyitems.randomize_keys(char_locs,outfile,locked_chars)
+     if boss_scaler == "Y":
+         print("Rescaling bosses based on key items..")
+         boss_scale.scale_bosses(char_locs,keyitems,locked_chars,outfile)
      # Tyrano Castle chest hack
      f = open(outfile,"r+b")
      f.seek(0x35F6D5)
