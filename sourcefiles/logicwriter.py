@@ -3,11 +3,11 @@ import struct as st
 import characterwriter as chars
 def determine_char_locks(loclist,charlocs,charkey):
     char = charlocs [charkey] [0]
-    if char == 3:
+    if char == 3 and "desert" not in loclist:
        loclist.append("desert")
-    if char == 1:
+    if char == 1 and "trial1" not in loclist:
        loclist.append("trial1")
-    if char == 4:
+    if char == 4 and "sword3" not in loclist:
        loclist.append("sword3")
 def rename_chars(charlocs):
     for charkey in charlocs:
@@ -112,7 +112,7 @@ def randomize_keys(char_locs,outfile,locked_chars):
               loclist.append("palace")
           elif heldkey == "moon":
               loclist.append("melchior")
-          if 2300 in loclist and "arris" not in lockeys: 
+          if 2300 in loclist and "arris" not in lockeys:
               lockeys.append("arris")
               lockeys.append("geno")
               lockeys.append("sun")
@@ -122,9 +122,8 @@ def randomize_keys(char_locs,outfile,locked_chars):
                 lockeys.append("reptite")
                 if locked_chars != "Y":                     
                     determine_char_locks(loclist,char_locs,"dactyl")
-            if "dream" in loclist:
-                if "woe" not in lockeys:
-                    lockeys.append("woe")
+            if "dream" in loclist and "woe" not in lockeys:
+                lockeys.append("woe")
                 if locked_chars == "Y":
                     determine_char_locks(loclist,char_locs,"dactyl")
           if "giant" in loclist and "claw" not in lockeys:
@@ -139,9 +138,9 @@ def randomize_keys(char_locs,outfile,locked_chars):
             if "sword3" in loclist and "woe" not in lockeys:
                 lockeys.append("woe")
             determine_char_locks(loclist,char_locs,"burrow")
-          if "endoftime" in loclist and "trial" in lockeys and "melchior" in loclist \
-          and 2300 in loclist and "melchior" not in lockeys:
-              lockeys.append("melchior")
+          if "endoftime" in loclist and "trial" in lockeys \
+          and "melchior" in loclist and 2300 in loclist and "melchior" not in lockeys:
+                lockeys.append("melchior")
           i += 1
        iterations += 1
     if iterations == 3600:
@@ -168,6 +167,7 @@ def randomize_keys(char_locs,outfile,locked_chars):
     rename_chars(char_locs)
     f.write(f"{str(locations)}\n{str(char_locs)}")
     f.close
+    return locations
 if __name__ == "__main__":
     char_locations = chars.randomize_char_positions("Project.sfc","Y")
     randomize_keys(char_locations,"Project.sfc","Y")
