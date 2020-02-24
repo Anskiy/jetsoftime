@@ -921,3 +921,6 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Fixed a bug that made the character check at Dactyl count multiple times.
  - Added a new option that scales bosses based on progression.
  - Made Vigil Hat cost 40,000, and Prism Helm 60,0000.
+
+24/02/2020
+ - Made the boss rescaler less predictable for 2300 AD locations.
