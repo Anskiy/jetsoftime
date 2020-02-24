@@ -110,12 +110,10 @@ def set_power(locations,important_keys,rank = 3):
            nizbelpower = rank
         if locs in futurelocs:
            important_keys.append("pendant")
-           dtankpower = rank - 1
-           if locs == "arris":
+           if dtankpower < rank:
+              dtankpower = rank - 1
               guardianpower = dtankpower + 1
-           if locs == "sun":
               sunpower = dtankpower + 1
-           if locs == "geno":
               motherpower = dtankpower + 1
         if locs == "melchior":
            yakraxiiipower = rank
