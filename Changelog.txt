@@ -924,3 +924,12 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 
 24/02/2020
  - Made the boss rescaler less predictable for 2300 AD locations.
+
+27/02/2020
+ - Gave Marle, Lucca and Magus a base magic of 20 and a magic growth of 106. This makes up strongly for the lower endgame levels in Jets.
+ - Gave Hexapods and Mohavors resistances to every element except Ice.
+ - Set back Proto 4, Debuggest and Laser Guard to (mostly) vanilla stats.
+ - Lowered Laser Spin's TP requirements.
+ - Raised Area Bomb's TP requirements.
+ - Gave the old pervert in Sandorino one of each tab.
+ - Buffed Lavos Core's HP to 20,000.
