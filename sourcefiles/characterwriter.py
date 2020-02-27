@@ -1,9 +1,12 @@
 import random as rand
 import struct as st
 import patcher as patch
+"""stats pattern:id(not used for stat setups),hp,mp,power,stamina,magic,hit,evade,magic defense,level,
+current XP first byte,current XP last byte,XP to next level,tech points to next tech,number of techs,
+current techs bitfield"""
 chrono = [0,70,8,5,8,5,8,8,15,1,0,0,20,5,0,0]
-marle = [1,65,12,2,6,8,8,6,25,1,0,0,20,5,0,0]
-lucca = [2,62,12,2,6,8,8,7,25,1,0,0,20,5,0,0]
+marle = [1,65,12,2,6,16,8,6,25,1,0,0,20,5,0,0]
+lucca = [2,62,12,2,6,20,8,7,25,1,0,0,20,5,0,0]
 robo = [3,130,6,7,10,3,7,7,10,1,0,0,20,5,0,0]
 frog = [4,80,9,4,8,6,8,8,15,1,0,0,20,5,0,0]
 ayla = [5,80,4,10,9,3,10,12,10,1,0,0,20,5,0,0]
@@ -15,13 +18,13 @@ def set_stats(file_pointer,character,location):
         return
     elif location == "castle":
         if character == chrono:
-           char_array = [122,16,10,14,6,9,9,16,5,0xF0,0,0xA0,0x32,2,0xC0]
+           char_array = [122,16,10,14,6,9,9,16,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == marle:
-           char_array = [109,20,3,8,11,13,7,26,5,0xF0,0,0xA0,0x32,2,0xC0]
+           char_array = [109,20,3,8,19,13,7,26,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == lucca:
-           char_array = [114,20,3,9,11,13,8,26,5,0xF0,0,0xA0,0x32,2,0xC0]
+           char_array = [114,20,3,9,24,13,8,26,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == robo:
-           char_array = [170,14,13,17,5,8,8,11,5,0xF0,0,0xA0,200,2,0xC0]
+           char_array = [170,14,13,17,5,8,8,11,5,0xF0,0,0xA0,100,2,0xC0]
         elif character == frog:
            char_array = [128,17,9,14,9,9,9,16,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == ayla:
@@ -32,9 +35,9 @@ def set_stats(file_pointer,character,location):
         if character == chrono:
            char_array = [187,26,17,22,8,10,11,19,10,0x30,0x07,650,100,3,0xE0]
         elif character == marle:
-           char_array = [164,30,4,12,16,20,9,29,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [164,30,4,12,24,20,9,29,10,0x30,0x07,650,100,3,0xE0]
         elif character == lucca:
-           char_array = [179,30,4,13,17,20,9,29,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [179,30,4,13,29,20,9,29,10,0x30,0x07,650,100,3,0xE0]
         elif character == robo:
            char_array = [235,24,21,26,7,10,9,14,10,0x30,0x07,650,100,3,0xE0]
         elif character == frog:
