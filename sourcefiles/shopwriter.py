@@ -52,13 +52,16 @@ def pick_items(shop,rand_num):
     return item
 def write_slots(file_pointer,shop_start,items,shop_address):
     buffer = []
-    req_item_count = 0
+    item_count = items
     while items > 0:
        if items == 1:
             item = 0x00
        else:
             rand_num = rand.randrange(0,16,1)	
             item = pick_items(shop_start,rand_num)
+       if shop_start == 0xC2C71 or shop_start == 0xC2C99:
+          if items == item_count:
+             item = 0xCA
        if item in buffer:
             continue
        buffer.append(item)
