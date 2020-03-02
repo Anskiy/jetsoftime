@@ -20,7 +20,7 @@ def set_stats(file_pointer,character,location):
         if character == chrono:
            char_array = [122,16,10,14,6,9,9,16,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == marle:
-           char_array = [109,20,3,8,19,13,7,26,5,0xF0,0,0xA0,50,2,0xC0]
+           char_array = [109,20,3,8,24,13,7,26,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == lucca:
            char_array = [114,20,3,9,24,13,8,26,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == robo:
@@ -30,12 +30,12 @@ def set_stats(file_pointer,character,location):
         elif character == ayla:
            char_array = [140,12,16,15,4,12,15,11,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == magus:
-           char_array = [150,22,13,11,13,15,12,32,5,0xF0,0,0xA0,50,2,0xC0]
+           char_array = [150,22,13,11,24,15,12,32,5,0xF0,0,0xA0,50,2,0xC0]
     elif location == "proto" or location == "burrow" or location == "dactyl":
         if character == chrono:
            char_array = [187,26,17,22,8,10,11,19,10,0x30,0x07,650,100,3,0xE0]
         elif character == marle:
-           char_array = [164,30,4,12,24,20,9,29,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [164,30,4,12,29,20,9,29,10,0x30,0x07,650,100,3,0xE0]
         elif character == lucca:
            char_array = [179,30,4,13,29,20,9,29,10,0x30,0x07,650,100,3,0xE0]
         elif character == robo:
@@ -45,7 +45,7 @@ def set_stats(file_pointer,character,location):
         elif character == ayla:
            char_array = [215,22,23,24,5,16,19,14,10,0x30,0x07,650,200,3,0xE0]
         elif character == magus:
-           char_array = [200,32,19,16,18,19,15,35,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [200,32,19,16,29,19,15,35,10,0x30,0x07,650,100,3,0xE0]
     write_stats(file_pointer,character,char_array)
 def write_stats(file_pointer,character,stats):
         start_pointer = 0xC0000 + character[0] * 0x50
