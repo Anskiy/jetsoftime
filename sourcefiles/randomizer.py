@@ -63,24 +63,31 @@ if __name__ == "__main__":
         seed = "".join(rand.choice(names) for i in range(2))
      rand.seed(seed)
      glitch_fixes = input("Would you like to disable (most known) glitches? Y/N ")
+     glitch_fixes = glitch_fixes.upper()
      if glitch_fixes == "Y":
         flags = flags + "g" 
      fast_move = input("Would you like to move faster on the overworld/Epoch? Y/N ")
+     fast_move = fast_move.upper()
      if fast_move == "Y":
         flags = flags + "s"
      sense_dpad = input("Would you like faster dpad inputs in menus? Y/N ")
+     sense_dpad = sense_dpad.upper()
      if sense_dpad == "Y":
         flags = flags + "d"
      boss_scaler = input("Do you want bosses to scale with progression? Y/N ")
+     boss_scaler = boss_scaler.upper()
      if boss_scaler == "Y":
         flags = flags + "b"
      zeal_end = input("Would you like Zeal 2 to be a final boss? Note that defeating Lavos still ends the game. Y/N ")
+     zeal_end = zeal_end.upper()
      if zeal_end == "Y":
         flags = flags + "z"
      quick_pendant = input("Do you want the pendant to be charged earlier? Y/N ")
+     quick_pendant = quick_pendant.upper()
      if quick_pendant == "Y":
         flags = flags + "p"
      locked_chars = input("Do you want characters to be further locked? Y/N ")
+     locked_chars = locked_chars.upper()
      if locked_chars == "Y":
         flags = flags + "c"	 
      outfile = sourcefile.split(".")
