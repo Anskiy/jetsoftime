@@ -938,3 +938,11 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Guaranteed Lapises in Fritz's and Fiona's shop.
  - Fixed wrong stat allocation for the casters.
  - Made the randomizer accept lowercase characters for flags.
+
+04/03/2020
+ - Slightly buffed enemy Flare to 18 spell power. Set enemy Luminaire, Dark Matter and Energy Release(Mother Brain's desperation attack) to be the same as Flare.
+ - Nerfed the rewards to scaled bosses.
+ - Fixed three chests that were not randomized in Guardia Castle's basement.
+ - Implemented randomized HP and attacks for Magus and Black Tyrano. 
+ - Randomized enemy Magus' sprite.
+ - Nerfed the cost of Time Hats to be the same as Sight and Memory Caps.
