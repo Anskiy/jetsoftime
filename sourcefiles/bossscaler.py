@@ -151,12 +151,12 @@ def scale_stats(bosspower,boss,pointer):
        if bosspower < 2:
           boss_stats = [6000,16,16,50,160,127,3000,4000,50]
        elif bosspower < 3:
-          boss_stats = [7000,20,20,50,170,127,4500,6500,75]
-       else: boss_stats = [8000,30,30,50,180,127,6000,8000,100]
+          boss_stats = [7000,20,20,50,170,127,3500,6000,60]
+       else: boss_stats = [8000,30,30,50,180,127,4000,8000,70]
     if boss == dragon_tank:
        if bosspower < 2:
-          boss_stats = [1100,15,15,60,50,160,2300,3400,30]
-       else: boss_stats = [1300,30,30,60,100,160,3400,5000,50]
+          boss_stats = [1100,15,15,60,50,160,1600,2500,26]
+       else: boss_stats = [1300,30,30,60,100,160,2200,4000,36]
     if boss == dragon_wheel:
        if bosspower < 2:
           boss_stats = [1000,25,25,60,42,160]
@@ -167,10 +167,10 @@ def scale_stats(bosspower,boss,pointer):
        else: boss_stats = [1600,30,30,60,50,160]
     if boss == sonofsun:
        if bosspower < 2:
-            boss_stats = ["",20,20,"","","",3100,4200,35]
+            boss_stats = ["",20,20,"","","",1600,3000,30]
        elif bosspower < 3:
-            boss_stats = ["",30,20,"","","",4300,6200,50]
-       else: boss_stats = ["",30,30,"","","",5200,8000,70]
+            boss_stats = ["",30,20,"","","",2200,5000,40]
+       else: boss_stats = ["",30,30,"","","",2800,7000,50]
     if boss == sos_flame:
        if bosspower < 2:
             boss_stats = ["",20,20,"","",""]
@@ -179,34 +179,34 @@ def scale_stats(bosspower,boss,pointer):
        else: boss_stats = ["",30,30,"","",""]
     if boss == nizbel:
        if bosspower < 2:
-          boss_stats = [6000,20,20,60,155,253,4500,5100,55]
+          boss_stats = [6000,20,20,60,155,253,4000,4400,45]
        elif bosspower < 3:
-          boss_stats = [7000,30,30,60,175,253,6000,7200,70]
-       else: boss_stats = [8000,40,40,65,190,253,8000,10000,95]
+          boss_stats = [7000,30,30,60,175,253,5000,5500,55]
+       else: boss_stats = [8000,40,40,65,190,253,6000,6800,65]
     if boss == retinite_head or boss == retinite_legs:
        if bosspower < 2:
-          boss_stats = [2000,15,15,60,130,153,1600,0,18]
+          boss_stats = [2000,15,15,60,130,153,1200,0,12]
        elif bosspower < 3:
-          boss_stats = [2200,20,20,65,160,165,2000,0,25]
-       else: boss_stats = [2400,25,25,70,190,178,2200,0,30]
+          boss_stats = [2200,20,20,65,160,165,1400,0,14]
+       else: boss_stats = [2400,25,25,70,190,178,1600,0,16]
     if boss == retinite_core:
        if bosspower < 2:
-          boss_stats = [700,15,19,60,50,153,3200,2600,36]
+          boss_stats = [700,15,19,60,50,153,2400,2100,30]
        elif bosspower < 3:
-          boss_stats = [800,15,19,65,50,165,4000,3800,50]
-       else: boss_stats = [900,15,19,70,50,178,4400,4500,60]
+          boss_stats = [800,15,19,65,50,165,2800,2700,40]
+       else: boss_stats = [900,15,19,70,50,178,3200,3300,50]
     if boss == yakraxiii:
        if bosspower < 2:
-          boss_stats = [5200,17,18,50,95,127,3300,4000,50]
+          boss_stats = [5200,17,18,50,95,127,2800,3000,50]
        elif bosspower < 3:
-            boss_stats = [5800,17,18,50,120,127,4600,7000,70]
-       else: boss_stats = [6300,17,18,50,150,127,5500,10000,90]
+            boss_stats = [5800,17,18,50,120,127,3400,4000,60]
+       else: boss_stats = [6300,17,18,50,150,127,4000,5000,70]
     if boss == guardian:
        if bosspower < 2:
-          boss_stats = [3500,15,15,50,16,127,3000,4000,32]
+          boss_stats = [3500,15,15,50,16,127,2500,3000,30]
        elif bosspower < 3:
-            boss_stats = [4000,20,20,50,16,127,4100,6000,46]
-       else: boss_stats = [4300,30,30,50,16,127,5200,8000,60]
+            boss_stats = [4000,20,20,50,16,127,3000,4000,40]
+       else: boss_stats = [4300,30,30,50,16,127,3500,5000,50]
     if boss == bit:
        if bosspower < 2:
           boss_stats = [500,12,12,50,32,127]
@@ -215,10 +215,10 @@ def scale_stats(bosspower,boss,pointer):
        else: boss_stats = [500,17,17,50,74,127]
     if boss == motherbrain:
        if bosspower < 2:
-          boss_stats = [3500,20,20,50,100,127,4000,6200,50]
+          boss_stats = [3500,20,20,50,100,127,3100,4000,50]
        elif bosspower < 3:
-             boss_stats = [4000,30,30,50,100,127,5500,7300,71]
-       else: boss_stats = [4500,40,40,50,100,127,6400,8100,93]
+             boss_stats = [4000,30,30,50,100,127,3700,5000,60]
+       else: boss_stats = [4500,40,40,50,100,127,4300,6000,70]
     if boss == display:
        if bosspower < 2:
           boss_stats = [1,15,15,50,144,127]
@@ -227,14 +227,14 @@ def scale_stats(bosspower,boss,pointer):
        else: boss_stats = [1,15,25,50,144,127]
     if boss == rseries:
        if bosspower < 2:
-          boss_stats = [1200,15,15,50,52,127,600,400,10]
-       else: boss_stats = [1400,20,20,50,75,127,800,600,15]
+          boss_stats = [1200,15,15,50,52,127,500,400,10]
+       else: boss_stats = [1400,20,20,50,75,127,600,600,15]
     if boss == giga_gaia:
        if bosspower < 2:
-          boss_stats = [8000,32,15,50,50,127,5000,7000,110]
+          boss_stats = [8000,32,15,50,50,127,5000,7000,90]
        elif bosspower < 3:
-             boss_stats = [9000,32,15,50,50,127,6200,8200,130]
-       else: boss_stats = [10000,32,15,50,50,127,7400,9200,150]
+             boss_stats = [9000,32,15,50,50,127,6000,8100,100]
+       else: boss_stats = [10000,32,15,50,50,127,7000,9200,110]
     if boss == gaia_left:
        if bosspower < 2:
           boss_stats = [2500,20,30,61,40,127]
