@@ -1,5 +1,6 @@
 import struct as st
 import random as rand
+import patcher as bossmutator
 
 regular_drops = [00, 0xBD, 0xC0, 0xC6, 0xC7, 0xC8, 0xC9, 0x95, 0x96, 0x97, 0x98, 0x99, 0xA4, 0xAC]
 good_drops = [0xBE, 0xC1, 0xCA, 0xCB, 0xCC, 0x9C, 0x9F, 0xA0, 0xA5, 0xA6, 0xA8, 0xA9, 0xAB, 0xB4, 0xB9]
@@ -19,6 +20,7 @@ boss_armors = [0x63,0x66,0x6A,0x71,0x72,0x73,0x74,0x7A,0x70,0x6B,0x6C,0x6D,0x6E]
 enemy_drop_address = 0xC5E04
 enemy_charm_address = 0xC5E05
 def randomize_enemy_stuff(f):
+  outfile = f
   f = open(f, "r+b")
   enemy_id = 0
   while enemy_id < 0xFA:
@@ -27,12 +29,42 @@ def randomize_enemy_stuff(f):
      write_enemy_stuff(drop,charm,f,enemy_id)
      enemy_id += 1
   randomize_boss_stuff(f)
+  randomize_midbosses(outfile,f)
   f.close
 def randomize_boss_stuff(f):
   for id in boss_ids:
      drop = rand.choice(tabs + boss_consumes + boss_weapons + boss_accessories + boss_armors)
      charm = rand.choice(great_charms)
      write_enemy_stuff(drop,charm,f,id)
+def randomize_midbosses(outfile,f):
+    magus_hp = rand.randrange(6000,11000,1000)
+    tyrano_hp = rand.randrange(6000,11000,1000)
+    magus_select = rand.randrange(0,7)
+    tyrano_element = rand.randrange(0,5)
+    f.seek(0xC57E4)
+    f.write(st.pack("H",tyrano_hp))
+    f.seek(0xC5D5F)
+    f.write(st.pack("H",magus_hp))
+    if magus_select == 0:
+       bossmutator.patch_file("patches/magus_c.txt",outfile)
+    elif magus_select == 1:
+       bossmutator.patch_file("patches/magus_m.txt",outfile)
+    elif magus_select == 2:
+       bossmutator.patch_file("patches/magus_l.txt",outfile)
+    elif magus_select == 3:
+       bossmutator.patch_file("patches/magus_r.txt",outfile)
+    elif magus_select == 4:
+       bossmutator.patch_file("patches/magus_f.txt",outfile)
+    elif magus_select == 5:
+       bossmutator.patch_file("patches/magus_a.txt",outfile)
+    if tyrano_element == 0:
+       bossmutator.patch_file("patches/tyrano_i.txt",outfile)
+    elif tyrano_element == 1:
+       bossmutator.patch_file("patches/tyrano_l.txt",outfile)
+    elif tyrano_element == 2:
+       bossmutator.patch_file("patches/tyrano_s.txt",outfile)
+    elif tyrano_element == 3:
+       bossmutator.patch_file("patches/tyrano_n.txt",outfile)
 def write_enemy_stuff(drop,charm,f,enemy_id):
   f.seek(enemy_drop_address + 7 * (enemy_id))
   f.write(st.pack("B",drop))
