@@ -946,3 +946,7 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Implemented randomized HP and attacks for Magus and Black Tyrano. 
  - Randomized enemy Magus' sprite.
  - Nerfed the cost of Time Hats to be the same as Sight and Memory Caps.
+
+12/03/2020
+ - Fixed the erroneous strings for randomized Magus.
+ - Upped Magus' HP range to 10,000-15,000, Black Tyrano's HP range to 8,000-13,000.
