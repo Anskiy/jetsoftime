@@ -37,8 +37,8 @@ def randomize_boss_stuff(f):
      charm = rand.choice(great_charms)
      write_enemy_stuff(drop,charm,f,id)
 def randomize_midbosses(outfile,f):
-    magus_hp = rand.randrange(6000,11000,1000)
-    tyrano_hp = rand.randrange(6000,11000,1000)
+    magus_hp = rand.randrange(10000,16000,1000)
+    tyrano_hp = rand.randrange(8000,14000,1000)
     magus_select = rand.randrange(0,7)
     tyrano_element = rand.randrange(0,5)
     f.seek(0xC57E4)
