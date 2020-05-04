@@ -950,3 +950,34 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 12/03/2020
  - Fixed the erroneous strings for randomized Magus.
  - Upped Magus' HP range to 10,000-15,000, Black Tyrano's HP range to 8,000-13,000.
+
+24/03/2020
+ - Upped the attack of several weapons to make them more interesting buys.
+   Robin Bow: 25 -> 40
+   Sage Bow: 40 -> 50
+   Dream Bow: 60 -> 70
+   CometArrow: 80 -> 90
+   SonicArrow: 100 -> 110
+   PicoMagnum: 20 -> 40
+   Plasma Gun: 25 -> 50
+   Ruby Gun: 40 -> 70
+   Dream Gun: 60 -> 90
+   Graedus: 60 -> 90
+   Megablast: 80 -> 100
+   Slasher: 43 -> 70
+
+08/04/2020
+ - Moved PowerScarf and Rage Band to Passable tier.
+ - Nerfed prices of most bad, passable, and medium tier items.
+ - Upped the prices of Shelters and Revives.
+13/04/2020 
+ - Set Giant's Claw enemies back to vanilla stats.
+14/04/2020 
+ - Made a new tier, rearranged loot some more.
+ - Made all equipment in Good Tier and above unsellable.
+ - Rebalanced most of the prices, making several items cheaper while buffing the prices of some high tier equipment.
+20/04/2020
+ - Redid the placement algorithms for treasure chests, enemy drops, event rewards and shops.
+ - Gave back vanilla rock locations, set them all to be randomized.
+ - Made consumables slightly less common in chests.
+ - Buffed Ayla's Cat Attack and Triple Kick, Cat Attack now costs more TP to unlock and more MP to use.
