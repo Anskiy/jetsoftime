@@ -28,7 +28,7 @@ def set_stats(file_pointer,character,location):
         elif character == frog:
            char_array = [128,17,9,14,9,9,9,16,5,0xF0,0,0xA0,50,2,0xC0]
         elif character == ayla:
-           char_array = [140,12,16,15,4,12,15,11,5,0xF0,0,0xA0,50,2,0xC0]
+           char_array = [140,12,16,15,4,12,15,11,5,0xF0,0,0xA0,100,2,0xC0]
         elif character == magus:
            char_array = [150,22,13,11,24,15,12,32,5,0xF0,0,0xA0,50,2,0xC0]
     elif location == "proto" or location == "burrow" or location == "dactyl":
@@ -136,4 +136,4 @@ def randomize_char_positions(outfile,locked_chars):
    f.close
    return character_locations
 if __name__ == "__main__":
-    randomize_char_positions("Project.sfc","Y")
+    randomize_char_positions("Project.sfc","N")
