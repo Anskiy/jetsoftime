@@ -11,6 +11,8 @@ import random as rand
 import patcher as patches
 import enemywriter as enemystuff
 import bossscaler as boss_scale
+import techwriter as tech_order
+
 def tenthousands_digit(digit):
     digit = st.unpack(">B",digit)
     digit = int(digit[0]) * 0x10000
@@ -62,34 +64,38 @@ if __name__ == "__main__":
         names = read_names()
         seed = "".join(rand.choice(names) for i in range(2))
      rand.seed(seed)
-     glitch_fixes = input("Would you like to disable (most known) glitches? Y/N ")
+     glitch_fixes = input("Would you like to disable (most known) glitches(g)? Y/N ")
      glitch_fixes = glitch_fixes.upper()
      if glitch_fixes == "Y":
         flags = flags + "g" 
-     fast_move = input("Would you like to move faster on the overworld/Epoch? Y/N ")
+     fast_move = input("Would you like to move faster on the overworld/Epoch(s)? Y/N ")
      fast_move = fast_move.upper()
      if fast_move == "Y":
         flags = flags + "s"
-     sense_dpad = input("Would you like faster dpad inputs in menus? Y/N ")
+     sense_dpad = input("Would you like faster dpad inputs in menus(d)? Y/N ")
      sense_dpad = sense_dpad.upper()
      if sense_dpad == "Y":
         flags = flags + "d"
-     boss_scaler = input("Do you want bosses to scale with progression? Y/N ")
+     boss_scaler = input("Do you want bosses to scale with progression(b)? Y/N ")
      boss_scaler = boss_scaler.upper()
      if boss_scaler == "Y":
         flags = flags + "b"
-     zeal_end = input("Would you like Zeal 2 to be a final boss? Note that defeating Lavos still ends the game. Y/N ")
+     zeal_end = input("Would you like Zeal 2 to be a final boss? Note that defeating Lavos still ends the game(z). Y/N ")
      zeal_end = zeal_end.upper()
      if zeal_end == "Y":
         flags = flags + "z"
-     quick_pendant = input("Do you want the pendant to be charged earlier? Y/N ")
+     quick_pendant = input("Do you want the pendant to be charged earlier(p)? Y/N ")
      quick_pendant = quick_pendant.upper()
      if quick_pendant == "Y":
         flags = flags + "p"
-     locked_chars = input("Do you want characters to be further locked? Y/N ")
+     locked_chars = input("Do you want characters to be further locked(c)? Y/N ")
      locked_chars = locked_chars.upper()
      if locked_chars == "Y":
-        flags = flags + "c"	 
+        flags = flags + "c"
+     tech_list = input("Do you want to randomize techs(te)? Y/N ")
+     tech_list = tech_list.upper()
+     if tech_list == "Y":
+        flags = flags + "te"
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
      outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
@@ -158,6 +164,8 @@ Also, try writing the extension(.sfc/smc).""")
      if boss_scaler == "Y":
          print("Rescaling bosses based on key items..")
          boss_scale.scale_bosses(char_locs,keyitems,locked_chars,outfile)
+     if tech_list == "Y":
+        tech_order.take_pointer(outfile)
      # Tyrano Castle chest hack
      f = open(outfile,"r+b")
      f.seek(0x35F6D5)
