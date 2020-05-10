@@ -592,8 +592,7 @@ def rewrite_combo_techs():
     file_pointer.write(st.pack("B",new_ids["tailspin"] - 40))
     combo_tech_requirements += 3
     #Blaze Kick
-    file_pointer.seek(combo_tech_address)
-    file_pointer.write(st.pack("B",new_ids["triplekick"]))
+    #Like Crono, Ayla uses a different version of Triple Kick that doesn't multihit, so the previous line is skipped.
     file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["fire2"]))
     combo_tech_address += 11
@@ -678,7 +677,7 @@ def rewrite_combo_techs():
     combo_tech_requirements += 3
     #Bubble Hit
     file_pointer.seek(combo_tech_address)
-    file_pointer.write(st.pack("B",new_ids["rollokick"]))
+    file_pointer.write(st.pack("B",new_ids["rollokick"]))5
     file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["water"]))
     combo_tech_address += 11
@@ -690,8 +689,7 @@ def rewrite_combo_techs():
     #Drop Kick
     file_pointer.seek(combo_tech_address)
     file_pointer.write(st.pack("B",new_ids["leapslash"]))
-    file_pointer.seek(combo_tech_address+1)
-    file_pointer.write(st.pack("B",new_ids["triplekick"]))
+    #See Blaze Kick
     combo_tech_address += 11
     file_pointer.seek(combo_tech_requirements)
     file_pointer.write(st.pack("B",new_ids["leapslash"] - 32))
@@ -775,8 +773,7 @@ def rewrite_combo_techs():
     file_pointer.write(st.pack("B",new_ids["leapslash"] - 32))
     combo_tech_requirements += 3
     #Final Kick
-    file_pointer.seek(combo_tech_address)
-    file_pointer.write(st.pack("B",new_ids["triplekick"]))
+    #See Blaze Kick
     file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["lightning2"]))
     file_pointer.seek(combo_tech_address+2)
@@ -820,8 +817,7 @@ def rewrite_combo_techs():
     file_pointer.write(st.pack("B",new_ids["water2"] - 32))
     combo_tech_requirements += 3
     #Gatling Kick
-    file_pointer.seek(combo_tech_address)
-    file_pointer.write(st.pack("B",new_ids["triplekick"]))
+    #See Blaze Kick
     file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["lightning2"]))
     file_pointer.seek(combo_tech_address+2)
@@ -864,8 +860,7 @@ def rewrite_combo_techs():
     file_pointer.write(st.pack("B",new_ids["tailspin"] - 40))
     combo_tech_requirements += 3
     #3D Attack
-    file_pointer.seek(combo_tech_address)
-    file_pointer.write(st.pack("B",new_ids["triplekick"]))
+    #See Blaze Kick
     file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["cyclone"]))
 	#See X Strike
