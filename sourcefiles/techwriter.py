@@ -677,7 +677,7 @@ def rewrite_combo_techs():
     combo_tech_requirements += 3
     #Bubble Hit
     file_pointer.seek(combo_tech_address)
-    file_pointer.write(st.pack("B",new_ids["rollokick"]))5
+    file_pointer.write(st.pack("B",new_ids["rollokick"]))
     file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["water"]))
     combo_tech_address += 11
