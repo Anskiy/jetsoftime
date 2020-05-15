@@ -981,3 +981,5 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Gave back vanilla rock locations, set them all to be randomized.
  - Made consumables slightly less common in chests.
  - Buffed Ayla's Cat Attack and Triple Kick, Cat Attack now costs more TP to unlock and more MP to use.
+15/05/2020
+ - Implemented Lost Worlds mode.
