@@ -168,6 +168,57 @@ def randomize_keys(char_locs,outfile,locked_chars):
     f.write(f"{str(locations)}\n{str(char_locs)}")
     f.close
     return locations
+def randomize_lost_worlds_keys(char_locs,outfile):
+    loclist = []
+    iterations = 0
+    complete_list = ["dream","palace","omen1","omen2"]
+    while len(loclist) != len(complete_list) and iterations != 3600:
+        loclist = []
+        keyitems = ["stone","knife","clone","trigger","ribbon"]
+        locations = {"arris": "","geno": "","sun": "","reptite": "","woe": ""}
+        lockeys = ["arris","geno","sun","reptite","woe"]
+        for loc in locations:
+          chosen = rand.choice(keyitems)
+          locations[loc] = chosen
+          keyitems.remove(chosen)
+        i = 0
+        while i < len(lockeys):
+           heldkey = locations[lockeys[i]]
+           if heldkey == "stone":
+              loclist.append("dream")
+           elif heldkey == "clone":
+              loclist.append("omen1")
+           elif heldkey == "trigger":
+              loclist.append("omen2")
+           elif heldkey == "knife":
+              loclist.append("palace")
+           if "endoftime" in loclist and "trial" in lockeys \
+           and "melchior" in loclist and 2300 in loclist and "melchior" not in lockeys:
+                lockeys.append("melchior")
+           i += 1
+        iterations += 1
+    if iterations == 3600:
+       print("Oops, ran out of attempts. Please try again!")
+    else:
+       ordered_keys = ["arris" ,"geno" ,"sun" ,"reptite" ,"woe"]
+       pointer1 = [0x392F4C,0x1B1844,0x1B8D95,0x18FC2C,0x381010]
+       pointer2 = [0x392F4E,0x1B1846,0x1B8D97,0x18FC2F,0x381013]
+       i = 0
+       while i < len(ordered_keys):
+           written_key = locations[ordered_keys[i]]
+           written_key = parse_keys(written_key)
+           f = open(outfile,"r+b")
+           f.seek(pointer1[i])
+           f.write(st.pack("B",written_key))
+           f.seek(pointer2[i])
+           f.write(st.pack("B",written_key))
+           i += 1
+           f.close
+    f = open("spoiler_log.txt","w+")
+    rename_chars(char_locs)
+    f.write(f"{str(locations)}\n{str(char_locs)}")
+    f.close
+    return locations
 if __name__ == "__main__":
     char_locations = chars.randomize_char_positions("Project.sfc","Y")
     randomize_keys(char_locations,"Project.sfc","Y")

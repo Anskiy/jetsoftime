@@ -11,11 +11,11 @@ robo = [3,130,6,7,10,3,7,7,10,1,0,0,20,5,0,0]
 frog = [4,80,9,4,8,6,8,8,15,1,0,0,20,5,0,0]
 ayla = [5,80,4,10,9,3,10,12,10,1,0,0,20,5,0,0]
 magus = [6,110,14,8,7,10,12,10,30,1,0,0,20,50,0,0]
-def set_stats(file_pointer,character,location):
-    if location == "start" or location == "start2" or location == "cathedral":
+def set_stats(file_pointer,character,location,lost_worlds):
+    global chrono, marle, lucca, robo, frog, ayla, magus, char_array
+    if (location == "start" or location == "start2" or location == "cathedral") and lost_worlds != "Y":
         char_array = character[1:]
         write_stats(file_pointer,character,char_array)
-        return
     elif location == "castle":
         if character == chrono:
            char_array = [122,16,10,14,6,9,9,16,5,0xF0,0,0xA0,50,2,0xC0]
@@ -31,7 +31,7 @@ def set_stats(file_pointer,character,location):
            char_array = [140,12,16,15,4,12,15,11,5,0xF0,0,0xA0,100,2,0xC0]
         elif character == magus:
            char_array = [150,22,13,11,24,15,12,32,5,0xF0,0,0xA0,50,2,0xC0]
-    elif location == "proto" or location == "burrow" or location == "dactyl":
+    elif location == "proto" or location == "burrow" or location == "dactyl" or lost_worlds == "Y":
         if character == chrono:
            char_array = [187,26,17,22,8,10,11,19,10,0x30,0x07,650,100,3,0xE0]
         elif character == marle:
@@ -85,24 +85,27 @@ def write_stats(file_pointer,character,stats):
         file_pointer.write(st.pack("B",stats[13]))
         file_pointer.seek(techlist_pointer)
         file_pointer.write(st.pack("B",stats[14]))
-def write_chars(file_pointer,char_dict,locked_chars,outfile):
+def write_chars(file_pointer,char_dict,locked_chars,lost_worlds,outfile):
       char_keys = ["start","start2","cathedral","castle","proto","burrow","dactyl"]
       loadchars = [0x57,0x5C,0x62,0x6A,0x68,0x6C,0x6D]
+      charnames = [0x39D7E,0x39D80,0x377090,0x5F6E5,0x372AB7,0x389321,0x3BB90E]
+      chars = [0x39D82,0x39D84,0x376FEB,0x5F5EE,0x372A6F,0x389269,0x3BB8FA]
+      chars2 = [0,0,0x377088,0x5F6DD,0x372AAD,0x389317,0x3BB904]
+      chars3 = [0,0,0x377099,0x5F6E8,0x372AC1,0x38932B,0x3BB916]
+      chars4 = [0,0,0x3770D1,0x5F6E8,0x372ADB,0x389347,0x3BB927]
+      charloads = [0,0,0x3770D2,0x5F6E8,0x372ADC,0x389348,0x3BB928]
+      if lost_worlds == "Y":
+          charnames[0] = 0x39CCF
+          charnames[1] = 0x39CD1
+          chars[0] = 0x39CD3
+          chars[1] = 0x39CD5
       if locked_chars == "Y":
-          charnames = [0x39D7E,0x39D80,0x377090,0x5F6E5,0x372AB9,0x389321,0x3BB90E]
-          chars = [0x39D82,0x39D84,0x376FEB,0x5F5EE,0x372A6F,0x389269,0x3BB8FA]
-          chars2 = [0,0,0x377088,0x5F6DD,0x372AAF,0x389317,0x3BB904]
-          chars3 = [0,0,0x377099,0x5F6E8,0x372AC3,0x38932B,0x3BB916]
-          chars4 = [0,0,0x3770D1,0x5F6E8,0x372ADD,0x389347,0x3BB927]
-          charloads = [0,0,0x3770D2,0x5F6E8,0x372ADE,0x389348,0x3BB928]
-          patch.patch_file("patches/locked_chars.txt",outfile) 
-      else:
-          charnames = [0x39D7E,0x39D80,0x377090,0x5F6E5,0x372AB7,0x389321,0x3BB90E]
-          chars = [0x39D82,0x39D84,0x376FEB,0x5F5EE,0x372A6F,0x389269,0x3BB8FA]
-          chars2 = [0,0,0x377088,0x5F6DD,0x372AAD,0x389317,0x3BB904]
-          chars3 = [0,0,0x377099,0x5F6E8,0x372AC1,0x38932B,0x3BB916]
-          chars4 = [0,0,0x3770D1,0x5F6E8,0x372ADB,0x389347,0x3BB927]
-          charloads = [0,0,0x3770D2,0x5F6E8,0x372ADC,0x389348,0x3BB928]
+          charnames[4] = 0x372AB9
+          chars2[4] = 0x372AAF
+          chars3[4] = 0x372AC3
+          chars4[4] = 0x372ADD
+          charloads[4] = 0x372ADE
+          patch.patch_file("patches/locked_chars.txt",outfile)		  
       i = 0
       while i < 7:
             char = char_dict[char_keys[i]][0]
@@ -123,17 +126,17 @@ def write_chars(file_pointer,char_dict,locked_chars,outfile):
                 file_pointer.seek(charloads[i])
                 file_pointer.write(st.pack("B",loadchars[char]))
             i += 1
-def randomize_char_positions(outfile,locked_chars):
-   f = open(outfile,"r+b")
-   character_locations = {"start": "", "start2": "", "cathedral": "", "castle": "", "proto": "", "burrow": "", "dactyl": ""}
-   characters = [chrono, marle, lucca, robo, frog, ayla, magus]
-   for location in character_locations:
-      character_locations[location] = rand.choice(characters)
-      chosen_char = character_locations[location]
-      set_stats(f,chosen_char,location)
-      characters.remove(chosen_char)
-   write_chars(f,character_locations,locked_chars,outfile)
-   f.close
-   return character_locations
+def randomize_char_positions(outfile,locked_chars,lost_worlds):
+    f = open(outfile,"r+b")
+    character_locations = {"start": "", "start2": "", "cathedral": "", "castle": "", "proto": "", "burrow": "", "dactyl": ""}
+    characters = [chrono, marle, lucca, robo, frog, ayla, magus]
+    for location in character_locations:
+        character_locations[location] = rand.choice(characters)
+        chosen_char = character_locations[location]
+        set_stats(f,chosen_char,location,lost_worlds)
+        characters.remove(chosen_char)
+    write_chars(f,character_locations,locked_chars,lost_worlds,outfile)
+    f.close
+    return character_locations
 if __name__ == "__main__":
     randomize_char_positions("Project.sfc","N")
