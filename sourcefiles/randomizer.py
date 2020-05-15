@@ -8,6 +8,7 @@ import shopwriter as shops
 import characterwriter as char_slots
 import logicwriter as keyitems
 import random as rand
+import ipswriter as bigpatches
 import patcher as patches
 import enemywriter as enemystuff
 import bossscaler as boss_scale
@@ -76,6 +77,10 @@ if __name__ == "__main__":
      sense_dpad = sense_dpad.upper()
      if sense_dpad == "Y":
         flags = flags + "d"
+     lost_worlds = input("Would you want to activate Lost Worlds(l)? Y/N ")
+     lost_worlds = lost_worlds.upper()
+     if lost_worlds == "Y":
+         flags = flags + "l"
      boss_scaler = input("Do you want bosses to scale with progression(b)? Y/N ")
      boss_scaler = boss_scaler.upper()
      if boss_scaler == "Y":
@@ -84,10 +89,13 @@ if __name__ == "__main__":
      zeal_end = zeal_end.upper()
      if zeal_end == "Y":
         flags = flags + "z"
-     quick_pendant = input("Do you want the pendant to be charged earlier(p)? Y/N ")
-     quick_pendant = quick_pendant.upper()
-     if quick_pendant == "Y":
-        flags = flags + "p"
+     if lost_worlds == "Y":
+        pass
+     else:
+         quick_pendant = input("Do you want the pendant to be charged earlier(p)? Y/N ")
+         quick_pendant = quick_pendant.upper()
+         if quick_pendant == "Y":
+            flags = flags + "p"
      locked_chars = input("Do you want characters to be further locked(c)? Y/N ")
      locked_chars = locked_chars.upper()
      if locked_chars == "Y":
@@ -117,24 +125,7 @@ Also, try writing the extension(.sfc/smc).""")
         f.write(data)
         f.close()
      print("Applying patch. This might take a while.")
-     p = open("patch.ips","r+b")
-     patch_size = stat("patch.ips").st_size
-     position = 5
-     f = open(outfile,'r+b')
-     while position < patch_size - 4:
-       p.seek(position)
-       pointer1 = p.read(1)
-       pointer1 = tenthousands_digit(pointer1)
-       position += 1
-       pointer2 = p.read(2)
-       pointer = make_number(pointer1,pointer2)
-       position += 2
-       length = p.read(2)
-       length = get_length(length)
-       position += 2
-       position = write_data(length,pointer,position)
-     p.close
-     f.close
+     bigpatches.write_patch("patch.ips",outfile)
      patches.patch_file("patches/patch_codebase.txt",outfile)
      if glitch_fixes == "Y":
         patches.patch_file("patches/save_anywhere_patch.txt",outfile)
@@ -148,8 +139,12 @@ Also, try writing the extension(.sfc/smc).""")
         patches.patch_file("patches/faster_menu_dpad.txt",outfile)
      if zeal_end == "Y":
         patches.patch_file("patches/zeal_end_boss.txt",outfile)
-     if quick_pendant == "Y":
-        patches.patch_file("patches/fast_charge_pendant.txt",outfile)
+     if lost_worlds == "Y":
+        bigpatches.write_patch("patches/lost.ips",outfile)
+     if lost_worlds == "Y":
+         pass
+     elif quick_pendant == "Y":
+             patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      print("Randomizing treasures...")
      treasures.randomize_treasures(outfile)
      hardcoded_items.randomize_hardcoded_items(outfile)
@@ -158,9 +153,12 @@ Also, try writing the extension(.sfc/smc).""")
      print("Randomizing shops...")
      shops.randomize_shops(outfile)
      print("Randomizing character locations...")
-     char_locs = char_slots.randomize_char_positions(outfile,locked_chars)
+     char_locs = char_slots.randomize_char_positions(outfile,locked_chars,lost_worlds)
      print("Now placing key items...")
-     keyitems = keyitems.randomize_keys(char_locs,outfile,locked_chars)
+     if lost_worlds == "Y":
+         keyitems = keyitems.randomize_lost_worlds_keys(char_locs,outfile)
+     else:
+         keyitems = keyitems.randomize_keys(char_locs,outfile,locked_chars)
      if boss_scaler == "Y":
          print("Rescaling bosses based on key items..")
          boss_scale.scale_bosses(char_locs,keyitems,locked_chars,outfile)
