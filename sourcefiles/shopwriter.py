@@ -47,9 +47,14 @@ def write_slots(file_pointer,shop_start,items,shop_address):
        else:
             rand_num = rand.randrange(0,10,1)	
             item = pick_items(shop_start,rand_num)
+       #Guarantee for Lapises from Fritz's and Fiona's shop
        if shop_start == 0xC2C71 or shop_start == 0xC2C99:
           if items == item_count:
              item = 0xCA
+       #Guarantee for Amulets from shops in Kajar and the Black Omen
+       if shop_start == 0xC2C7B or shop_start == 0xC2C9B:
+          if items == item_count:
+             item = 0x9A
        if item in buffer:
             continue
        buffer.append(item)
