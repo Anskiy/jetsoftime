@@ -1,1 +1,0 @@
-{'zenan': 'pop', 'denadoro1': 'pendant', 'denadoro2': 'gate', 'snail': 'stone', 'burrow': 'moon', 'carpenter': 'clone', 'trial': 'jerky', 'melchior': 'trigger', 'claw': 'prism', 'desert': 'ribbon', 'arris': 'tools', 'geno': 'medal', 'sun': 'hilt', 'reptite': 'blade', 'woe': 'knife'}
