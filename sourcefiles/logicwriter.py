@@ -174,7 +174,7 @@ def randomize_lost_worlds_keys(char_locs,outfile):
     complete_list = ["dream","palace","omen1","omen2"]
     while len(loclist) != len(complete_list) and iterations != 3600:
         loclist = []
-        keyitems = ["stone","knife","clone","trigger","ribbon"]
+        keyitems = ["stone","knife","clone","trigger","pendant"]
         locations = {"arris": "","geno": "","sun": "","reptite": "","woe": ""}
         lockeys = ["arris","geno","sun","reptite","woe"]
         for loc in locations:
