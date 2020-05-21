@@ -365,7 +365,7 @@ def rewrite_combo_techs():
     #Spire
     file_pointer.seek(combo_tech_address)
     file_pointer.write(st.pack("B",new_ids["leapslash"]))
-    file_pointer.seek(combo_tech_address)
+    file_pointer.seek(combo_tech_address+1)
     file_pointer.write(st.pack("B",new_ids["lightning2"]))
     combo_tech_address += 11
     file_pointer.seek(combo_tech_requirements)
