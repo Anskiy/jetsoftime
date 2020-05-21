@@ -970,6 +970,8 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Moved PowerScarf and Rage Band to Passable tier.
  - Nerfed prices of most bad, passable, and medium tier items.
  - Upped the prices of Shelters and Revives.
+13/04/2020 
+ - Set Giant's Claw enemies back to vanilla stats.
 14/04/2020 
  - Made a new tier, rearranged loot some more.
  - Made all equipment in Good Tier and above unsellable.
