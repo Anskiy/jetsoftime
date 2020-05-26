@@ -169,5 +169,10 @@ Also, try writing the extension(.sfc/smc).""")
      f.seek(0x35F6D5)
      f.write(st.pack("B",1))
      f.close()
+     #Mystic Mtn event fix in Lost Worlds
+     if lost_worlds == "Y":         
+       f = open(outfile,"r+b")
+       bigpatches.write_patch("patches/mysticmtnfix.ips",outfile)
+       f.close()
      print("Randomization completed successfully.")
      input("Press Enter to exit.")
