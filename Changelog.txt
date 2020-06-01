@@ -983,3 +983,12 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Buffed Ayla's Cat Attack and Triple Kick, Cat Attack now costs more TP to unlock and more MP to use.
 15/05/2020
  - Implemented Lost Worlds mode.
+26/05/2020
+ - Redid HP of Lab 16 enemies:
+   Meat Eater has 500 HP.
+   Octopod has 300 HP.
+   Crater has 300 HP.
+01/06/2020
+ - Set levels of all characters in Lost Worlds mode to level 15.
+ - Consequently, set levels of characters in Proto Dome, Dactyl Nest and Frog's Burrow to level 15 too.
+ - Set HP of Rubbles to 500.
