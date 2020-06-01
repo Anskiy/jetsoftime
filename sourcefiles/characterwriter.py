@@ -5,12 +5,12 @@ import patcher as patch
 current XP first byte,current XP last byte,XP to next level,tech points to next tech,number of techs,
 current techs bitfield"""
 chrono = [0,70,8,5,8,5,8,8,15,1,0,0,20,5,0,0]
-marle = [1,65,12,2,6,16,8,6,25,1,0,0,20,5,0,0]
+marle = [1,65,12,2,6,20,8,6,25,1,0,0,20,5,0,0]
 lucca = [2,62,12,2,6,20,8,7,25,1,0,0,20,5,0,0]
 robo = [3,130,6,7,10,3,7,7,10,1,0,0,20,5,0,0]
 frog = [4,80,9,4,8,6,8,8,15,1,0,0,20,5,0,0]
 ayla = [5,80,4,10,9,3,10,12,10,1,0,0,20,5,0,0]
-magus = [6,110,14,8,7,10,12,10,30,1,0,0,20,50,0,0]
+magus = [6,110,14,8,7,20,12,10,30,1,0,0,20,50,0,0]
 def set_stats(file_pointer,character,location,lost_worlds):
     global chrono, marle, lucca, robo, frog, ayla, magus, char_array
     if (location == "start" or location == "start2" or location == "cathedral") and lost_worlds != "Y":
@@ -33,19 +33,19 @@ def set_stats(file_pointer,character,location,lost_worlds):
            char_array = [150,22,13,11,24,15,12,32,5,0xF0,0,0xA0,50,2,0xC0]
     elif location == "proto" or location == "burrow" or location == "dactyl" or lost_worlds == "Y":
         if character == chrono:
-           char_array = [187,26,17,22,8,10,11,19,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [262,36,24,31,10,12,13,21,15,0xBE,0x19,1450,100,3,0xE0]
         elif character == marle:
-           char_array = [164,30,4,12,29,20,9,29,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [228,40,6,15,34,27,11,31,15,0xBE,0x19,1450,100,3,0xE0]
         elif character == lucca:
-           char_array = [179,30,4,13,29,20,9,29,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [250,40,5,17,34,27,11,31,15,0xBE,0x19,1450,100,3,0xE0]
         elif character == robo:
-           char_array = [235,24,21,26,7,10,9,14,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [310,34,29,34,10,12,11,16,15,0xBE,0x19,1450,100,3,0xE0]
         elif character == frog:
-           char_array = [188,27,15,22,13,10,11,19,10,0x30,0x07,650,200,3,0xE0]
+           char_array = [258,37,22,30,17,12,13,21,15,0xBE,0x19,1450,200,3,0xE0]
         elif character == ayla:
-           char_array = [215,22,23,24,5,16,19,14,10,0x30,0x07,650,200,3,0xE0]
+           char_array = [290,32,31,33,7,20,23,16,15,0xBE,0x19,1450,200,3,0xE0]
         elif character == magus:
-           char_array = [200,32,19,16,29,19,15,35,10,0x30,0x07,650,100,3,0xE0]
+           char_array = [250,42,26,21,34,22,19,38,15,0xBE,0x19,1450,100,3,0xE0]
     write_stats(file_pointer,character,char_array)
 def write_stats(file_pointer,character,stats):
         start_pointer = 0xC0000 + character[0] * 0x50
