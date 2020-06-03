@@ -1,0 +1,51 @@
+Flags
+The randomizer features several flags to provide flexible options. Some of them are small tweaks, others are more significant changes, and there is even a completely different mode of gameplay available. What follows is a small description of what each flag does.
+
+
+g: This flag disables most well known glitches, like emptying equipment slots, saving anywhere you can, and using quick menu switching to activate scripted encounters from a distance and skip them. Tricks that aren't blocked by this flag are generally accepted as valid for races.
+
+
+s: This flag speeds up the Epoch and overworld movement speed.
+
+
+d: This flag makes dpad inputs faster and more responsive.
+
+
+l: This activates Lost Worlds, a huge twist on the gameplay of Jets of Time. When it's activated:
+
+-You start out in 2300 AD, and can explore it, 12000 BC and Prehistory freely.
+
+-Your characters start at level 15, have three techs learnt, and have magic unlocked.
+
+-You can buy from the guarantee shop in the fair before starting, but can't access it afterwards until either Zeal 2 or the Lavos shell is defeated.
+
+-To access the Ocean Palace, you need to defeat Black Tyrano and collect the Ruby Knife.
+
+-The p flag does not work with this mode.
+
+
+b: This flag activates boss scaling. Bosses holding important key items, directly or otherwise, get scaled up. When it's activated:
+
+-Bosses holding the Ruby Knife, Clone or C. Trigger get scaled up the most, usually.
+
+-Bosses holding keys to one of the three routes, or to a location that holds the three aforementioned key items, get scaled up a little less.
+
+-Bosses holding keys to those specific locations get scaled up the least, while still being noticeably stronger.
+
+-Dragon Tank gets scaled based on the strongest key item placed in the Future.
+
+-If the c flag is on, R Series scale up based on the character placed in Proto Dome. Crono and Magus are the highest ranked, and Frog, Marle and Lucca the least ranked.
+
+-Bosses that are not locked behind anything will not be scaled. This means that Zombor, Heckran, and Masa & Mune(both fights) will always be the same strength regardless of seed.
+
+
+z: This makes Zeal 2 an alternate final boss. Defeating her will win the game and grant a different ending. Defeating Lavos still remains an option, and grants the regular ending.
+
+
+p: This makes the Pendant charge earlier. Precisely, it charges the moment you complete the Prison quest, allowing you to open sealed chests and doors a lot earlier than normal.
+
+
+c: This locks the characters in Proto Dome and Dactyl Nest further. The Proto Dome character requires the Factory to be completed, while the Dactyl Nest character requires the Dreamstone to access.
+
+
+te: This randomizes the order in which characters learn their techs. For example, with this on Crono can learn Lightning 2 first, followed by Spincut. The points required to learn several slots  on the list remain the same, and you still need to unlock magic to get more than the first three techs for characters requiring the End of Time. 
