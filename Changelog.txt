@@ -970,8 +970,6 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Moved PowerScarf and Rage Band to Passable tier.
  - Nerfed prices of most bad, passable, and medium tier items.
  - Upped the prices of Shelters and Revives.
-13/04/2020 
- - Set Giant's Claw enemies back to vanilla stats.
 14/04/2020 
  - Made a new tier, rearranged loot some more.
  - Made all equipment in Good Tier and above unsellable.
@@ -992,3 +990,6 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Set levels of all characters in Lost Worlds mode to level 15.
  - Consequently, set levels of characters in Proto Dome, Dactyl Nest and Frog's Burrow to level 15 too.
  - Set HP of Rubbles to 500.
+ - Made everything in the Good tier sellable.
+ - Made Amulets available from the upper Nu shop in Kajar and the Last Village shop.
+ - Made Amulets rarer and cost more to account for the above.

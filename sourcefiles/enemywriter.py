@@ -85,6 +85,16 @@ def randomize_enemy_stuff(f):
      if rand_num < 7:
         drop = 0	 
      write_enemy_stuff(drop,charm,f,enemy)
+  #Small block to randomize status inflicted by Obstacle/Chaotic Zone
+  rand_num = rand.randrange(0,10,1)
+  f.seek(0xC7EEB)
+#  if rand_num < 2:
+#      status_effect = rand.choice(1,0x40) #Blind, Poison
+  if rand_num < 8:
+      status_effect = rand.choice([2,8,0x20]) #Sleep, Lock, Slow
+  else:
+      status_effect = rand.choice([4,0x80]) #Chaos, Stop
+  f.write(st.pack("B",status_effect))
   f.close
 def randomize_boss_stuff(f):
   for id in early_boss_ids:
