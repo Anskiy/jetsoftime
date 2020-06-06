@@ -65,6 +65,14 @@ if __name__ == "__main__":
         names = read_names()
         seed = "".join(rand.choice(names) for i in range(2))
      rand.seed(seed)
+     difficulty = input(f"Choose your difficulty \nEasy(e)/Normal(n)/Hard(h)")
+     if difficulty == "n":
+         difficulty = "normal"
+     elif difficulty == "e":
+         difficulty = "easy"
+     else:
+         difficulty = "hard"
+     flags = flags + difficulty[0]
      glitch_fixes = input("Would you like to disable (most known) glitches(g)? Y/N ")
      glitch_fixes = glitch_fixes.upper()
      if glitch_fixes == "Y":
@@ -146,10 +154,10 @@ Also, try writing the extension(.sfc/smc).""")
      elif quick_pendant == "Y":
              patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      print("Randomizing treasures...")
-     treasures.randomize_treasures(outfile)
+     treasures.randomize_treasures(outfile,difficulty)
      hardcoded_items.randomize_hardcoded_items(outfile)
      print("Randomizing enemy loot...")
-     enemystuff.randomize_enemy_stuff(outfile)
+     enemystuff.randomize_enemy_stuff(outfile,difficulty)
      print("Randomizing shops...")
      shops.randomize_shops(outfile)
      print("Randomizing character locations...")
