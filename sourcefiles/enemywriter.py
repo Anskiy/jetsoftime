@@ -40,51 +40,75 @@ uncommon_enemy_ids = [0x01,0x03,0x04,0x05,0x16,0x17,0x1D,0x22,0x26,0x27,0x29,0x2
 rare_enemy_ids = [0x02,0x07,0x09,0x0E,0x1B,0x20,0x28,0x2B,0x2D,0x30,0x39,0x3A,0x40,0x41,0x42,0x49,0x52,0x53,0x56,0x58,
 0x59,0x62,0x6A,0x6D,0x70,0x75,0x76,0x7A,0x81,0x84,0x85,0x8B,0x8E,0x96,0xA4,0xAA,0xAC,0xC1,0xC8,0xD5,0xD6,0xD9]
 rarest_enemy_ids = [0,0x2C,0x43,0x5F,0x82]
-def randomize_enemy_stuff(f):
+def randomize_enemy_stuff(f,difficulty):
   outfile = f
   f = open(f, "r+b")
   randomize_boss_stuff(f)
   randomize_midbosses(outfile,f)
-  for enemy in common_enemy_ids:
-     rand_num = rand.randrange(0,10,1)
-     if rand_num > 7:
-        drop = rand.choice(plvlitems+llvlitems)
-     else:
-        drop = rand.choice(plvlconsumables+llvlconsumables)
-     charm = drop
-     if rand_num < 5:
-        drop = 0	 
-     write_enemy_stuff(drop,charm,f,enemy)
-  for enemy in uncommon_enemy_ids:
-     rand_num = rand.randrange(0,10,1)
-     if rand_num > 7:
-        drop = rand.choice(mlvlitems+glvlitems)
-     else:
-        drop = rand.choice(mlvlconsumables+glvlconsumables)
-     charm = drop
-     if rand_num < 6:
-        drop = 0	 
-     write_enemy_stuff(drop,charm,f,enemy)
-  for enemy in rare_enemy_ids:
-     rand_num = rand.randrange(0,10,1)
-     if rand_num > 7:
-        drop = rand.choice(mlvlitems+glvlitems+hlvlitems)
-     else:
-        drop = rand.choice(mlvlconsumables+glvlconsumables+hlvlconsumables)
-     charm = drop
-     if rand_num < 6:
-        drop = 0	 
-     write_enemy_stuff(drop,charm,f,enemy)
-  for enemy in rarest_enemy_ids:
-     rand_num = rand.randrange(0,10,1)
-     if rand_num > 8:
-        drop = rand.choice(hlvlitems+alvlitems)
-     else:
-        drop = rand.choice(glvlconsumables+hlvlconsumables+alvlconsumables)
-     charm = drop
-     if rand_num < 7:
-        drop = 0	 
-     write_enemy_stuff(drop,charm,f,enemy)
+  if difficulty == "hard":
+      for enemy in common_enemy_ids:
+          drop = 0
+          charm = 0
+          write_enemy_stuff(drop,charm,f,enemy)
+      for enemy in uncommon_enemy_ids:
+          drop = 0
+          charm = rand.choice(mlvlconsumables + glvlconsumables)
+          write_enemy_stuff(drop,charm,f,enemy)
+      for enemy in rare_enemy_ids:
+          drop = rand.choice(plvlconsumables+mlvlconsumables+glvlconsumables)
+          charm = rand.choice(mlvlitems+glvlitems)
+          write_enemy_stuff(drop,charm,f,enemy)
+      for enemy in rarest_enemy_ids:
+          rand_num = rand.randrange(0,10,1)
+          if rand_num > 8:
+              drop = rand.choice(hlvlitems+alvlitems)
+          else:
+              drop = rand.choice(glvlconsumables+hlvlconsumables+alvlconsumables)
+          charm = drop
+          if rand_num < 7:
+              drop = 0
+          write_enemy_stuff(drop,charm,f,enemy)
+  else:
+      for enemy in common_enemy_ids:
+          rand_num = rand.randrange(0,10,1)
+          if rand_num > 7:
+              drop = rand.choice(plvlitems+llvlitems)
+          else:
+              drop = rand.choice(plvlconsumables+llvlconsumables)
+          charm = drop
+          if rand_num < 5:
+              drop = 0	 
+          write_enemy_stuff(drop,charm,f,enemy)
+      for enemy in uncommon_enemy_ids:
+          rand_num = rand.randrange(0,10,1)
+          if rand_num > 7:
+              drop = rand.choice(mlvlitems+glvlitems)
+          else:
+              drop = rand.choice(mlvlconsumables+glvlconsumables)
+          charm = drop
+          if rand_num < 6:
+              drop = 0	 
+          write_enemy_stuff(drop,charm,f,enemy)
+      for enemy in rare_enemy_ids:
+          rand_num = rand.randrange(0,10,1)
+          if rand_num > 7:
+              drop = rand.choice(mlvlitems+glvlitems+hlvlitems)
+          else:
+              drop = rand.choice(mlvlconsumables+glvlconsumables+hlvlconsumables)
+          charm = drop
+          if rand_num < 6:
+              drop = 0	 
+          write_enemy_stuff(drop,charm,f,enemy)
+      for enemy in rarest_enemy_ids:
+          rand_num = rand.randrange(0,10,1)
+          if rand_num > 8:
+              drop = rand.choice(hlvlitems+alvlitems)
+          else:
+              drop = rand.choice(glvlconsumables+hlvlconsumables+alvlconsumables)
+          charm = drop
+          if rand_num < 7:
+              drop = 0	 
+          write_enemy_stuff(drop,charm,f,enemy)
   #Small block to randomize status inflicted by Obstacle/Chaotic Zone
   rand_num = rand.randrange(0,10,1)
   f.seek(0xC7EEB)

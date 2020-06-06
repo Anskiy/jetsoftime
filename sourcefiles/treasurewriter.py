@@ -31,62 +31,129 @@ hlvlconsumables = [0xC3,0xC4,0xCD,0xCE,0xCF]
 alvlitems = [0xBB,0x0E,0x53,0x54,0x55,0x28,0x39,0x91,0x86,0x8F,0x6C,0x7A,0x6D,0x6B]
 alvlconsumables = [0xC3,0xC5]
 
-def choose_item(pointer):
+def choose_item(pointer,difficulty):
     rand_num = rand.randrange(0,11,1)
-    if pointer in lowlvlchests:
-        if rand_num > 5:
-            writeitem = rand.choice(llvlconsumables)
-        else: 
-            writeitem = rand.choice(llvlitems)
-    elif pointer in lmidlvlchests:
-        if rand_num > 5:
-            writeitem = rand.choice(llvlconsumables+plvlconsumables)
-        else:
-            rand_num = rand.randrange(0,100,1)
-            if rand_num > 74:
-                writeitem = rand.choice(mlvlitems)
+    if difficulty == "easy":
+        if pointer in lowlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(plvlconsumables+mlvlconsumables)
+            else: 
+                writeitem = rand.choice(plvlitems+mlvlitems)
+        elif pointer in lmidlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(mlvlconsumables+glvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    writeitem = rand.choice(glvlitems)
+                else:
+                    writeitem = rand.choice(mlvlitems)
+        elif pointer in midlvlchests or mhighlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(glvlconsumables + hlvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                   if rand_num > 94:
+                       writeitem = rand.choice(alvlitems)
+                   else:
+                       writeitem = rand.choice(hlvlitems)
+                else:
+                    writeitem = rand.choice(glvlitems)
+        elif pointer in hawelvlchests:
+            if rand_num > 6:
+                writeitem = rand.choice(glvlconsumables + hlvlconsumables + alvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    writeitem = rand.choice(alvlitems)
+                else:
+                    writeitem = rand.choice(glvlitems + hlvlitems)
+    elif difficulty == "hard":
+        if pointer in lowlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(llvlconsumables)
+            else: 
+                writeitem = rand.choice(llvlitems)
+        elif pointer in lmidlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(llvlconsumables+plvlconsumables)
             else:
                 writeitem = rand.choice(plvlitems)
-    elif pointer in midlvlchests:
-        if rand_num > 5:
-            writeitem = rand.choice(plvlconsumables + mlvlconsumables)
-        else:
-            rand_num = rand.randrange(0,100,1)
-            if rand_num > 74:
-               if rand_num > 94:
-                  writeitem = rand.choice(hlvlitems)
-               else:
-                  writeitem = rand.choice(glvlitems)
+        elif pointer in midlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(plvlconsumables + mlvlconsumables)
             else:
-               writeitem = rand.choice(mlvlitems)
-    elif pointer in mhighlvlchests:
-        if rand_num > 5:
-            writeitem = rand.choice(mlvlconsumables + glvlconsumables)
-        else:
-            rand_num = rand.randrange(0,100,1)
-            if rand_num > 74:
-               if rand_num > 94:
-                  writeitem = rand.choice(alvlitems)
-               else:
-                  writeitem = rand.choice(hlvlitems)
+                writeitem = rand.choice(mlvlitems)
+        elif pointer in mhighlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(mlvlconsumables + glvlconsumables)
             else:
-               writeitem = rand.choice(glvlitems)
-    elif pointer in hawelvlchests:
-        if rand_num > 6:
-            writeitem = rand.choice(glvlconsumables + hlvlconsumables + alvlconsumables)
-        else:
-            rand_num = rand.randrange(0,100,1)
-            if rand_num > 74:
-                  writeitem = rand.choice(alvlitems)
+                writeitem = rand.choice(glvlitems)
+        elif pointer in hawelvlchests:
+            if rand_num > 6:
+                writeitem = rand.choice(glvlconsumables + hlvlconsumables + alvlconsumables)
             else:
-                  writeitem = rand.choice(glvlitems + hlvlitems)
-    return writeitem		
-def randomize_treasures(outfile):
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    writeitem = rand.choice(alvlitems)
+                else:
+                    writeitem = rand.choice(glvlitems + hlvlitems)
+    else:
+        if pointer in lowlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(llvlconsumables)
+            else: 
+                writeitem = rand.choice(llvlitems)
+        elif pointer in lmidlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(llvlconsumables+plvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    writeitem = rand.choice(mlvlitems)
+                else:
+                    writeitem = rand.choice(plvlitems)
+        elif pointer in midlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(plvlconsumables + mlvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    if rand_num > 94:
+                        writeitem = rand.choice(hlvlitems)
+                    else:
+                        writeitem = rand.choice(glvlitems)
+                else:
+                    writeitem = rand.choice(mlvlitems)
+        elif pointer in mhighlvlchests:
+            if rand_num > 5:
+                writeitem = rand.choice(mlvlconsumables + glvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    if rand_num > 94:
+                        writeitem = rand.choice(alvlitems)
+                    else:
+                        writeitem = rand.choice(hlvlitems)
+                else:
+                    writeitem = rand.choice(glvlitems)
+        elif pointer in hawelvlchests:
+            if rand_num > 6:
+                writeitem = rand.choice(glvlconsumables + hlvlconsumables + alvlconsumables)
+            else:
+                rand_num = rand.randrange(0,100,1)
+                if rand_num > 74:
+                    writeitem = rand.choice(alvlitems)
+                else:
+                    writeitem = rand.choice(glvlitems + hlvlitems)
+    return writeitem
+def randomize_treasures(outfile,difficulty):
    f = open(outfile,"r+b")
    for p in allpointers:
       f.seek(p-3)
       f.write(st.pack("B",0x00))
-      writeitem = choose_item(p)
+      writeitem = choose_item(p,difficulty)
       f.seek(p)
       f.write(st.pack("B",writeitem))
    f.close
