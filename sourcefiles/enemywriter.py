@@ -43,7 +43,7 @@ rarest_enemy_ids = [0,0x2C,0x43,0x5F,0x82]
 def randomize_enemy_stuff(f,difficulty):
   outfile = f
   f = open(f, "r+b")
-  randomize_boss_stuff(f)
+  randomize_boss_stuff(f,difficulty)
   randomize_midbosses(outfile,f)
   if difficulty == "hard":
       for enemy in common_enemy_ids:
@@ -120,60 +120,60 @@ def randomize_enemy_stuff(f,difficulty):
       status_effect = rand.choice([4,0x80]) #Chaos, Stop
   f.write(st.pack("B",status_effect))
   f.close
-def randomize_boss_stuff(f):
-  for id in early_boss_ids:
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 94:
-         drop = rand.choice(alvlitems)
-      elif rand_num > 74:
-         drop = rand.choice(glvlitems + hlvlitems)
-      else:
-         drop = rand.choice(mlvlitems)
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 94:
-         charm = rand.choice(alvlitems)
-      elif rand_num > 74:
-         charm = rand.choice(glvlitems + hlvlitems)
-      else:
-         charm = rand.choice(mlvlitems)
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 74:
-         drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
-      write_enemy_stuff(drop,charm,f,id)
-  for id in mid_boss_ids:
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 94:
-         drop = rand.choice(alvlitems)
-      elif rand_num > 74:
-         drop = rand.choice(glvlitems + hlvlitems)
-      else:
-         drop = rand.choice(glvlitems)
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 94:
-         charm = rand.choice(alvlitems)
-      elif rand_num > 74:
-         charm = rand.choice(glvlitems + hlvlitems)
-      else:
-         charm = rand.choice(glvlitems)
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 74:
-         drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
-      write_enemy_stuff(drop,charm,f,id)
-  for id in late_boss_ids:
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 94:
-         drop = rand.choice(alvlitems)
-      else:
-         drop = rand.choice(glvlitems + hlvlitems)
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 94:
-         charm = rand.choice(alvlitems)
-      else:
-         charm = rand.choice(glvlitems + hlvlitems)
-      rand_num = rand.randrange(0,100,1)
-      if rand_num > 74:
-         drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
-      write_enemy_stuff(drop,charm,f,id)
+def randomize_boss_stuff(f,difficulty):
+    for id in early_boss_ids:
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 94:
+            drop = rand.choice(alvlitems)
+        elif rand_num > 74:
+            drop = rand.choice(glvlitems + hlvlitems)
+        else:
+            drop = rand.choice(mlvlitems)
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 94:
+            charm = rand.choice(alvlitems)
+        elif rand_num > 74:
+            charm = rand.choice(glvlitems + hlvlitems)
+        else:
+            charm = rand.choice(mlvlitems)
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 74 or (difficulty == "hard" and rand_num > 49):
+            drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
+        write_enemy_stuff(drop,charm,f,id)
+    for id in mid_boss_ids:
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 94:
+            drop = rand.choice(alvlitems)
+        elif rand_num > 74:
+            drop = rand.choice(glvlitems + hlvlitems)
+        else:
+            drop = rand.choice(glvlitems)
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 94:
+            charm = rand.choice(alvlitems)
+        elif rand_num > 74:
+            charm = rand.choice(glvlitems + hlvlitems)
+        else:
+            charm = rand.choice(glvlitems)
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 74 or (difficulty == "hard" and rand_num > 49):
+            drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
+        write_enemy_stuff(drop,charm,f,id)
+    for id in late_boss_ids:
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 94:
+            drop = rand.choice(alvlitems)
+        else:
+            drop = rand.choice(glvlitems + hlvlitems)
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 94:
+            charm = rand.choice(alvlitems)
+        else:
+            charm = rand.choice(glvlitems + hlvlitems)
+        rand_num = rand.randrange(0,100,1)
+        if rand_num > 74 or (difficulty == "hard" and rand_num > 49):
+            drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
+        write_enemy_stuff(drop,charm,f,id)
 def randomize_midbosses(outfile,f):
     magus_hp = rand.randrange(10000,16000,1000)
     tyrano_hp = rand.randrange(8000,14000,1000)
