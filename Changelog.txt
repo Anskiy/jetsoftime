@@ -993,3 +993,10 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Made everything in the Good tier sellable.
  - Made Amulets available from the upper Nu shop in Kajar and the Last Village shop.
  - Made Amulets rarer and cost more to account for the above.
+11/06/2020
+ - Set Tail Spin to 24 power, made it cost 10 MP.
+ - Made Arc Impulse use 150% damage for Spincut and Leap Slash.
+ - Made 3D Attack use 150% damage for Triple Kick.
+ - Made DarkEternal use 150% damage for DarkMatter.
+ - Made Omega Flare use 150% damage for Flare.
+ - Raised Grand Dream's power to 40.
