@@ -2,6 +2,7 @@ from shutil import copyfile
 import struct as st
 from os import stat
 from time import time
+import sys
 import treasurewriter as treasures
 import specialwriter as hardcoded_items
 import shopwriter as shops
@@ -13,6 +14,7 @@ import patcher as patches
 import enemywriter as enemystuff
 import bossscaler as boss_scale
 import techwriter as tech_order
+import randomizergui as gui
 
 def tenthousands_digit(digit):
     digit = st.unpack(">B",digit)
@@ -56,7 +58,39 @@ def read_names():
         names = names.split(",")
         p.close
         return names
-if __name__ == "__main__":
+
+# Script variables
+flags = ""
+sourcefile = ""
+difficulty = ""
+glitch_fixes = ""
+fast_move = ""
+sense_dpad = ""
+lost_worlds = ""
+boss_scaler = ""
+zeal_end = ""
+quick_pendant = ""
+locked_chars = ""
+tech_list = ""
+seed = ""
+   
+#
+# Handle the command line interface for the randomizer.
+#   
+def command_line():
+     global flags
+     global sourcefile
+     global difficulty
+     global glitch_fixes
+     global fast_move
+     global sense_dpad
+     global lost_worlds
+     global boss_scaler
+     global zeal_end
+     global quick_pendant
+     global locked_chars
+     global tech_list
+     global seed
      flags = ""
      sourcefile = input("Please enter ROM name or drag it onto the screen.")
      sourcefile = sourcefile.strip("\"")
@@ -112,11 +146,97 @@ if __name__ == "__main__":
      tech_list = tech_list.upper()
      if tech_list == "Y":
         flags = flags + "te"
+    
+
+#
+# Given a tk IntVar, convert it to a Y/N value for use by the randomizer.
+#
+def get_flag_value(flag_var):
+  if flag_var.get() == 1:
+    return "Y"
+  else:
+    return "N"
+  
+#
+# Handle seed generation from the GUI.
+# Convert all of the GUI datastore values internal values
+# for the randomizer and then generate the ROM.
+#  
+def handle_gui(datastore):
+  global flags
+  global sourcefile
+  global difficulty
+  global glitch_fixes
+  global fast_move
+  global sense_dpad
+  global lost_worlds
+  global boss_scaler
+  global zeal_end
+  global quick_pendant
+  global locked_chars
+  global tech_list
+  global seed
+  
+  # Get the user's chosen difficulty
+  difficulty = datastore.difficulty.get()
+  
+  # build the flag string from the gui datastore vars
+  flags = ""
+  for flag, value in datastore.flags.items():
+    if value.get() == 1:
+      flags = flags + flag
+  
+  # Set the flag variables based on what the user chose
+  glitch_fixes = get_flag_value(datastore.flags['g'])
+  fast_move = get_flag_value(datastore.flags['s'])
+  sense_dpad = get_flag_value(datastore.flags['d'])
+  lost_worlds = get_flag_value(datastore.flags['l'])
+  boss_scaler = get_flag_value(datastore.flags['b'])
+  zeal_end = get_flag_value(datastore.flags['z'])
+  quick_pendant = get_flag_value(datastore.flags['p'])
+  locked_chars = get_flag_value(datastore.flags['c'])
+  tech_list = get_flag_value(datastore.flags['te'])
+  
+  # source ROM
+  sourcefile = datastore.inputFile.get()
+  
+  # seed
+  seed = datastore.seed.get()
+  if seed is None or seed == "":
+    names = read_names()
+    seed = "".join(rand.choice(names) for i in range(2))
+  rand.seed(seed)
+  datastore.seed.set(seed)
+  
+  # GUI values have been converted, generate the ROM.
+  generate_rom()
+   
+   
+#
+# Generate the randomized ROM.
+#    
+def generate_rom():
+     global flags
+     global sourcefile
+     global difficulty
+     global glitch_fixes
+     global fast_move
+     global sense_dpad
+     global lost_worlds
+     global boss_scaler
+     global zeal_end
+     global quick_pendant
+     global locked_chars
+     global tech_list
+     global seed
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
-     outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
+     if flags == "":
+       outfile = "%s.%s.sfc"%(outfile,seed)
+     else:
+       outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
      try:
-        size = stat(sourcefile).st_size
+       size = stat(sourcefile).st_size
      except WindowsError:
         input("""Try placing the ROM in the same folder as this program.
 Also, try writing the extension(.sfc/smc).""")
@@ -164,12 +284,12 @@ Also, try writing the extension(.sfc/smc).""")
      char_locs = char_slots.randomize_char_positions(outfile,locked_chars,lost_worlds)
      print("Now placing key items...")
      if lost_worlds == "Y":
-         keyitems = keyitems.randomize_lost_worlds_keys(char_locs,outfile)
+         keyitemlist = keyitems.randomize_lost_worlds_keys(char_locs,outfile)
      else:
-         keyitems = keyitems.randomize_keys(char_locs,outfile,locked_chars)
+         keyitemlist = keyitems.randomize_keys(char_locs,outfile,locked_chars)
      if boss_scaler == "Y":
          print("Rescaling bosses based on key items..")
-         boss_scale.scale_bosses(char_locs,keyitems,locked_chars,outfile)
+         boss_scale.scale_bosses(char_locs,keyitemlist,locked_chars,outfile)
      if tech_list == "Y":
         tech_order.take_pointer(outfile)
      # Tyrano Castle chest hack
@@ -183,4 +303,14 @@ Also, try writing the extension(.sfc/smc).""")
        bigpatches.write_patch("patches/mysticmtnfix.ips",outfile)
        f.close()
      print("Randomization completed successfully.")
-     input("Press Enter to exit.")
+     
+     
+     
+if __name__ == "__main__":
+  if len(sys.argv) > 1 and sys.argv[1] == "-c":
+    command_line()
+    generate_rom()
+    input("Press Enter to exit.")
+  else:
+    gui.guiMain()
+  
