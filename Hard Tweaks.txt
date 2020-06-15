@@ -1,0 +1,107 @@
+Reptite: HP 400, XP 100
+Terrasaur: HP 1000, Level 20, Magic 40, XP 300
+Kilwala: HP 300, XP 80
+Hench: HP 600, Defense 170, Offense 125, XP 270
+Martello: HP 1000, Level 20, Magic 20, XP 350
+Bellbird: XP 20
+Panel: HP 1000, Level 30, Magic 36
+Mammon Machine: HP 7000
+Blue Imp: XP 20
+Green Imp: XP 40
+Stone Imp: HP 600, Offense 210, XP 300
+Roly: XP 40
+Poly: XP 80
+Rolypoly: XP 20
+Roly Rider: XP 40
+Blue Eaglet: XP 20
+Avian Chaos: XP 20
+Bantan Imp: HP 400, XP 350
+Gnasher: XP 30
+Gnawer: XP 100
+Naga-ette: XP 45
+Ruminator: XP 100
+Octopod: XP 180
+Octoblush: XP 20
+Zeal: HP 7000
+Fly Trap: HP 500, XP 120
+Meat Eater: HP 600, XP 200
+Man Eater: HP 500, XP 200
+Krakker: XP 200
+Egder: XP 200
+Defunct: XP 200
+Decedent: XP 140
+Macabre: XP 300
+Reaper: XP 200
+Guard: XP 100
+Sentry: XP 200
+Free Lancer: XP 85
+Outlaw: HP 500, XP 200
+Giga Mutant: HP 6500, XP 4000
+Giga Mutant(bottom): HP 6500
+Terra Mutant: HP 7000, XP 5000
+Juggler: HP 1200, XP 350
+Mage: HP 1200, XP 600
+Reptite: XP 120
+Incognito: XP 120
+PeepingDoom: XP 120
+Jinn Bottle: XP 60
+Evilweevil: HP 350, XP 200
+Tempurite: XP 30
+Diablos: XP 30
+Gargoyle: HP 600, XP 300
+Grimalkin: HP 400, XP 200
+Hench: XP 80
+T'pole: XP 80
+Golem Twins: HP 8000, XP 1200
+Mad Bat: XP 30
+Vamp: XP 120
+Scouter: HP 250, XP 200
+Flyclops: XP 150
+Debugger: HP 500, XP 200
+Debuggest: HP 1200, XP 350
+Sorcerer: HP 400, XP 150
+Jinn: XP 200
+Barghest: HP 1000, XP 680
+Crater: HP 400, XP 150
+Volcano: XP 150
+Hetake: XP 20
+Shist: XP 100
+Pahoehoe: XP 100
+Mohavor: HP 320, XP 150
+Thrasher: HP 700, Defense 127, XP 300
+Omen Lavos Spawn: HP 12000, XP 6000
+Lasher: HP 800, Defense 150, XP 300
+Goblin: XP 85
+Ogan: XP 150
+Flunky: XP 240
+Groupie: XP 200
+Megasaur: HP 700, Level 20, Magic 20, XP 300
+Omnicrone: HP 300, XP 200
+Lizardactyl: HP 600, XP 150
+Avian Rex: HP 400, XP 100
+Runner: HP 400, XP 125
+Proto 3: XP 300
+Proto 4: HP 1200, XP 366
+Goon: HP 1200
+Golem: HP 7000, XP 1500
+Azala: HP 3000
+Nizbel: HP 5800
+Slash: HP 5000
+Flea: HP 4200
+Mutant: HP 600
+Gigasaur: HP 600
+Leaper: HP 400
+Fossil Ape: HP 600
+Decedent II: HP 500, Offense 110
+Zeal 2: HP 22000
+Lavos Body: HP 12000
+Lavos Right Hand: HP 6000
+Lavos Left Hand: HP 5000
+Lavos Center Bit: HP 10000
+Red Scout: HP 250, XP 200
+Blue Scout: HP 250, XP 200
+Lavos Spawn: HP 6000, Level 20, Magic 30
+Lavos Shell: HP 14000
+Lavos Left Bit: HP 3500
+Hexapod: HP 400, XP 200
+Lavos Right Bit: HP 22000

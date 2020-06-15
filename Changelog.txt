@@ -1000,3 +1000,6 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
  - Made DarkEternal use 150% damage for DarkMatter.
  - Made Omega Flare use 150% damage for Flare.
  - Raised Grand Dream's power to 40.
+15/06/2020
+ - Merged GUI made by Anguirel.
+ - Added tweaks to enemy and boss stats in hard mode.
