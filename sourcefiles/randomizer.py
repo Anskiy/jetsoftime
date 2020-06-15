@@ -292,6 +292,8 @@ Also, try writing the extension(.sfc/smc).""")
          boss_scale.scale_bosses(char_locs,keyitemlist,locked_chars,outfile)
      if tech_list == "Y":
         tech_order.take_pointer(outfile)
+     if difficulty == "hard":
+         bigpatches.write_patch("patches/hard.ips",outfile)
      # Tyrano Castle chest hack
      f = open(outfile,"r+b")
      f.seek(0x35F6D5)
