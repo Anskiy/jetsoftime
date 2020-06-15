@@ -58,9 +58,9 @@ def randomize_enemy_stuff(f,difficulty):
       for enemy in rarest_enemy_ids:
           rand_num = rand.randrange(0,10,1)
           if rand_num > 8:
-              drop = rand.choice(hlvlitems+alvlitems)
+              drop = rand.choice(mlvlitems+glvlitems+hlvlitems+alvlitems)
           else:
-              drop = rand.choice(glvlconsumables+hlvlconsumables+alvlconsumables)
+              drop = rand.choice(mlvlconsumables+glvlconsumables+hlvlconsumables+alvlconsumables)
           charm = drop
           if rand_num < 7:
               drop = 0
@@ -136,6 +136,10 @@ def randomize_boss_stuff(f,difficulty):
         rand_num = rand.randrange(0,100,1)
         if rand_num > 74 or (difficulty == "hard" and rand_num > 49):
             drop = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
+        if difficulty == "hard":
+            rand_num = rand.randrange(0,100,1)
+            if rand_num > 49:
+                drop = 0
         write_enemy_stuff(drop,charm,f,id)
     for id in mid_boss_ids:
         rand_num = rand.randrange(0,100,1)
