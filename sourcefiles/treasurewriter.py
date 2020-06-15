@@ -89,16 +89,16 @@ def choose_item(pointer,difficulty):
             if rand_num > 5:
                 writeitem = rand.choice(mlvlconsumables + glvlconsumables)
             else:
-                writeitem = rand.choice(glvlitems)
+                writeitem = rand.choice(mlvlitems+glvlitems)
         elif pointer in hawelvlchests:
             if rand_num > 6:
-                writeitem = rand.choice(glvlconsumables + hlvlconsumables + alvlconsumables)
+                writeitem = rand.choice(mlvlconsumables + glvlconsumables + hlvlconsumables + alvlconsumables)
             else:
                 rand_num = rand.randrange(0,100,1)
                 if rand_num > 74:
                     writeitem = rand.choice(alvlitems)
                 else:
-                    writeitem = rand.choice(glvlitems + hlvlitems)
+                    writeitem = rand.choice(mlvlitems + glvlitems + hlvlitems)
     else:
         if pointer in lowlvlchests:
             if rand_num > 5:
