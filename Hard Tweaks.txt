@@ -105,3 +105,4 @@ Lavos Shell: HP 14000
 Lavos Left Bit: HP 3500
 Hexapod: HP 400, XP 200
 Lavos Right Bit: HP 22000
+All bosses that can be adjusted by boss scaling are set to the lowest boosted stats by default

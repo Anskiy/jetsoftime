@@ -1003,3 +1003,6 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 15/06/2020
  - Merged GUI made by Anguirel.
  - Added tweaks to enemy and boss stats in hard mode.
+17/06/2020
+ - Made scalable bosses start with their lowest boost on Hard.
+ - Made Tail Spin use Level as a defensive stat.
