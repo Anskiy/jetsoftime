@@ -41,8 +41,8 @@ genThread = None
 #
 def generateHandler():
   global genThread
-  genThread = threading.Thread(target=randomize)
-  if not genThread.is_alive():
+  if genThread == None or not genThread.is_alive():
+    genThread = threading.Thread(target=randomize)
     progressBar.start(50)
     genThread.start()
   
