@@ -65,10 +65,11 @@ def randomize_hardcoded_items(outfile):
        f.write(st.pack("B",item))
        i += 1
    i = 0
+   rocks_local = rocks.copy()
    while i < 5:
      f.seek(rock_posts[i][0])
-     rock = rand.choice(rocks)
-     rocks.remove(rock)
+     rock = rand.choice(rocks_local)
+     rocks_local.remove(rock)
      f.write(st.pack("B",rock))
      f.seek(rock_posts[i][1])
      f.write(st.pack("B",rock))

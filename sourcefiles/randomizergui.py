@@ -33,7 +33,7 @@ def randomize():
   progressBar.stop()
   tk.messagebox.showinfo("Randomization Complete", "Randomization complete. Seed: " + datastore.seed.get())
 
-genThread = threading.Thread(target=randomize)
+genThread = None
     
 #
 # Button handler function for the generate button. It starts the
@@ -41,7 +41,8 @@ genThread = threading.Thread(target=randomize)
 #
 def generateHandler():
   global genThread
-  if not genThread.is_alive():
+  if genThread == None or not genThread.is_alive():
+    genThread = threading.Thread(target=randomize)
     progressBar.start(50)
     genThread.start()
   
