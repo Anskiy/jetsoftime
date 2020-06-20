@@ -181,7 +181,7 @@ def handle_gui(datastore):
   difficulty = datastore.difficulty.get()
   
   # build the flag string from the gui datastore vars
-  flags = ""
+  flags = difficulty[0]
   for flag, value in datastore.flags.items():
     if value.get() == 1:
       flags = flags + flag
