@@ -94,6 +94,10 @@ def command_line():
      flags = ""
      sourcefile = input("Please enter ROM name or drag it onto the screen.")
      sourcefile = sourcefile.strip("\"")
+     if sourcefile.find(".sfc") == -1:
+         if sourcefile.find(".smc") == - 1:
+             input("Invalid File Name. Try placing the ROM in the same folder as the randomizer. Also, try writing the extension(.sfc/smc).")
+             exit()
      seed = input("Enter seed(or leave blank if you want to randomly generate one).")
      if seed is None or seed == "":
         names = read_names()
@@ -235,11 +239,7 @@ def generate_rom():
        outfile = "%s.%s.sfc"%(outfile,seed)
      else:
        outfile = "%s.%s.%s.sfc"%(outfile,flags,seed)
-     try:
-       size = stat(sourcefile).st_size
-     except WindowsError:
-        input("""Try placing the ROM in the same folder as this program.
-Also, try writing the extension(.sfc/smc).""")
+     size = stat(sourcefile).st_size
      if size % 0x400 == 0:
         copyfile(sourcefile, outfile)
      elif size % 0x200 == 0:
@@ -287,13 +287,13 @@ Also, try writing the extension(.sfc/smc).""")
          keyitemlist = keyitems.randomize_lost_worlds_keys(char_locs,outfile)
      else:
          keyitemlist = keyitems.randomize_keys(char_locs,outfile,locked_chars)
+     if difficulty == "hard":
+         bigpatches.write_patch("patches/hard.ips",outfile)
      if boss_scaler == "Y":
          print("Rescaling bosses based on key items..")
          boss_scale.scale_bosses(char_locs,keyitemlist,locked_chars,outfile)
      if tech_list == "Y":
         tech_order.take_pointer(outfile)
-     if difficulty == "hard":
-         bigpatches.write_patch("patches/hard.ips",outfile)
      # Tyrano Castle chest hack
      f = open(outfile,"r+b")
      f.seek(0x35F6D5)

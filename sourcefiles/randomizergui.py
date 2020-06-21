@@ -29,9 +29,13 @@ progressBar = None
 # bar when the seed is ready.
 #
 def randomize():
-  randomizer.handle_gui(datastore)
-  progressBar.stop()
-  tk.messagebox.showinfo("Randomization Complete", "Randomization complete. Seed: " + datastore.seed.get())
+  try:
+    randomizer.handle_gui(datastore)
+    progressBar.stop()
+    tk.messagebox.showinfo("Randomization Complete", "Randomization complete. Seed: " + datastore.seed.get())
+  except WindowsError:
+    tk.messagebox.showinfo("Invalid File Name", f"Try placing the ROM in the same folder as the program. \n Also, try writing the extension(.sfc/smc).")
+    progressBar.stop()
 
 genThread = None
     
