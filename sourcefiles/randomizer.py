@@ -283,7 +283,7 @@ def generate_rom():
              patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      print("Randomizing treasures...")
      treasures.randomize_treasures(outfile,difficulty,tab_treasures)
-     hardcoded_items.randomize_hardcoded_items(outfile)
+     hardcoded_items.randomize_hardcoded_items(outfile,tab_treasures)
      print("Randomizing enemy loot...")
      enemystuff.randomize_enemy_stuff(outfile,difficulty)
      print("Randomizing shops...")
@@ -315,6 +315,7 @@ def generate_rom():
        if locked_chars == "Y":
          bigpatches.write_patch("patches/bangorfix.ips",outfile)
        f.close()
+     
      print("Randomization completed successfully.")
      
      

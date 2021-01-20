@@ -41,12 +41,21 @@ claw_rock = [0x35F57C,0x35F57C]
 omen_rock = [0x35F73C,0x35F73C]
 jerky_trades = [0xBB,0x0E,0x53,0x54,0x55,0x28,0x39,0x91,0x86,0x8F,0x6C,0x7A,0x6D,0x6B]
 jerky_pointers = [0x1BD9B3,0x1BD9B5]
-def randomize_hardcoded_items(outfile):
+def randomize_hardcoded_items(outfile,tab_treasures):
    f = open(outfile,"r+b")
    i = 0
    while i < len(sealed_pointers) - 1:
        f.seek(sealed_pointers[i])
-       treasure = rand.choice(sealed_treasures)
+       if tab_treasures == "Y":
+            rand_num = rand.randrange(0,8,1) # choose number from 0 to 8 inclusive.
+            if rand_num == 0: # 11% chance of a speed tab
+                treasure = 0xCF;
+            elif rand_num > 4: # 44% chance of a magic tab
+                treasure = 0xCE;
+            else: # 44% chance of a power tab
+                treasure = 0xCD;
+       else:
+            treasure = rand.choice(sealed_treasures)
        f.write(st.pack("B",treasure))
        f.seek(sealed_pointers[i+1])
        f.write(st.pack("B",treasure))
