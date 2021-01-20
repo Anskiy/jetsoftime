@@ -133,6 +133,12 @@ def getGameFlagsFrame(window):
   tk.Checkbutton(frame, text="Randomize techs(te)", variable = var).grid(row=row, sticky=tk.W, columnspan=3)
   row = row + 1
   
+  # Tab Treasures
+  var = tk.IntVar()
+  datastore.flags['tb'] = var
+  tk.Checkbutton(frame, text="Make all treasures tabs(tb)", variable = var).grid(row=row, sticky=tk.W, columnspan=3)
+  row = row + 1
+
   # Let the user choose a seed (optional parameter)
   tk.Label(frame, text="Seed(optional):").grid(row=row, column=0, sticky=tk.E)
   datastore.seed = tk.StringVar()
