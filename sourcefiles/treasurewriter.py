@@ -31,9 +31,17 @@ hlvlconsumables = [0xC3,0xC4,0xCD,0xCE,0xCF]
 alvlitems = [0xBB,0x0E,0x53,0x54,0x55,0x28,0x39,0x91,0x86,0x8F,0x6C,0x7A,0x6D,0x6B]
 alvlconsumables = [0xC3,0xC5]
 
-def choose_item(pointer,difficulty):
+def choose_item(pointer,difficulty,tab_treasures):
     rand_num = rand.randrange(0,11,1)
-    if difficulty == "easy":
+    if tab_treasures == "Y":
+        rand_num = rand.randrange(0,20,1) # choose number from 0 to 20 inclusive.
+        if rand_num == 0: # 4.8% chance of a speed tab
+            writeitem = 0xCF;
+        elif rand_num > 10: # 47.6% chance of a magic tab
+            writeitem = 0xCE;
+        else: # 47.6% chance of a power tab
+            writeitem = 0xCD;
+    elif difficulty == "easy":
         if pointer in lowlvlchests:
             if rand_num > 5:
                 writeitem = rand.choice(plvlconsumables+mlvlconsumables)
@@ -148,12 +156,12 @@ def choose_item(pointer,difficulty):
                 else:
                     writeitem = rand.choice(glvlitems + hlvlitems)
     return writeitem
-def randomize_treasures(outfile,difficulty):
+def randomize_treasures(outfile,difficulty,tab_treasures):
    f = open(outfile,"r+b")
    for p in allpointers:
       f.seek(p-3)
       f.write(st.pack("B",0x00))
-      writeitem = choose_item(p,difficulty)
+      writeitem = choose_item(p,difficulty,tab_treasures)
       f.seek(p)
       f.write(st.pack("B",writeitem))
    f.close

@@ -150,6 +150,10 @@ def command_line():
      tech_list = tech_list.upper()
      if tech_list == "Y":
         flags = flags + "te"
+     tab_treasures = input("Do you want all treasures to be tabs(tb)? Y/N ")
+     tab_treasures = tab_treasures.upper()
+     if tab_treasures == "Y":
+        flags = flags + "tb"
     
 
 #
@@ -180,6 +184,7 @@ def handle_gui(datastore):
   global locked_chars
   global tech_list
   global seed
+  global tab_treasures
   
   # Get the user's chosen difficulty
   difficulty = datastore.difficulty.get()
@@ -200,6 +205,7 @@ def handle_gui(datastore):
   quick_pendant = get_flag_value(datastore.flags['p'])
   locked_chars = get_flag_value(datastore.flags['c'])
   tech_list = get_flag_value(datastore.flags['te'])
+  tab_treasures = get_flag_value(datastore.flags['tb'])
   
   # source ROM
   sourcefile = datastore.inputFile.get()
@@ -233,6 +239,8 @@ def generate_rom():
      global locked_chars
      global tech_list
      global seed
+     global tab_treasures
+     
      outfile = sourcefile.split(".")
      outfile = str(outfile[0])
      if flags == "":
@@ -274,7 +282,7 @@ def generate_rom():
      elif quick_pendant == "Y":
              patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      print("Randomizing treasures...")
-     treasures.randomize_treasures(outfile,difficulty)
+     treasures.randomize_treasures(outfile,difficulty,tab_treasures)
      hardcoded_items.randomize_hardcoded_items(outfile)
      print("Randomizing enemy loot...")
      enemystuff.randomize_enemy_stuff(outfile,difficulty)
