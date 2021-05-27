@@ -1,3 +1,4 @@
+import math
 import struct as st
 import random as rand
 shop_starts = list(range(0xC2C6F,0xC2C9D,2))
@@ -91,6 +92,67 @@ def randomize_shops(outfile):
      f.write(st.pack("H",shop_pointer))
      shop_pointer += shop_items
      shop_address = write_slots(f,start,shop_items,shop_address)
-   f.close
+   f.close()
+
+#
+# Get a random price from 1-65000.  This function tends to 
+# bias lower numbers to avoid everything being prohibitively expensive.
+#
+def getRandomPrice():
+  r1 = rand.uniform(0, 1)
+  r2 = rand.uniform(0, 1)
+  return math.floor(abs(r1 - r2) * 65000 + 1)
+   
+#
+# Modify shop prices based on the selected flags.
+#
+def modify_shop_prices(outfile, flag):
+  if flag == "Normal":
+    return
+    
+  f = open(outfile, "r+b")
+
+  # Items
+  # The first 147 (0x93) items are 6 bytes each.
+  # Item price is 16 bits in bytes 2 and 3.
+  # The price bytes are the same for all types of items.
+  item_base_address = 0x0C06A4
+  for index in range(0, 0x94):
+    f.seek(item_base_address + (index * 6) + 1)
+    price = 0
+    if flag != "Free":
+      price = getRandomPrice()
+    f.write(st.pack("H", price))
+    
+  # Accessories
+  # The next 39 (0x27) items are 4 bytes each.
+  accessory_base_address = 0x0C0A1C
+  for index in range(0, 0x28):
+    f.seek(accessory_base_address + (index * 4) + 1)
+    price = 0
+    if flag != "Free":
+      price = getRandomPrice()
+    f.write(st.pack("H", price))
+    
+  # Key Items and Consumables
+  # The final 53 (0x35) item definitions are 3 bytes each.
+  consumables_base_address = 0x0C0ABC
+  # In "Mostly Random" mode, exlclude midtonics, ethers, heals, 
+  # revives, and shelters.
+  exclusion_list = [2, 4, 10, 11, 12]
+  for index in range(0, 0x36):
+    f.seek(consumables_base_address + (index * 3) + 1)
+    price = 0
+    if flag == "Mostly Random":
+      if not index in exclusion_list:
+        f.write(st.pack("H", getRandomPrice()))
+    elif flag == "Fully Random":
+      f.write(st.pack("H", getRandomPrice()))
+    else:
+      # Free shops
+      f.write(st.pack("H", 0))
+  
+  f.close()
+   
 if __name__ == "__main__":
    randomize_shops("Project.sfc")

@@ -1006,3 +1006,50 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 17/06/2020
  - Made scalable bosses start with their lowest boost on Hard.
  - Made Tail Spin use Level as a defensive stat.
+25/05/2021
+- Added the balanced weighted techs as 'Balanced Random' tech order option.
+- Replaced the 'Tools' Key Item with the Grand Leon (upgraded Masamune) - This can be taken to the carpenter to gain access to the Northern Ruins as a replacement for the Tools.
+- Reduced power of Ayla's Triple Kick tech to 43.
+- Added a 1.25x damage multiplier to Fire/Ice Sword 2 Dual Techs.
+- Changed Falcon Hit to use 1x Spincut damage.
+- Buffed Crono's Lightning 2 to 24 power.
+- Fixed the 'Tools' event not checking Frog's sword slot.
+- Renamed the upgraded Masamune to Grand Leon.
+- Made visiting Cyrus' Grave in the Northern Ruins/Hero's Grave buff Frog's Power by 10 and Speed by 2.
+- Added some "interesting" buffs to the Hero Medal.
+- Fixed some enemies/bosses that weren't giving random drops/charms.
+- Implemented new testing interface, allowing testers to pick starting characters.
+- Implemented new 'tex' flag, for weighted balanced techs.
+- Hero's Medal should now be detected by the check, even if equipped.
+- Fixed the softlocks that happened with two characters on the first fight of Mystic Mtns while heading away from the portal, and the Epoch from the End of Time.
+- Fixed the appearance of pillars of light when getting a Crono less ending.
+- Added 'm' flag, which allows all techs to be learned without visiting Spekkio.
+- Turned Hexagon Mist into a 20 power magic water based attack.
+- Changed Hallation's text to indicate Barriers won't work afterwards.
+- Fixed slot issues with Nizbel and Nizbel II.
+- Added 'q' flag - Quiet Mode, which removes music.
+- Added presets: Race (NGSDZPTE), New Player (EGSDZPMTE), Lost Worlds (NGSDLZTE) and Hard (HGSDBCTEX)
+- Frog will no longer auto-equip the Masamune when he cuts a mountain in half.
+- Added new 'cr' flag for full randomization - Key items can now be in a whooooole bunch of chests.
+- Now, if Taban has multiple items to give you, the Key Item will always be the first one given.
+- Implemented boss randomizer, currently only randomizes single target bosses and the Golem Twins
+- Implemented Cronosanity for Lost Worlds
+- Super Volt now uses Luminaire instead of Lightning 2
+- Opening the Magic Cave now teleports the party and Epoch to Magus' Castle's island
+- Completing Magus' Castle now opens the sealed door without the Ruby Knife
+- Golem Boss, Atropos XR and Dalton Plus now count as bosses for the item pool
+- Implemented price randomizer
+- Shock costs 12 MP, Area Bomb 10 MP
+- Changed the Dactyl Nest encounter tile when the Locked Characters flag is on
+- Upped Terra Mutant's HP to 7000, Mammon Machine's HP to 10000.
+- Upped Confuse's power to 35, Uzzi Punch's power to 31
+- Mammon Machine no longer skips two turns
+- Upped HP of Terra Mutant to 9000 and Mammon Machine to 12000 on Hard mode
+- Changed Black Hole to Anti Life, a 63 power single target magic spell that also kills Magus when cast
+- Randomized tabs. Power tabs now roll 3, 5 and 7 Power at roughly equal chance. Magic tabs roll 1, 2 and 3 Magic. All thanks to Psuedoarc.
+- Reverted Robo Tackle to being an Ayla style damage tech, has the same power as Rock Throw
+- Grand Dream now no longer requires the Grand Leon or visiting Cyrus' Grave. Thanks to Psuedoarc.
+- Gold Rock can now be equipped by Marle, Robo and Frog
+- Mammon Machine's level lowered to 37 from 48
+- Mammon Machine now raises its magic by 5 rather than 20 when hit by a spell.
+- Grand Dream power upped to 30.

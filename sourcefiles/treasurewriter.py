@@ -164,6 +164,6 @@ def randomize_treasures(outfile,difficulty,tab_treasures):
       writeitem = choose_item(p,difficulty,tab_treasures)
       f.seek(p)
       f.write(st.pack("B",writeitem))
-   f.close
+   f.close()
 if __name__ == "__main__":
    randomize_treasures("Techwriter.sfc")

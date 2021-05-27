@@ -16,3 +16,5 @@ Basic Changes
 -Characters are slightly adjusted to fit the gameplay of the randomizer; characters who started with a speed of 6 now start with 8 speed instead, and Frog fits the role of a hybrid fighter/mage much better.
 
 -Lavos was adjusted to not require high levels. Generally, levels around 30 or above should do, though equipment and tech combos play a big role.
+
+-Power and Magic tabs now give random, usually stronger boosts, since both were quite underwhelming in the original game.

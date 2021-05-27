@@ -5,7 +5,7 @@ Hench: HP 600, Defense 170, Offense 125, XP 270
 Martello: HP 1000, Level 20, Magic 20, XP 350
 Bellbird: XP 20
 Panel: HP 1000, Level 30, Magic 36
-Mammon Machine: HP 7000
+Mammon Machine: HP 12000
 Blue Imp: XP 20
 Green Imp: XP 40
 Stone Imp: HP 600, Offense 210, XP 300
@@ -38,7 +38,7 @@ Free Lancer: XP 85
 Outlaw: HP 500, XP 200
 Giga Mutant: HP 6500, XP 4000
 Giga Mutant(bottom): HP 6500
-Terra Mutant: HP 7000, XP 5000
+Terra Mutant: HP 9000, XP 5000
 Juggler: HP 1200, XP 350
 Mage: HP 1200, XP 600
 Reptite: XP 120

@@ -1,12 +1,14 @@
 Jets of Time: An Open Ended Chrono Trigger Randomizer
 
-Version: 2.0.3
+Version: 3.0.0
 
-Date: July 6, 2020
+Date: May 25, 2021
 
 URL: https://github.com/Anskiy/jetsoftime/
 
 https://sites.google.com/view/ctrandoinfo/home
+
+Online generator: http://anguirel.ddns.net/jot/
 
 Contact: https://discord.gg/cKYjHwj
          
@@ -24,14 +26,16 @@ Windows users can directly run the provided .exe, Mac and Linux users should run
 
 If on commandline mode, either enter the location of the ROM or drag and drop it into the window. Follow the onscreen instructions afterwards.
 
+Lastly, if you're having trouble running the executable, you can try using the online seed generator.
+
 --CREDITS--
 
-Designers: Anskiy, Abyssonym
+Designers: Anskiy, Abyssonym, Pseudoarc, Anguirel
 
-Developers: Anskiy, Abyssonym, Myself086, Anguirel
+Developers: Anskiy, Abyssonym, Myself086, Anguirel, FutureForce14, gameboyf9, Psuedoarc
 
-Technical Assistance: Mauron, Myself086, Lagolunatic
+Technical Assistance: Mauron, Myself086, Lagolunatic, Psuedoarc
 
-Notable Testers: Muppetsinspace, MisterLichTV, TheBigSalarius, proccy, boozewizard
+Notable Testers: Muppetsinspace, MisterLichTV, TheBigSalarius, proccy, boozewizard, Korenth, Taco Hero, silverneo, many others(Sorry if I forgot your name!)
 
 Guides: MisterLichTV, TrintonGL

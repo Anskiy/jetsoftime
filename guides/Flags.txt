@@ -1,51 +1,68 @@
-Flags
-The randomizer features several flags to provide flexible options. Some of them are small tweaks, others are more significant changes, and there is even a completely different mode of gameplay available. What follows is a small description of what each flag does.
+The randomizer features several flags to provide flexible options. Some of them are small tweaks, others are more significant changes, and there are even completely different gameplay modes available. What follows is a small description of what each flag does.
 
-
-g: This flag disables most well known glitches, like emptying equipment slots, saving anywhere you can, and using quick menu switching to activate scripted encounters from a distance and skip them. Tricks that aren't blocked by this flag are generally accepted as valid for races.
-
+g: This flag disables most well known glitches, like emptying equipment slots, saving anywhere you can, and using quick menu switching to activate scripted encounters from a distance and skip them. Tricks that aren't blocked by this flag are generally accepted as valid for races, the most notable one being the menu glitch.
 
 s: This flag speeds up the Epoch and overworld movement speed.
 
-
 d: This flag makes dpad inputs faster and more responsive.
 
+q: Stops all music from playing.
+
+Difficulty:
+
+Easy: Makes higher quality treasure from chests and enemies more plentiful.
+Normal:  Has standard treasure randomization.
+Hard:  Has reduced treasure quality from chests and enemies, with most enemies not dropping anything. Enemies are also scaled up to be tougher and more durable in general.
 
 l: This activates Lost Worlds, a huge twist on the gameplay of Jets of Time. When it's activated:
 
--You start out in 2300 AD, and can explore it, 12000 BC and Prehistory freely.
+You start out in 2300 AD, and can explore it, 12000 BC and Prehistory freely.
 
--Your characters start at level 15, have three techs learnt, and have magic unlocked.
+Your characters start at level 15, have three techs learnt, and have magic unlocked.
 
--You can buy from the guarantee shop in the fair before starting, but can't access it afterwards until either Zeal 2 or the Lavos shell is defeated.
+You can buy from the guarantee shop in the fair before starting, but can't access it afterwards until either Zeal 2 or the Lavos shell is defeated.
 
--To access the Ocean Palace, you need to defeat Black Tyrano and collect the Ruby Knife.
+To access the Ocean Palace, you need to defeat Black Tyrano and collect the Ruby Knife.
 
--The p flag does not work with this mode.
+The p flag does not work with this mode.
 
+ro: Activates boss randomization. This currently shuffles single part bosses among themselves, however a few bosses that don't show up in a regular seed are also included in the pool. Currently there are plans to shuffle two part bosses.
 
 b: This flag activates boss scaling. Bosses holding important key items, directly or otherwise, get scaled up. When it's activated:
 
--Bosses holding the Ruby Knife, Clone or C. Trigger get scaled up the most, usually.
+Bosses holding the Ruby Knife, Clone or C. Trigger get scaled up the most, usually.
 
--Bosses holding keys to one of the three routes, or to a location that holds the three aforementioned key items, get scaled up a little less.
+Bosses holding keys to one of the three routes, or to a location that holds the three aforementioned key items, get scaled up a little less.
 
--Bosses holding keys to those specific locations get scaled up the least, while still being noticeably stronger.
+Bosses holding keys to those specific locations get scaled up the least, while still being noticeably stronger.
 
--Dragon Tank gets scaled based on the strongest key item placed in the Future.
+Dragon Tank gets scaled based on the strongest key item placed in the Future.
 
--If the c flag is on, R Series scale up based on the character placed in Proto Dome. Crono and Magus are the highest ranked, and Frog, Marle and Lucca the least ranked.
+If the c flag is on, R Series scale up based on the character placed in Proto Dome. Crono and Magus are the highest ranked, and Frog, Marle and Lucca the least ranked.
 
--Bosses that are not locked behind anything will not be scaled. This means that Zombor, Heckran, and Masa & Mune(both fights) will always be the same strength regardless of seed.
-
+Bosses that are not locked behind anything will not be scaled. This means that Zombor, Heckran, and Masa & Mune(both fights) will always be the same strength regardless of seed.
 
 z: This makes Zeal 2 an alternate final boss. Defeating her will win the game and grant a different ending. Defeating Lavos still remains an option, and grants the regular ending.
 
-
 p: This makes the Pendant charge earlier. Precisely, it charges the moment you complete the Prison quest, allowing you to open sealed chests and doors a lot earlier than normal.
 
-
 c: This locks the characters in Proto Dome and Dactyl Nest further. The Proto Dome character requires the Factory to be completed, while the Dactyl Nest character requires the Dreamstone to access.
+m: Unlocks magic for all relevant characters from the start.
 
+tb: Turns all loot from chests into tabs. Note that shops and monster drops are unaffected.
 
-te: This randomizes the order in which characters learn their techs. For example, with this on Crono can learn Lightning 2 first, followed by Spincut. The points required to learn several slots  on the list remain the same, and you still need to unlock magic to get more than the first three techs for characters requiring the End of Time. 
+cr: An alternate mode, where key items can be found from chests and are not limited to specific bosses or quests. Note that key items can never be in chests that are lost or made inaccessible through events, like the Prison sequence or Magus' Castle. They will also never show up in the endgame dungeons of Ocean Palace and Black Omen either. Further information here: https://docs.google.com/document/d/1wA4TlxOiVNS-WvPRRNnOIS4toF8bpgElaf1hz9HT3As/edit?usp=sharing.
+
+Shop Prices:
+
+Normal: Standard pricing
+Free: Shops sell all items for free.
+
+Mostly Random: Shops sell items at random prices, excluding some cheap consumables like ethers, heals and such.
+
+Fully Random: Shops sell all items at random prices.
+
+Tech Randomization:
+
+Fully Random: This randomizes the order in which characters learn their techs, with no weighting. For example, with this on Crono can learn Lightning 2 first, followed by Spincut. The points required to learn several slots  on the list remain the same, and you still need to unlock magic to get more than the first three techs for characters requiring the End of Time. 
+Mostly Random: This weighs techs based roughly on how useful they are. For instance, Flare or Confuse tends to come later with this on.

@@ -51,8 +51,8 @@ def parse_keys(provided_key):
        provided_key = 0xDE
     if provided_key == "prism":
        provided_key = 0xD8
-    if provided_key == "tools":
-       provided_key = 0xDA
+    if provided_key == "masa2":
+       provided_key = 0x42
     if provided_key == "clone":
        provided_key = 0xE2
     if provided_key == "trigger":
@@ -70,7 +70,7 @@ def randomize_keys(char_locs,outfile,locked_chars):
     iterations = 0
     while len(loclist) != len(complete_list) and iterations != 3600:
        loclist = []
-       keyitems = ["pop","hilt","blade","stone","knife","gate","jerky","pendant","moon","prism","tools","clone",
+       keyitems = ["pop","hilt","blade","stone","knife","gate","jerky","pendant","moon","prism","masa2","clone",
        "trigger","medal","ribbon"]
        locations = {"zenan": "","taban": "","denadoro": "","snail": "","burrow": "","carpenter": "","trial": "",
        "melchior": "","claw": "","desert": "","arris": "","geno": "","sun": "","reptite": "","woe": ""}
@@ -98,7 +98,7 @@ def randomize_keys(char_locs,outfile,locked_chars):
               loclist.append("giant")
           elif heldkey == "pendant":
               loclist.append(2300)
-          elif heldkey == "tools":
+          elif heldkey == "masa2":
               loclist.append("ruins")
           elif heldkey == "medal":
               loclist.append("burrow")
@@ -148,10 +148,10 @@ def randomize_keys(char_locs,outfile,locked_chars):
     else:
        ordered_keys = ["zenan" ,"taban" ,"denadoro" ,"snail" ,"burrow" ,"carpenter" ,"trial" ,
        "melchior" ,"claw" ,"desert" ,"arris" ,"geno" ,"sun" ,"reptite" ,"woe"]
-       pointer1 = [0x393C82,0x35F8AE,0x37742F,0x380C42,0x3891D1,0x3966B,0x38045D,0x3805DE,0x1B8AEC,
-       0x6EF5E,0x392F4C,0x1B1844,0x1B8D95,0x18FC2C,0x381010]
-       pointer2 = [0x393C84,0x35F8B0,0x377432,0x380C5B,0x3891D4,0x3966D,0x38045F,0x3805E0,
-       0x1B8AEF,0x6EF61,0x392F4E,0x1B1846,0x1B8D97,0x18FC2F,0x381013]
+       pointer1 = [0x393C83,0x35F888,0x3773F1,0x380C42,0x3891DE,0x3966B,0x38045D,0x3805DE,0x1B8ABB,
+       0x6EF5E,0x392F4C,0x1B1844,0x1B8D95,0x18FC04,0x381010]
+       pointer2 = [0x393C85,0x35F88A,0x3773F3,0x380C5B,0x3891E0,0x3966D,0x38045F,0x3805E0,
+       0x1B8ABF,0x6EF61,0x392F4E,0x1B1846,0x1B8D97,0x18FC07,0x381013]
        i = 0
        while i < len(ordered_keys):
            written_key = locations[ordered_keys[i]]
@@ -162,11 +162,11 @@ def randomize_keys(char_locs,outfile,locked_chars):
            f.seek(pointer2[i])
            f.write(st.pack("B",written_key))
            i += 1
-           f.close
+           f.close()
     f = open("spoiler_log.txt","w+")
     rename_chars(char_locs)
     f.write(f"{str(locations)}\n{str(char_locs)}")
-    f.close
+    f.close()
     return locations
 def randomize_lost_worlds_keys(char_locs,outfile):
     loclist = []
@@ -201,8 +201,8 @@ def randomize_lost_worlds_keys(char_locs,outfile):
        print("Oops, ran out of attempts. Please try again!")
     else:
        ordered_keys = ["arris" ,"geno" ,"sun" ,"reptite" ,"woe"]
-       pointer1 = [0x392F4C,0x1B1844,0x1B8D95,0x18FC2C,0x381010]
-       pointer2 = [0x392F4E,0x1B1846,0x1B8D97,0x18FC2F,0x381013]
+       pointer1 = [0x392F4C,0x1B1844,0x1B8D95,0x18FC04,0x381010]
+       pointer2 = [0x392F4E,0x1B1846,0x1B8D97,0x18FC07,0x381013]
        i = 0
        while i < len(ordered_keys):
            written_key = locations[ordered_keys[i]]
@@ -213,11 +213,11 @@ def randomize_lost_worlds_keys(char_locs,outfile):
            f.seek(pointer2[i])
            f.write(st.pack("B",written_key))
            i += 1
-           f.close
+           f.close()
     f = open("spoiler_log.txt","w+")
     rename_chars(char_locs)
     f.write(f"{str(locations)}\n{str(char_locs)}")
-    f.close
+    f.close()
     return locations
 if __name__ == "__main__":
     char_locations = chars.randomize_char_positions("Project.sfc","Y")

@@ -18,8 +18,8 @@ def patch_file(patch,outfile):
             f.write(st.pack("B",bytes[i]))
             address += 1            
             i += 1
-     f.close
-     p.close
+     f.close()
+     p.close()
 if __name__ == "__main__":
     file = input("Enter patch name.")
     patch_file(file,"Projectfile.smc")

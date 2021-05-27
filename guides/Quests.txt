@@ -34,7 +34,7 @@ Zenan Bridge(Key)
 Talk to the knight on the bridge, then go down to the kitchen in Guardia Castle and talk to the chef. Wait until he finishes his conversation with the maid, then head back upstairs. He should give you the key item. You will be immediately sent to battle, but will be completely healed.
 
 Hero's Medal(Key)
-Visit Frog's Burrow in the Cursed Woods with the Hero's Medal in inventory(not on Frog) and open the left chest. It contains a key item.
+Visit Frog's Burrow in the Cursed Woods with the Hero's Medal and open the left chest. It contains a key item.
 
 Sunken Desert(Key)
 Defeat Retinite, then speak with Fiona. Visit 1000 AD and retrieve Robo from her shrine for a key item. You need Robo to complete this, obviously.
@@ -46,13 +46,13 @@ Giant's Claw(Key)
 To start this, travel to Choras in 1000 AD with Toma's Pop in hand, and visit Toma's grave. This opens up the claw in 600 AD. Everything afterwards is fairly straightforward.
 
 Magic Cave
-To start this, you must have completed Forging the Masamune. Visit the cave on the Choras side of the continent with Frog in your active party, and watch him cut a path to Magus' Castle. Note that once this happens, you can fly directly to Magus Castle's island and enter it on foot.
+To start this, you must have completed Forging the Masamune. Visit the cave on the Choras side of the continent with Frog in your active party, and watch him cut a path to Magus' Castle. 
 
 Magus' Castle
-Complete it to enter the Dark Ages.
+Complete it to enter the Dark Ages and break the sealed door to Ocean Palace.
 
 Northern Ruins
-Give the Tools to the worker in Choras Cafe, then visit his workshop. Keep clearing out parts of the Ruins as they open up, then go back to the workshop and pay him. Note that this gives no key items, but the sealed chests do contain valuable treasure and can be opened without the pendant. After he repairs the Ruins twice, you can visit it with Frog as an active member in 1000 AD and upgrade the Masamune in Cyrus' tomb. See also Forging the Masamune.
+Give the Grand Leon to the worker in Choras Cafe, then visit his workshop. Keep clearing out parts of the Ruins as they open up, then go back to the workshop and pay him. Note that this gives no key items, but the sealed chests do contain valuable treasure and can be opened without the pendant. After he repairs the Ruins twice, you can visit it with Frog as an active member in 1000 AD and upgrade his stats in Cyrus' tomb. See also Forging the Masamune. Note that you do NOT lose the Grand Leon for this quest.
 
 Future: 2300 AD
 Arris Dome(Key)
@@ -88,6 +88,7 @@ Mt. Woe(Key)
 Visit Algetty and head through the caves to reach Mt. Woe. Complete it for a key item.
 
 Ocean Palace
-Visit Zeal Palace with Ruby Knife in inventory. It leads to Lavos. Visit the Mammom Machine to power up the Pendant.
+Visit Zeal Palace with the Ruby Knife in inventory. It leads to Lavos. If you would like to get some sealed treasure, visit the Mammom Machine to power up the Pendant.
 
 If you lose the fight against Lavos at the Ocean Palace, you still get another chance, as both the bucket at the End of Time and 1999 AD on the Epoch open up.
+

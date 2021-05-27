@@ -1,0 +1,74 @@
+$C2/B2F8  5C 00 00 00 	JMP $5F0000
+	
+$5F/0000  18		CLC
+$5F/0001  65 6F	ADC $6F
+$5F/0003  AA		TAX 
+// Be careful because we're coming in with 16-bit everything
+// Put accumulator back to 8-bit
+$5F/0004  E2 20	SEP #$20
+// Compute the amount to add and the max from the tab type
+$5F/0006  AD BD 0D	LDA $0DBD
+// Set magnitude in $10 and max in $12 for pow = 01, mag = 06, spd = 02
+$5F/0009  C9 01	CMP #$01
+$5F/000B  D0 0A	BNE $0A 	(to CMP #$06)
+$5F/000D  A9 05	LDA #$05
+$5F/000F  85 10	STA $10 
+$5F/0011  A9 63	LDA #63
+$5F/0013  85 12	STA $12
+$5F/0015  80 16	BRA $16	(to LDA $000B,x)
+$5F/0017  C9 06	CMP #$06
+$5F/0019  D0 0A	BNE $0A 	(to LDA #01)
+$5F/001B  A9 02	LDA #02
+$5F/001D  85 10	STA $10
+$5F/001F  A9 63	LDA #$63
+$5F/0021  85 12	STA $12
+$5F/0023  80 08	BRA $08 	(to LDA $000B,x)
+$5F/0025  A9 01	LDA #01
+$5F/0027  85 10	STA $10
+$5F/0029  A9 10	LDA #$10
+$5F/002B  85 12	STA $12
+	
+// Add to the current stat
+$5F/002D  BD 0B 00	LDA $000B,x
+$5F/0030  18 		CLC
+$5F/0031  65 10	ADC $10
+$5F/0033  C5 12	CMP $12
+$5F/0035  90 02	BCC $02	(to STA $000B,x)
+$5F/0037  A5 12	LDA $12
+$5F/0039  9D 0B 00	STA $000B,x
+// Edited out a SEP #$20 because I moved it up to the top
+
+// Add to the base stat
+$5F/003C  A6 00	LDX $00
+$5F/003E  BD 2F 00	LDA $002F,x
+$5F/0040  18		CLC
+$5F/0041  65 10	ADC $10
+$5F/0043  C5 12	CMP $12
+$5F/0045  90 02	BCC $02	(to STA $002F,x)
+$5F/0047  A5 12	LDA $12
+$5F/004A  9D 2F 00	STA $002F,x
+$5F/004D  5C 0E B3 C2	JMP $C2B30E 
+	
+	
+Display of tab magnitude
+Old:
+$C2/B2D0 A9 01 00    LDA #$0001              
+$C2/B2D3 9D 63 0F    STA $0F63,x[$7E:0F63]
+
+New:
+$C2/B2D0 5C 00 01 5F	JMP $5F0100
+
+$5F/0100 AD BD 0D	LDA $0DBD
+$5F/0103 29 FF 00	AND #$00FF
+$5F/0106 C9 01 00	CMP #0001
+$5F/0109 D0 05		BNE $05	(to CMP #$0006 )
+$5F/010B A9 05 00	LDA #0005
+$5F/010E 80 0D		BRA $0D	(to STA $0F63,x )
+$5F/0110 C9 06 00	CMP #0006
+$5F/0113 D0 05		BNE $05	(to LDA #$0001)
+$5F/0115 A9 02 00	LDA #$0002
+$5F/0118 80 03		BRA $03	(to STA $0F63,x )
+$5F/011A A9 01 00	LDA #$0001
+$5F/011D 9D 63 0F	STA $0F63,x
+$5F/0120 5C D6 B2 C2	JMP $C2B2D6
+	

@@ -56,5 +56,5 @@ def write_patch(patch,outfile):
        length = get_length(length)
        position += 2
        position = write_data(length,pointer,position)
-     p.close
-     f.close
+     p.close()
+     f.close()
