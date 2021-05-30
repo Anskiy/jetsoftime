@@ -12,10 +12,14 @@
 
 - Sometimes, ambient music that continues playing during fights resets after a fight.
 
-- Occasionally, entering the Mystic Mountain portal with a two people team sets their positions wrong and makes them softlock at any encounter in the next room. This is fixed by changing the order of the team.
-
 - Having the randomizer in a folder path with a . generates seeds outside the folder with the . in its name.
 
 - Falling off the waterfalls of Denadoro Mts can sometimes make the screen scroll down too far if you trigger the bird fight at the same time. This corrects itself when you open and close the menu.
 
 - Saving a game on the 600 AD overworld immediately after exiting Denadoro Mts from the top makes the screen scroll weirdly upon reloading the save. Fixed by entering any location on the overworld.
+
+- Occasionally, the music will restart abruptly after a fight, even if the fight itself didn't set any music.
+
+- The Ioka Village trades for Fang and Feather and Horn and Feather are apparently bugged.
+
+- Enemies will sometimes not display status messages if concurrent actions occur with other enemies or characters. Most visible with Lavos Core.
