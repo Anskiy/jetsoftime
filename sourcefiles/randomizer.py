@@ -329,7 +329,7 @@ def generate_rom():
         f.write(data)
         f.close()
      print("Applying patch. This might take a while.")
-     bigpatches.write_patch("patch.ips",outfile)
+     bigpatches.write_patch_alt("patch.ips",outfile)
      patches.patch_file("patches/patch_codebase.txt",outfile)
      if glitch_fixes == "Y":
         patches.patch_file("patches/save_anywhere_patch.txt",outfile)
@@ -344,15 +344,15 @@ def generate_rom():
      if zeal_end == "Y":
         patches.patch_file("patches/zeal_end_boss.txt",outfile)
      if lost_worlds == "Y":
-        bigpatches.write_patch("patches/lost.ips",outfile)
+        bigpatches.write_patch_alt("patches/lost.ips",outfile)
      if lost_worlds == "Y":
          pass
      elif quick_pendant == "Y":
              patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      if unlocked_magic == "Y":
-         bigpatches.write_patch("patches/fastmagic.ips",outfile)
+         bigpatches.write_patch_alt("patches/fastmagic.ips",outfile)
      if difficulty == "hard":
-         bigpatches.write_patch("patches/hard.ips",outfile)
+         bigpatches.write_patch_alt("patches/hard.ips",outfile)
      tabwriter.rewrite_tabs(outfile)#Psuedoarc's code to rewrite Power and Magic tabs and make them more impactful
      print("Randomizing treasures...")
      treasures.randomize_treasures(outfile,difficulty,tab_treasures)
@@ -383,7 +383,7 @@ def generate_rom():
      elif tech_list == "Balanced Random":
          tech_order.take_pointer_balanced(outfile)
      if quiet_mode == "Y":
-         bigpatches.write_patch("patches/nomusic.ips",outfile)
+         bigpatches.write_patch_alt("patches/nomusic.ips",outfile)
      # Tyrano Castle chest hack
      f = open(outfile,"r+b")
      f.seek(0x35F6D5)
@@ -392,11 +392,11 @@ def generate_rom():
      #Mystic Mtn event fix in Lost Worlds
      if lost_worlds == "Y":         
        f = open(outfile,"r+b")
-       bigpatches.write_patch("patches/mysticmtnfix.ips",outfile)
-       bigpatches.write_patch("patches/losteot.ips",outfile)
+       bigpatches.write_patch_alt("patches/mysticmtnfix.ips",outfile)
+       bigpatches.write_patch_alt("patches/losteot.ips",outfile)
      #Bangor Dome event fix if character locks are on
        if locked_chars == "Y":
-         bigpatches.write_patch("patches/bangorfix.ips",outfile)
+         bigpatches.write_patch_alt("patches/bangorfix.ips",outfile)
        f.close()
      print("Randomization completed successfully.")
 
