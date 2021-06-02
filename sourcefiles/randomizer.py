@@ -19,6 +19,7 @@ import bossscaler as boss_scale
 import techwriter as tech_order
 import randomizergui as gui
 import tabchange as tabwriter
+import fastmagic
 
 def read_names():
         p = open("names.txt","r")
@@ -350,7 +351,8 @@ def generate_rom():
      elif quick_pendant == "Y":
              patches.patch_file("patches/fast_charge_pendant.txt",outfile)
      if unlocked_magic == "Y":
-         bigpatches.write_patch_alt("patches/fastmagic.ips",outfile)
+        fastmagic.set_fast_magic_file(outfile)
+        # bigpatches.write_patch_alt("patches/fastmagic.ips",outfile)
      if difficulty == "hard":
          bigpatches.write_patch_alt("patches/hard.ips",outfile)
      tabwriter.rewrite_tabs(outfile)#Psuedoarc's code to rewrite Power and Magic tabs and make them more impactful
