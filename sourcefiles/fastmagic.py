@@ -25,8 +25,6 @@ def set_fast_magic_file(filename):
         control_ptr = get_value_from_bytes(control_ptr_bytes)
         control_ptr = to_file_ptr(control_ptr)
 
-        print("%6.6X" % control_ptr)
-
         magic_learners = [Char.CRONO, Char.MARLE, Char.LUCCA, Char.FROG]
 
         for x in magic_learners:
