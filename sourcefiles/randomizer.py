@@ -1,5 +1,6 @@
 from shutil import copyfile
 import struct as st
+import os
 from os import stat
 from time import time
 import sys
@@ -150,7 +151,7 @@ def command_line():
      unlocked_magic = input("Do you want the ability to learn all techs without visiting Spekkio(m)? Y/N")
      unlocked_magic = unlocked_magic.upper()
      if unlocked_magic == "Y":
-         flags = flags + "te"
+         flags = flags + "m"
      quiet_mode = input("Do you want to enable quiet mode (No music)(q)? Y/N")
      quiet_mode = quiet_mode.upper()
      if quiet_mode == "Y":
@@ -172,7 +173,7 @@ def command_line():
         shop_prices = "Mostly Random"
         flags = flags + "spm"
      elif shop_prices == "R":
-        shop_prices = "Fully_Random"
+        shop_prices = "Fully Random"
         flags = flags + "spr"
      else:
         shop_prices = "Normal"
