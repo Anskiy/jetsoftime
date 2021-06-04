@@ -218,6 +218,9 @@ class PCStats:
         # set total xp as sum of previous xp_thresh values
         self.xp = sum(self.xp_thresh[i] for i in range(0, new_level))
 
+        # actually change the level...
+        self.level = new_level
+
     def print_data(self):
         self.__update_statblock()
         print('Stat Block:')
