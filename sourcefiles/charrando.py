@@ -9,6 +9,7 @@
 import copy
 import techrandomizer
 import random
+import ipswriter
 
 from techdb import TechDB
 from byteops import get_record, set_record, to_little_endian, \
@@ -178,7 +179,7 @@ def max_expand_empty_db(orig_db, reassign):
 
     num_menu_mps = 2*3*num_dual_grps+3*(num_trip_grps+num_rock_grps)
 
-    db.atb_pen_count = db.num_techs + num_trip_grps + num_rock_grps
+    db.atb_pen_count = 1 + db.num_techs + num_trip_grps + num_rock_grps
 
     dat = [db.controls, db.gfx, db.names,
            db.desc_ptrs, db.techs_learned, db.lrn_reqs,
@@ -1423,17 +1424,64 @@ def reassign_items(rom, reassign):
                      acc_dat, acc_start)
 
 
+def reassign_characters_file(filename, tech_rando_type, lost_worlds):
+    with open(filename, 'rb') as infile:
+        rom = bytearray(infile.read())
+
+    reassign = [random.randrange(7) for i in range(7)]
+    reassign_characters(rom, reassign, tech_rando_type, lost_worlds)
+
+    with open(filename, 'wb') as outfile,\
+         open('patches/chardup_telepod_patch.ips', 'rb') as telepod_patch,\
+         open('patches/chardup_spekkio_patch.ips', 'rb') as spek_patch:
+
+        outfile.write(rom)
+        ipswriter.write_patch_objs(telepod_patch, outfile)
+
+        if not lost_worlds:
+            ipswriter.write_patch_objs(spek_patch, outfile)
+
+
 # Do everything to apply the reassignment list to the rom
-def reassign_characters(rom, db, reassign):
+# Assume db is created from get_reassign_techdb with the provided reassign list
+def reassign_characters(rom, reassign, tech_rando_type, lost_worlds):
 
-    reassign_techs(rom, db, reassign)
-    reassign_magic(rom, db, reassign)
+    # print(reassign)
 
-    # TODO: Make some object to track free space in the rom and allocate it
-    # as needed.  Getting sick of hardcoding where bits go.
+    orig_db = TechDB.get_default_db(rom)
+
+    new_db = get_reassign_techdb(orig_db, reassign)
+    reassign_tech_refs(rom, new_db, reassign)
+    reassign_magic(rom, new_db, reassign)
+
     reassign_graphics(rom, 0x5F7000, 0x5F7200, reassign)
+    fix_menu_graphics(rom, reassign)
 
+    reassign_stats(rom, reassign)
     fix_ayla_fist(rom, reassign)
+
+    reassign_items(rom, reassign)
+
+    if tech_rando_type == "Fully Random":
+        techrandomizer.randomize_single_techs_uniform(new_db)
+    elif tech_rando_type == "Balanced Random":
+        techrandomizer.randomize_single_techs_balanced(new_db)
+
+    # Nuke the old db to make sure we're using only newly written data
+    TechDB.write_db_ff_internal(orig_db, rom)
+
+    TechDB.write_db_internal(new_db, rom)
+
+    # Script things here for now.  Consolidate later.
+
+    # In King's Trial (Loc 0x1B6, Loc Event 0x60) Marle does animation A8
+    # I believe this kiss animation is only held by girls.  We're going to
+    # change it to something else for non-Marle in spot 1.
+
+    if reassign[1] != 1:
+        rom[0x36F1F2] = 0x1A  # Should be laughing now
+
+    # Probably need one for Frog cutting the mountain.
 
 
 # Main

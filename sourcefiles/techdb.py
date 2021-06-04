@@ -102,6 +102,11 @@ class TechDB:
 
         self.rock_types = bytearray()
 
+    def get_default_db_file(filename):
+        with open(filename, 'rb') as infile:
+            rom = bytearray(infile.read())
+            return get_default_db(rom)
+
     def get_default_db(vanilla_rom):
         db = TechDB.db_from_rom(vanilla_rom,
                                 0x0C1BEB, 0x7C,
@@ -641,11 +646,11 @@ class TechDB:
     # Companion to get_tech.  Puts a tech into the db.  Again, we assume that
     # the animation script is in the rom already and we just pass the right
     # index to it in the gfx data.
-    def set_tech(self, tech, id):
-        set_record(self.controls, tech['control'], id, TechDB.control_size)
-        set_record(self.gfx, tech['gfx'], id, TechDB.gfx_size)
-        set_record(self.targets, tech['target'], id, TechDB.target_size)
-        set_record(self.names, tech['name'], id, TechDB.name_size)
+    def set_tech(self, tech, tid):
+        set_record(self.controls, tech['control'], tid, TechDB.control_size)
+        set_record(self.gfx, tech['gfx'], tid, TechDB.gfx_size)
+        set_record(self.targets, tech['target'], tid, TechDB.target_size)
+        set_record(self.names, tech['name'], tid, TechDB.name_size)
 
         grp_count = 0
         for x in tech['bat_grp']:
@@ -653,19 +658,19 @@ class TechDB:
                 grp_count += 1
 
         if grp_count > 1 and len(tech['lrn_req']) > 0:
-            set_record(self.lrn_reqs, tech['lrn_req'], id-0x39,
+            set_record(self.lrn_reqs, tech['lrn_req'], tid-0x39,
                        TechDB.lrn_req_size)
 
         # print_bytes(self.atb_pens, 16)
         # print(tech['atb_pen'], format(id, 'X'))
         # input()
-        self.atb_pens[id] = tech['atb_pen'][0]
+        self.atb_pens[tid] = tech['atb_pen'][0]
 
         if grp_count == 3:
             num_trips = \
                 len(self.menu_grps) - self.group_sizes[self.first_trip_grp]
 
-            self.atb_pens[id+num_trips] = tech['atb_pen'][1]
+            self.atb_pens[tid+num_trips] = tech['atb_pen'][1]
 
         # leave desc alone for now
         # leave mp alone for now
@@ -856,7 +861,7 @@ class TechDB:
                 i_grp = get_record(self.bat_grps, i, self.bat_grp_size)
                 # The order really matters, so it's a list comparison
                 if(i_grp == bat_grp):
-                    print("Group found at %d" % i)
+                    # print("Group found at %d" % i)
                     ind = i
                     found = True
                     break
@@ -1185,14 +1190,14 @@ class TechDB:
 
         starts = [control_start, effect_start, gfx_start, targets_start,
                   menu_grps_start, bat_grps_start, names_start,
-                  desc_start, desc_ptr_start, techs_learned_start,
+                  desc_start, desc_ptr_start,
                   lrn_req_start, lrn_refs_start, mp_start,
                   menu_mp_reqs_start, group_sizes_start,
                   atb_pen_start]
 
         db_dat = [db.controls, db.effects, db.gfx, db.targets,
                   db.menu_grps, db.bat_grps, db.names,
-                  db.descs, db.desc_ptrs, db.techs_learned,
+                  db.descs, db.desc_ptrs,
                   db.lrn_reqs, db.lrn_refs, db.mps,
                   db.menu_mp_reqs, db.group_sizes,
                   db.atb_pens]
