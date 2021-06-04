@@ -436,6 +436,18 @@ def getRandomizerOptionsFrame(window):
   checkButton = tk.Checkbutton(frame, text="Chronosanity (cr)", variable = var, command=disableChronosanityIncompatibleFlags)
   checkButton.grid(row=row, sticky=tk.W, columnspan=2)
   CreateToolTip(checkButton, "Key items can now show up in most treasure chests in addition to their normal locations.")
+  # row = row + 1
+
+  # Duplicate Characters
+  var = tk.IntVar()
+  datastore.flags['dc'] = var
+  checkButton = \
+      tk.Checkbutton(frame, text="Duplicate Characters (dc)", variable = var)
+  checkButton.grid(row=row, column=2, sticky=tk.W, columnspan=2)
+  CreateToolTip(checkButton,
+                "Characters can now show up more than once.  "
+                + "Quests are activated and turned in based on the default "
+                + "NAME of the character.")
   row = row + 1
   
   # Dropdown for shop price settings
