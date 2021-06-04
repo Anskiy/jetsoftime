@@ -143,10 +143,10 @@ def randomize_pc_techs(db, char_id, perm, preserve_magic=True):
                 size = 1
 
             start_tech = db.group_sizes[i]
-            lrn_loc = (start_tech-0x38)*TechDB.lrn_req_size+pos
+            lrn_loc = (start_tech-0x39)*TechDB.lrn_req_size+pos
 
             for tech in range(start_tech, start_tech+size):
-                tech_lrn_start = (tech-0x38)*TechDB.lrn_req_size
+                tech_lrn_start = (tech-0x39)*TechDB.lrn_req_size
                 lrn_loc = tech_lrn_start+pos
                 db.lrn_reqs[lrn_loc] = perm[db.lrn_reqs[lrn_loc]-1]+1
 

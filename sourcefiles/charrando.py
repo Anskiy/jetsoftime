@@ -1,22 +1,10 @@
 # TODO List:
-#  -Fix Rock techs (Needs ASM since there may be copies of rock techs)
-#      Is it truly possible...This is done?
-#  -Fix starting tech-level/stats when reassigning characters -- done!
-#  -Fix targetting bugs (especially robo) -- I think this is done?!?!
 #  -Fix Ayla fist loading -- Done in battle.  Menu?  Need to poke around.
 #     It is possible that the fist in battle just gets written back to Ayla
-#  -Dual techs don't show up in X-menu sometimes.  Battle OK.
-#     Happens when there are no triple techs.  Maybe put a dummy last entry
-#     In the group_sizes -- Done
 #  -Junk shows up in triple tech list when there are no triple techs.
-#     Consider early RTS/NOP out routine when no triples (doubles?)
-#  -Delete problematic animations for Marle, maybe Frog depending.
-#     Got Marle (in TF).  Not frog yet, but should be easy.
-#  -Fix magic learning for randomized characters. -- Done
-#  -Refix magic learning.  Make the appropriate techs get x80 bits in their
-#   control headers so avoid learning past the desired point. -- Done
-#   This may need to be altered to play nicely with fastmagic
-#  -Fix overworld sprites. -- Done
+#     Consider early RTS/NOP out routine when no triples (doubles?).
+#     This might be fixed, but has to be tested.
+
 
 import copy
 import techrandomizer
@@ -24,7 +12,7 @@ import random
 
 from techdb import TechDB
 from byteops import get_record, set_record, to_little_endian, \
-    update_ptrs, to_rom_ptr
+    update_ptrs, to_rom_ptr, print_bytes
 from statcompute import PCStats as PC
 
 
@@ -1096,7 +1084,7 @@ def reassign_tech_refs(rom, db, reassign):
     for i in range(7):
         from_ind = reassign[i]
         to_ind = i
-        rom[0x0CF63C+to_ind] = atk_range[0x0CF63C+from_ind]
+        rom[0x0CF63C+to_ind] = atk_range[from_ind]
 
     # $C2/91B4 FC DB 91    JSR ($91DB,x)[$C2:0CA9]
     # These are pointers for damage formulas for the menu.  They do not seem
@@ -1106,6 +1094,9 @@ def reassign_tech_refs(rom, db, reassign):
     atk_form_start = 0x0291DB
 
     for i in range(7):
+        to_ind = i
+        from_ind = reassign[i]
+
         to_start = atk_form_start+2*to_ind
         from_start = 2*from_ind
         rom[to_start:to_start+2] = atk_forms[from_start:from_start+2]
@@ -1455,6 +1446,7 @@ if __name__ == '__main__':
         rom = bytearray(infile.read())
 
     orig_db = TechDB.get_default_db(rom)
+    # orig_db = TechDB.db_from_rom_internal(rom)
 
     random.seed(1234567890)
     reassign = [random.randrange(0, 7) for i in range(7)]
@@ -1462,8 +1454,9 @@ if __name__ == '__main__':
     new_db = get_reassign_techdb(orig_db, reassign)
 
     # These actually do some work on the rom to fix references
-    update_rock_techs(rom, new_db, reassign)
-    update_targetting(rom, new_db, reassign)
+    reassign_tech_refs(rom, new_db, reassign)
+    # update_rock_techs(rom, new_db, reassign)
+    # update_targetting(rom, new_db, reassign)
 
     # reassign magic is out of the tech_db because it influences the rom
     reassign_magic(rom, new_db, reassign)
@@ -1483,6 +1476,10 @@ if __name__ == '__main__':
     # new_rom[0x01BEEE:0x01BEEE+4] = bytearray.fromhex('A9 00 EA EA')
 
     print(reassign)
+
+    # print_bytes(new_db.lrn_reqs, 9)
+    # print_bytes(new_db.lrn_refs, 5)
+    # print_bytes(new_db.menu_grps, 16)
 
     with open('jets_test-out.sfc', 'wb') as outfile:
         outfile.write(rom)

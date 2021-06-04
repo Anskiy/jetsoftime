@@ -1,12 +1,12 @@
 # TODO List:
-#  -Add entry for atb delays.  Right now, I NOP those out elsewhere, but some
-#   sadist may want to add them back in.  Also, when the tech list changes the
-#   delays become incorrectly mapped. -- Done
-#  -Fix X-menu desc_ptrs (maybe in techrefs) -- Done.
+#  - Make a read db method that reads pointers/counts from the rom itself.
+#    Pointers are easy, counts are harder to determine but should be readable
+#    from hardcoded loop bounds.
 
 import copy
 from byteops import get_record, set_record, print_bytes, \
-    get_value_from_bytes, to_little_endian, to_file_ptr, to_rom_ptr
+    get_value_from_bytes, to_little_endian, to_file_ptr, to_rom_ptr,\
+    file_ptr_from_rom
 from techrefs import fix_tech_refs
 
 
@@ -105,7 +105,7 @@ class TechDB:
     def get_default_db(vanilla_rom):
         db = TechDB.db_from_rom(vanilla_rom,
                                 0x0C1BEB, 0x7C,
-                                0x0C213F, 0x44,
+                                0x0C213F, 0x45,
                                 0x0D45A6, 0x80,
                                 0x0C1ACB, 0x75,
                                 0x0C249F, 0x32,
@@ -114,9 +114,12 @@ class TechDB:
                                 0x0C3A09, 0x79,
                                 0x0C3B0D, 0x0C43AF,
                                 0x0C0230,
-                                0x0C27F7, 0x38,
+                                # 0x0C27F7, 0x38,
+                                # Three weird bytes between lrn_ref and lrn_req
+                                # I mistook them for a lrn_req
+                                0x0C27FA, 0x37,
                                 0x0C2778, 0x19,
-                                0x0C253B, 0x44,
+                                0x0C253B, 0x45,
                                 0x0C28DB, 0x0C2962,
                                 0x02BD40, 0x25,
                                 0x0C2BDC, 0x75+15)
@@ -150,6 +153,208 @@ class TechDB:
         db.rock_types = bytearray.fromhex('00 01 02 03 04')
 
         return db
+
+    def db_from_rom_internal(rom):
+
+        # Controls
+        # Start ptr from techrefs (plenty of options)
+        control_start = file_ptr_from_rom(rom, 0x01CBA1)
+
+        # Control count is based on the control index of Magus' basic attack.
+        # It should be the last control header, so count is that + 1.
+        magus_atk_id = rom[0x0C2589]
+        control_count = magus_atk_id + 1
+        num_techs = control_count - 7
+
+        # Effects
+        # Start ptr from techrefs
+        effect_start = file_ptr_from_rom(rom, 0x01BF96)
+
+        # Effect count has to come by looking at the control headers and
+        # finding the max index
+        controls = \
+            rom[control_start:control_start+TechDB.control_size*control_count]
+
+        # Get effect indices (bytes 5,6,7) from each control header.
+        # And with 0x7F because the x80 bit encodes whether the effect is just
+        # used for mp.
+        # Take the max.
+        max_eff = max([controls[i] & (0x7F)
+                       for i in range(len(controls))
+                       if (i % TechDB.control_size) in {5, 6, 7}])
+
+        # print_bytes(controls, TechDB.control_size)
+        # print('%2.2X' % max_eff)
+
+        effect_count = max_eff+1
+
+        # Graphics
+        # Start ptr from techrefs
+        gfx_start = file_ptr_from_rom(rom, 0x0145BC)
+
+        # The gfx count is number of tech gfx + fixed other graphics.
+        # The difference between #gfx and #ctl should be fixed.
+        # Vanilla: (0x80 gfx headers - 0x7C controls = 4)
+        gfx_count = control_count + 4
+
+        # Targetting Data
+        # Start ptr from techrefs
+
+        target_start = file_ptr_from_rom(rom, 0x1C25A)
+
+        # Targetting data is one per tech
+        target_count = num_techs
+
+        # Battle groups
+        # Start ptr from techrefs
+        bat_grp_start = file_ptr_from_rom(rom, 0x1CBAE)
+
+        # Count is like effects, but the battle group index is byte#0 & 7F
+        max_bat_grp = max([controls[TechDB.control_size*i] & 0x7F
+                           for i in range(control_count)])
+
+        bat_grp_count = max_bat_grp+1
+
+        # Menu groups
+        # Start pointer from techrefs
+        menu_grp_start = file_ptr_from_rom(rom, 0x02BCE9)
+
+        # The count is trickier.
+        # Start of rock group section is here:
+        rock_grp_start = file_ptr_from_rom(rom, 0x3FF97B)
+        num_rock_techs = rom[0x3FF9B5]
+
+        menu_grp_count = rock_grp_start - menu_grp_start + num_rock_techs
+
+        # Names
+        # Info from techrefs
+        name_offset = get_value_from_bytes(rom[0x010B6A:0x010B6A+2])
+        name_bank = rom[0x010B75]
+
+        name_start = to_file_ptr(name_bank << 16) + name_offset
+
+        # count for each tech (not basic attack)
+        name_count = num_techs
+
+        # Desc Ptrs
+        # Info from techrefs
+        desc_ptr_offset = get_value_from_bytes(rom[0x02BE64:0x02BE64+2])
+        desc_ptr_bank = rom[0x02BE6A]
+        desc_ptr_start = to_file_ptr((desc_ptr_bank << 16) + desc_ptr_offset)
+
+        # one desc ptr per tech + 4 extras for menu text and "can't run away"
+        desc_ptr_count = num_techs + 4
+
+        # Tech Descriptions
+        # We are going to do a very dangerous thing and assume the desc_ptrs
+        # are in order.  They are in vanilla, and I don't change this!  But
+        # this may break if a foreign rom is introduced.
+
+        # Desc ptrs and descs must be in the same bank.
+        # This is the truth!  This is my belief!...At least for now...
+        first_ptr = get_value_from_bytes(rom[desc_ptr_start:desc_ptr_start+2])
+        desc_start = to_file_ptr((desc_ptr_bank << 16) + first_ptr)
+
+        # Get desc_end by following the last ptr until 00
+        last_ptr_st = desc_ptr_start+TechDB.desc_ptr_size*(desc_ptr_count-1)
+        last_ptr_b = rom[last_ptr_st:last_ptr_st + TechDB.desc_ptr_size]
+        last_ptr = get_value_from_bytes(last_ptr_b)
+
+        last_desc_start = to_file_ptr((desc_ptr_bank << 16) + last_ptr)
+
+        cur = last_desc_start
+        while rom[cur] != 0:
+            cur += 1
+
+        desc_end = cur + 1
+
+        # Techs_learned
+        stat_bank = rom[0x02958E]
+        techs_learned_start = to_file_ptr((stat_bank << 16) + 0x230)
+
+        # Learn Refs
+        lrn_ref_bank = rom[0x01F26A+3]
+        lrn_ref_off = get_value_from_bytes(rom[0x01F261:0x01F261+2])
+        lrn_ref_start = to_file_ptr((lrn_ref_bank << 16) + lrn_ref_off)
+
+        # There should be a lrn_ref for each non-rock, non-single  menu group
+        lrn_ref_count = menu_grp_count - num_rock_techs - 7
+
+        # Learn Reqs
+        lrn_req_bank = rom[0x01F595+3]
+
+        # Again, dangerous assumption that pointers are ordered.  They are in
+        # vanilla, and I keep them ordered too.
+        first_ptr = get_value_from_bytes(rom[lrn_ref_start+3:lrn_ref_start+5])
+        lrn_req_start = to_file_ptr((lrn_req_bank << 16) + first_ptr)
+
+        # each dual non-rock trip has an entry
+        lrn_req_count = num_techs - 1 - 7*8 - num_rock_techs
+
+        # Mps
+        mp_start = file_ptr_from_rom(rom, 0x02BC4E)
+
+        # one mp per effect
+        mp_count = effect_count
+
+        # Menu reqs
+        menu_mp_start = file_ptr_from_rom(rom, 0x3FF8F7)
+
+        menu_mp_rock_start = file_ptr_from_rom(rom, 0x3FF98D)
+        menu_mp_end = menu_mp_rock_start + 3*num_rock_techs
+
+        # for later:
+        menu_mp_trip_start = file_ptr_from_rom(rom, 0x3FF948)
+        num_trip_techs = (menu_mp_end - menu_mp_trip_start) // 3
+
+        # Group starts
+        group_begin_start = file_ptr_from_rom(rom, 0x02BD18)
+
+        # one per menu group
+        group_begin_count = menu_grp_count
+
+        # ATB Penalties
+        atb_pen_start = file_ptr_from_rom(rom, 0x01BDF6)
+
+        # Each tech has an entry, triple techs have two
+        atb_pen_count = num_techs+num_trip_techs
+        
+        for x in [control_start, control_count,
+                  effect_start, effect_count,
+                  gfx_start, gfx_count,
+                  target_start, target_count,
+                  bat_grp_start, bat_grp_count,
+                  menu_grp_start, menu_grp_count,
+                  name_start, name_count,
+                  desc_ptr_start, desc_ptr_count,
+                  desc_start, desc_end,
+                  techs_learned_start,
+                  lrn_req_start, lrn_req_count,
+                  lrn_ref_start, lrn_ref_count,
+                  mp_start, mp_count,
+                  menu_mp_start, menu_mp_end,
+                  group_begin_start, group_begin_count,
+                  atb_pen_start, atb_pen_count]:
+            print('%X' % x)
+        
+
+        return TechDB.db_from_rom(rom,
+                                  control_start, control_count,
+                                  effect_start, effect_count,
+                                  gfx_start, gfx_count,
+                                  target_start, target_count,
+                                  bat_grp_start, bat_grp_count,
+                                  menu_grp_start, menu_grp_count,
+                                  name_start, name_count,
+                                  desc_ptr_start, desc_ptr_count,
+                                  desc_start, desc_end,
+                                  techs_learned_start,
+                                  lrn_req_start, lrn_req_count,
+                                  lrn_ref_start, lrn_ref_count,
+                                  mp_start, mp_count,
+                                  menu_mp_start, menu_mp_end,
+                                  group_begin_start, group_begin_count,
+                                  atb_pen_start, atb_pen_count)
 
     # Give a bunch of pointers to where data is on the rom and shove it all
     # Into a TechDB.
@@ -309,7 +514,10 @@ class TechDB:
     def rewrite_lrn_refs(self):
 
         # You have to add 3 because of a blank "tech 0" entry in the lrn_reqs
-        addr = self.lrn_req_start % 0x010000+3
+        # addr = self.lrn_req_start % 0x010000+3
+
+        # No you don't.
+        addr = self.lrn_req_start % 0x010000
 
         for i in range(0, self.lrn_ref_count):
             start = i*TechDB.lrn_ref_size
@@ -380,7 +588,7 @@ class TechDB:
         ret_tech['name'] = get_record(self.names, tech_id, self.name_size)
 
         ret_tech['lrn_req'] = get_record(self.lrn_reqs,
-                                         tech_id-0x38,
+                                         tech_id-0x39,
                                          self.lrn_req_size)
 
         bat_id = ret_tech['control'][0] & 0x7F
@@ -404,7 +612,7 @@ class TechDB:
             ret_tech['lrn_reqs'] = None
         else:
             ret_tech['lrn_reqs'] = get_record(self.lrn_reqs,
-                                              tech_id-0x38,
+                                              tech_id-0x39,
                                               self.lrn_req_size)
 
         ret_tech['atb_pen'] = [self.atb_pens[tech_id]]
@@ -445,7 +653,7 @@ class TechDB:
                 grp_count += 1
 
         if grp_count > 1 and len(tech['lrn_req']) > 0:
-            set_record(self.lrn_reqs, tech['lrn_req'], id-0x38,
+            set_record(self.lrn_reqs, tech['lrn_req'], id-0x39,
                        TechDB.lrn_req_size)
 
         # print_bytes(self.atb_pens, 16)
@@ -521,7 +729,8 @@ class TechDB:
 
         self.descs.extend(tech['desc'] + bytearray([0]))
 
-        set_record(self.lrn_reqs, tech_id-0x38, self.lrn_req_size,
+        print(tech_id-39)
+        set_record(self.lrn_reqs, tech_id-0x39, self.lrn_req_size,
                    tech['lrn_req'])
 
         temp_grp = tech['bat_grp']
@@ -1391,11 +1600,14 @@ class TechDB:
 # This is just a sanity check that reading and rewriting the existing db
 # does not change the rom.
 if __name__ == '__main__':
-    with open('test.sfc', 'rb') as infile, \
+    with open('ct_vanilla.sfc', 'rb') as infile, \
          open('test-out.sfc', 'wb') as outfile:
 
         rom = bytearray(infile.read())
         db = TechDB.get_default_db(rom)
+
+        TechDB.db_from_rom_internal(rom)
+        quit()
 
         testrom = rom[:]
 
