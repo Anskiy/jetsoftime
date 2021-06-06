@@ -162,6 +162,10 @@ def command_line():
      chronosanity = chronosanity.upper()
      if chronosanity == "Y":
          flags = flags + "cr"
+     duplicate_chars = input("Do you want to allow duplicte characters?")
+     duplicate_chars = duplicate_chars.upper()
+     if duplicate_chars == "Y":
+         flags = flags + "dc"
      tab_treasures = input("Do you want all treasures to be tabs(tb)? Y/N ")
      tab_treasures = tab_treasures.upper()
      if tab_treasures == "Y":
