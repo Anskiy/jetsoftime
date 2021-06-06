@@ -1410,6 +1410,39 @@ def reassign_graphics(rom, anim_new_start, unk_new_start, reassign):
     # with the rest of the randomizer is dicey.
     fix_overworld_sprites(rom, 0x5F7580, None, reassign)
 
+    # Random thing I found while finding a vanilla bug:
+    # $CC/E60B C9 06       CMP #$06
+    # $CC/E60D D0 06       BNE $06    [$E615]
+    # $CC/E60F 8E 15 A1    STX $A115  [$7E:A115]
+    # $CC/E612 EE 17 A1    INC $A117  [$7E:A117]
+    # This is recording when Magus is in the party to try to keep the 'Tech'
+    # and 'Comb' text correct.  It still doesn't work in vanilla, but for
+    # dup chars we should remove the magus check
+
+    # New:
+    # $CC/E60B EA          NOP
+    # $CC/E60C EA          NOP
+    # $CC/E60D 80 06       BRA $06    [$E615]
+
+    rom[0x0CE60B:0x0CE60B+3] = bytearray.fromhex('EA EA 80')
+
+    # TODO: Fix this bug completely.
+    # The game stores whether a battle pc has any dual techs in a 3 byte range
+    # beginning at 0x7E9F25.
+    # We just need to catch when there's exactly one non-dual haver, store
+    # their index in $7EA115 and put a 1 in $7eA115...later.
+
+    # Break in the code at
+    # $CC/E780 7B          TDC
+    # $CC/E781 AA          TAX
+    # $CC/E782 86 80       STX $80
+    # $CC/E784 86 82       STX $82
+    # $CC/E786 64 82       STZ $82
+    # $CC/E788 64 8C       STZ $8C
+    # $CC/E78A A5 83       LDA $83
+    # Just setting up the next part of whatever it's doing after setting the
+    # $9F25 range.  This is where I will strike.
+
 
 def reassign_items(rom, reassign):
 
