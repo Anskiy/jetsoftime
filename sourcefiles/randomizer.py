@@ -21,6 +21,7 @@ import techwriter as tech_order
 import randomizergui as gui
 import tabchange as tabwriter
 import fastmagic
+import charrando
 
 def read_names():
         p = open("names.txt","r")
@@ -51,7 +52,7 @@ chronosanity = ""
 tab_treasures = ""
 boss_rando = ""
 shop_prices = ""
-   
+duplicate_chars = ""
 #
 # Handle the command line interface for the randomizer.
 #   
@@ -77,6 +78,7 @@ def command_line():
      global tab_treasures
      global boss_rando
      global shop_prices
+     global duplicate_chars
      
      flags = ""
      sourcefile = input("Please enter ROM name or drag it onto the screen.")
@@ -160,6 +162,10 @@ def command_line():
      chronosanity = chronosanity.upper()
      if chronosanity == "Y":
          flags = flags + "cr"
+     duplicate_chars = input("Do you want to allow duplicte characters?")
+     duplicate_chars = duplicate_chars.upper()
+     if duplicate_chars == "Y":
+         flags = flags + "dc"
      tab_treasures = input("Do you want all treasures to be tabs(tb)? Y/N ")
      tab_treasures = tab_treasures.upper()
      if tab_treasures == "Y":
@@ -214,6 +220,7 @@ def handle_gui(datastore):
   global tab_treasures
   global boss_rando
   global shop_prices
+  global duplicate_chars
   
   # Get the user's chosen difficulty
   difficulty = datastore.difficulty.get()
@@ -255,6 +262,7 @@ def handle_gui(datastore):
   quiet_mode = get_flag_value(datastore.flags['q'])
   chronosanity = get_flag_value(datastore.flags['cr'])
   tab_treasures = get_flag_value(datastore.flags['tb'])
+  duplicate_chars = get_flag_value(datastore.flags['dc'])
   
   # source ROM
   sourcefile = datastore.inputFile.get()
@@ -297,6 +305,7 @@ def generate_rom():
      global chronosanity
      global tab_treasures
      global shop_prices
+     global duplicate_chars
      
      # isolate the ROM file name
      inputPath = pathlib.Path(sourcefile)
@@ -381,10 +390,16 @@ def generate_rom():
      #print("Boss rando: " + boss_rando)
      if boss_rando == "Y":
          boss_shuffler.randomize_bosses(outfile,difficulty)
-     if tech_list == "Fully Random":
-         tech_order.take_pointer(outfile)
-     elif tech_list == "Balanced Random":
-         tech_order.take_pointer_balanced(outfile)
+     # going to handle techs differently for dup chars
+     if duplicate_chars == "Y":
+         charrando.reassign_characters_file(outfile, tech_list,
+                                            lost_worlds == "Y")
+     else:
+         if tech_list == "Fully Random":
+             tech_order.take_pointer(outfile)
+         elif tech_list == "Balanced Random":
+             tech_order.take_pointer_balanced(outfile)
+
      if quiet_mode == "Y":
          bigpatches.write_patch_alt("patches/nomusic.ips",outfile)
      # Tyrano Castle chest hack

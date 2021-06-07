@@ -114,3 +114,10 @@ def change_ptrs(rom, ptr_list, start, offsets, num_bytes=3):
         new_val = to_little_endian(to_rom_ptr(start + offsets[i]), num_bytes)
         rom[rom_loc:rom_loc+num_bytes] = new_val[:]
         # print('%x' % to_rom_ptr(start + offsets[i]))
+
+
+# Reads an n-byte ptr from the rom at a given addr (file relative).  The read
+# pointer is then converted to a file pointer and returned.
+# Yes it feels weird having a one line function, but it gets used frequently.
+def file_ptr_from_rom(rom, addr, num_bytes=3):
+    return to_file_ptr(get_value_from_bytes(rom[addr:addr+num_bytes]))
