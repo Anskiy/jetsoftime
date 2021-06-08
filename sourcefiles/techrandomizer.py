@@ -152,9 +152,9 @@ def randomize_pc_techs(db, char_id, perm, preserve_magic=True):
 
     # update menu_mp_reqs for triple techs (and menu if that ever works)
     for (i, x) in enumerate(db.menu_mp_reqs):
-        pc = (x-1) % 8
+        pc = (x-1) // 8
         if pc == char_id:
-            tech_num = (x-1) // 8
+            tech_num = (x-1) % 8
             tech_num = perm[tech_num]
             db.menu_mp_reqs[i] = pc*8+tech_num+1
 

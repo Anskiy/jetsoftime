@@ -541,8 +541,15 @@ def update_dual_techs(old_db, new_db, reassign):
                 from_st = ((from_start_id+k)-0x39)*2
                 from_mmp = old_db.menu_mp_reqs[from_st:from_st+2]
 
+                to_mmp = bytearray()
+
+                for el in range(0, 2):
+                    pc = (from_mmp[el]-1) // 8
+                    tech = (from_mmp[el]-1) % 8
+                    to_mmp.append(reassign[pc]*8+tech+1)
+
                 to_st = ((to_start_id+k)-0x39)*2
-                new_db.menu_mp_reqs[to_st:to_st+2] = from_mmp[0:2]
+                new_db.menu_mp_reqs[to_st:to_st+2] = to_mmp[0:2]
 
                 # TODO: atb_pen
 
@@ -633,12 +640,19 @@ def update_trip_techs(old_db, new_db, reassign):
                        + (from_tech_id-from_first_trip))
 
             from_mmp = old_db.menu_mp_reqs[from_st:from_st+3]
+            to_mmp = bytearray()
+
+            # apply reassign to menu reqs
+            for el in range(0, 3):
+                pc = (from_mmp[el] - 1) // 8
+                tech = (from_mmp[el] - 1) % 8
+                to_mmp.append(reassign[pc]*8+tech+1)
 
             to_first_trip = new_db.group_sizes[new_db.first_trip_grp]
             to_st = ((to_tech_id-0x39)*2
                      + (to_tech_id-to_first_trip))
 
-            new_db.menu_mp_reqs[to_st:to_st+3] = from_mmp[0:3]
+            new_db.menu_mp_reqs[to_st:to_st+3] = to_mmp[0:3]
 
 
 # This one is a doozy.  Now that the same triple tech may be repeated for
@@ -1349,6 +1363,32 @@ def fix_menu_graphics(rom, reassign, rt_addr=0x5F75D0):
     # TODO: fix weapon image in stats block
 
 
+# Sometimes the palettes are really ugly when you make a swap.  We'll try to
+# manually fix them up.  The list of fixes will change with feedback.
+def fix_palettes(rom, reassign):
+
+    # SNES color format: 5 bits per color, bgr order, leading bit unset
+    # 0bbb bbgg gggr rrrr
+
+    # PC palettes have 12 colors, so 24 bytes total.
+
+    pal_start = 0x240000
+    pal_size = 24
+
+    pals = \
+        [rom[pal_start+i*pal_size:pal_start+(i+1)*pal_size] for i in range(7)]
+
+    # The biggest issue is that lucca's bright pink hair occurs in in a slot
+    # that is dark for everyone else.  It is in slot 11, and the color right
+    # before is dark, so we'll just copy that one over.
+    if reassign[2] != 2:
+        pals[2][10*2:11*2] = pals[2][9*2:10*2]
+
+    rom[pal_start+2*pal_size:pal_start+3*pal_size] = pals[2][:]
+
+    # Many of the character portraits are gross but they require more care.
+
+
 def reassign_graphics(rom, anim_new_start, unk_new_start, reassign):
 
     # Copy pointer tables when needed.  Update some references to the tables
@@ -1409,6 +1449,7 @@ def reassign_graphics(rom, anim_new_start, unk_new_start, reassign):
     # Ok, I have a free space manager that sort of works, but making it work
     # with the rest of the randomizer is dicey.
     fix_overworld_sprites(rom, 0x5F7580, None, reassign)
+    fix_palettes(rom, reassign)
 
     # Random thing I found while finding a vanilla bug:
     # $CC/E60B C9 06       CMP #$06
@@ -1531,6 +1572,8 @@ if __name__ == '__main__':
 
     random.seed(1234567890)
     reassign = [random.randrange(0, 7) for i in range(7)]
+
+    # reassign[2] = 1
 
     new_db = get_reassign_techdb(orig_db, reassign)
 
