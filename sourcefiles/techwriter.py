@@ -1070,10 +1070,10 @@ def take_pointer_balanced(pointer):
     b_magus = [lightning2_2,lightning2_2,lightning2_2,lightning2_2,lightning2_2,
              ice2_2,ice2_2,ice2_2,ice2_2,ice2_2,
              fire2_2,fire2_2,fire2_2,fire2_2,fire2_2,
-             darkbomb,darkbomb,darkbomb,
-             magicwall,magicwall,magicwall,magicwall,magicwall,magicwall,magicwall,
+             antilife,antilife,antilife,
+             darkbomb,darkbomb,darkbomb,darkbomb,darkbomb,darkbomb,darkbomb,
              darkmist,darkmist,
-             antilife,antilife,antilife,antilife,antilife,antilife,antilife,antilife,
+             magicwall,magicwall,magicwall,magicwall,magicwall,magicwall,magicwall,magicwall,
              darkmatter]
     chars = [crono, marle, lucca, robo, frog, ayla, magus]
     balanced_chars = [b_crono, b_marle, b_lucca, b_robo, b_frog, b_ayla, b_magus]
