@@ -43,7 +43,7 @@ def randomize_single_techs_balanced(db):
              [8, 7, 6, 2, 3, 1, 5, 4],
              [8, 6, 7, 1, 3, 2, 4, 5],
              [8, 7, 5, 2, 6, 4, 3, 1],
-             [5, 5, 5, 3, 7, 2, 8, 1]]
+             [5, 5, 5, 7, 8, 2, 3, 1]]
 
     for i in range(7):
         perm = generate_permutation_freq(freqs[i])
@@ -152,9 +152,9 @@ def randomize_pc_techs(db, char_id, perm, preserve_magic=True):
 
     # update menu_mp_reqs for triple techs (and menu if that ever works)
     for (i, x) in enumerate(db.menu_mp_reqs):
-        pc = (x-1) % 8
+        pc = (x-1) // 8
         if pc == char_id:
-            tech_num = (x-1) // 8
+            tech_num = (x-1) % 8
             tech_num = perm[tech_num]
             db.menu_mp_reqs[i] = pc*8+tech_num+1
 
