@@ -390,6 +390,7 @@ def generate_rom():
      #print("Boss rando: " + boss_rando)
      if boss_rando == "Y":
          boss_shuffler.randomize_bosses(outfile,difficulty)
+         boss_shuffler.randomize_dualbosses(outfile,difficulty)
      # going to handle techs differently for dup chars
      if duplicate_chars == "Y":
          charrando.reassign_characters_file(outfile, tech_list,
