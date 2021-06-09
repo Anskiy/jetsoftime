@@ -81,12 +81,12 @@ def rewrite_tabs(filename, rt_start=0x5F7450):
 
     # Change these, make them function parameters, etc to alter the magnitudes
     random_num = rand.randrange(0,101,1)
-    if random_num < 33:
-        pow_add = bytearray([5])
-    elif random_num > 32 and random_num < 66:
-        pow_add = bytearray([7])
-    else:
+    if random_num < 50:
         pow_add = bytearray([3])
+    elif random_num > 50 and random_num < 91:
+        pow_add = bytearray([5])
+    else:
+        pow_add = bytearray([7])
     random_num = rand.randrange(0,101,1)
     if random_num < 33:
         mag_add = bytearray([2])
