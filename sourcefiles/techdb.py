@@ -1266,6 +1266,11 @@ class TechDB:
                       group_sizes_start,
                       atb_pen_start, num_trips)
 
+        # $FF/F863 A2 24       LDX #$24
+        # This is a hardcoded number of menu groups.  The value should be an
+        # index to the last menu group.
+        rom[0x3ff864] = len(db.menu_grps)-1
+
         # These two need more care since the relative location of trip/rock
         # will vary depending on the reassignment
         # $FF/F97A BF 83 29 CC LDA $CC2983,x  --> 0x3FF97B  (Rock Techs)

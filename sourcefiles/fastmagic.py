@@ -57,9 +57,10 @@ def set_fast_magic_file(filename):
 
         for x in magic_learners:
             file.seek(thresh_ptr + x)
-            # Set the threshold to 0xFF.  Could be 8 instead if you want to
-            # differentiate between magic learners and others.
-            file.write(b'\xFF')
+            # Set the threshold to 8.
+            # 0xFF works here but confuses the dc flag into thinking that the
+            # chars are not magic users.
+            file.write(b'\x08')
 
 
 def set_fast_magic(rom):
@@ -94,8 +95,8 @@ def set_fast_magic(rom):
     thresh_ptr = get_value_from_bytes(rom[0x3FF894:0x3FF894+3])
     thresh_ptr = to_file_ptr(thresh_ptr)
     for x in magic_learners:
-        # Set the threshold to 0xFF
-        rom[thresh_ptr + x] = 0xFF
+        # Set the threshold to 8
+        rom[thresh_ptr + x] = 0x08
 
 
 if __name__ == '__main__':
