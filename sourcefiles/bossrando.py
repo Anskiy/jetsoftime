@@ -1,7 +1,7 @@
 import random as rand
 import struct as st
 import patcher as patch
-
+import ipswriter as bigpatch
 # Start marker:  0xC4700
 # Boss stats:  
 # Byte 0+1 - HP
@@ -29,6 +29,8 @@ spots =      [0x1B38C2, 0x377824, 0x24EC52, 0x3ABF86, 0x1ED226, 0x1BEBBB, 0x3882
 spot_tiers = [0,1,1,2,2,3,4,2,2,2,2]
 boss_hp =    [920,3600,2100,4000,3800,6000,7000,5000,5000,4500,5400]
 hard_hp =    [920,3600,2100,5000,4200,7000,8000,6000,6000,5200,5800]
+
+#Extra Twin Golem spots: 0x388329, Twin Golem slot 1: 0x38821D, Twin Golem slot 2: 0x38832A
 
 #Two target bosses
 #Boss parts:  B3 - Zombor's legs, B4 - Zombor's head, D7 - Lavos Spawn's shell, D8 - Lavos Spawn's head, B8 - Mega Mutant's head, B9 - Mega Mutant's bottom,
@@ -112,10 +114,25 @@ def randomize_bosses(outfile,difficulty):
                safe_boss_tiers.pop(safe_bosses.index(0x99))
                safe_bosses.remove(0x99)
             boss = rand.choice(safe_bosses)
-            boss_tier = safe_boss_tiers[safe_bosses.index(boss)]            
+            boss_tier = safe_boss_tiers[safe_bosses.index(boss)]
         else:
             boss = rand.choice(eligible_bosses)
             boss_tier = boss_tiers[eligible_bosses.index(boss)]
+            if spot == 0x38821C and boss == 0xA2: #We replace Dalton Plus in the Golem Twins spot
+                dualboss_spots1.append(0x38821C)
+                dualboss_spots2.append(0x388329)
+                dualboss_spot_tiers.append(4)
+                dualboss_slot_addrs2.append(0x38832A)
+                dualboss_hp1.append(7000)
+                dualboss_hp2.append(7000)
+                dualboss_hard_hp1.append(8000)
+                dualboss_hard_hp2.append(8000)
+                bigpatch.write_patch_alt("patches/twinbossgolem.ips",outfile)
+                boss_tiers.pop(eligible_bosses.index(boss))
+                eligible_bosses.remove(boss)
+                lnI = lnI + 1
+                continue
+
         spot_tier = spot_tiers[lnI]
         
         #f.seek(0xC4700 + boss * 23 + 0);
