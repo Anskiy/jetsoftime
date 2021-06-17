@@ -590,11 +590,9 @@ class TechDB:
                                         tech_id,
                                         self.target_size)
 
-        ret_tech['name'] = get_record(self.names, tech_id, self.name_size)
+        ret_tech['pc_target'] = self.pc_target[tech_id]
 
-        ret_tech['lrn_req'] = get_record(self.lrn_reqs,
-                                         tech_id-0x39,
-                                         self.lrn_req_size)
+        ret_tech['name'] = get_record(self.names, tech_id, self.name_size)
 
         bat_id = ret_tech['control'][0] & 0x7F
         ret_tech['bat_grp'] = get_record(self.bat_grps,
@@ -603,6 +601,9 @@ class TechDB:
 
         desc_ptr = get_record(self.desc_ptrs, tech_id,
                               self.desc_ptr_size)
+
+        ret_tech['desc_ptr'] = desc_ptr[:]
+
         start = get_value_from_bytes(desc_ptr)
         start = start - (self.desc_start % 0x010000)
 
@@ -613,12 +614,26 @@ class TechDB:
         ret_tech['desc'] = self.descs[start:end]
 
         first_dual_tech = self.group_sizes[self.first_dual_grp]
+        first_trip_tech = self.group_sizes[self.first_trip_grp]
+        first_rock_tech = self.group_sizes[self.first_rock_grp]
+
         if tech_id < first_dual_tech:
-            ret_tech['lrn_reqs'] = None
+            ret_tech['lrn_req'] = None
+        elif tech_id >= first_rock_tech:
+            ret_tech['lrn_req'] = None
         else:
-            ret_tech['lrn_reqs'] = get_record(self.lrn_reqs,
-                                              tech_id-0x39,
-                                              self.lrn_req_size)
+            ret_tech['lrn_req'] = get_record(self.lrn_reqs,
+                                             tech_id-0x39,
+                                             self.lrn_req_size)
+
+        if tech_id < first_dual_tech:
+            ret_tech['mmp'] = None
+        elif tech_id < first_trip_tech:
+            mmp_start = (tech_id-0x39)*2
+            ret_tech['mmp'] = self.menu_mp_reqs[mmp_start:mmp_start+2]
+        else:
+            mmp_start = (tech_id-0x39)*2 + (tech_id-first_trip_tech)
+            ret_tech['mmp'] = self.menu_mp_reqs[mmp_start:mmp_start+3]
 
         ret_tech['atb_pen'] = [self.atb_pens[tech_id]]
         first_trip_tech = self.group_sizes[self.first_trip_grp]
@@ -647,24 +662,82 @@ class TechDB:
     # the animation script is in the rom already and we just pass the right
     # index to it in the gfx data.
     def set_tech(self, tech, tid):
-        set_record(self.controls, tech['control'], tid, TechDB.control_size)
+
         set_record(self.gfx, tech['gfx'], tid, TechDB.gfx_size)
         set_record(self.targets, tech['target'], tid, TechDB.target_size)
+
+        self.pc_target[tid] = tech['pc_target']
+
         set_record(self.names, tech['name'], tid, TechDB.name_size)
+
+        # Look for battle group
+        found = False
+        ind = 0
+
+        if self.first_rock_grp == len(self.menu_grps):
+            is_rock = False
+        else:
+            is_rock = (tid >= self.group_sizes[self.first_rock_grp])
+
+        for i in range(self.bat_grp_count):
+            grp = get_record(self.bat_grps, i, self.bat_grp_size)
+            if grp == tech['bat_grp']:
+                found = True
+                ind = i
+                break
+
+        if not found:
+            ind = self.add_bat_grp(tech['bat_grp'], is_rock)
+
+        ctl_x80 = tech['control'][0] & 0x80
+        tech['control'][0] = ind | ctl_x80
+
+        set_record(self.controls, tech['control'], tid, TechDB.control_size)
 
         grp_count = 0
         for x in tech['bat_grp']:
             if x != 0xFF:
                 grp_count += 1
 
-        if grp_count > 1 and len(tech['lrn_req']) > 0:
+        if grp_count > 1 and not is_rock:
             set_record(self.lrn_reqs, tech['lrn_req'], tid-0x39,
                        TechDB.lrn_req_size)
 
-        # print_bytes(self.atb_pens, 16)
-        # print(tech['atb_pen'], format(id, 'X'))
-        # input()
         self.atb_pens[tid] = tech['atb_pen'][0]
+
+        # desc_ptr/desc
+        if tech['desc_ptr'] is not None:
+            # If desc_ptr is set, assume the user knows what they're doing.
+            # Usually when shuffling things around, we can just pass ptrs
+            set_record(self.desc_ptrs, tech['desc_ptr'], tid,
+                       TechDB.desc_ptr_size)
+        else:
+            # If desc_ptr is not set, just add the desc to the end and set the
+            # pointer to the new text.
+            new_ptr = self.desc_start+len(self.descs)
+            new_ptr_b = to_little_endian(new_ptr, 2)
+
+            set_record(self.desc_ptrs, new_ptr_b, tid,
+                       TechDB.desc_ptr_size)
+
+            self.descs.extend(tech['desc'])
+
+        # mmp set
+        if grp_count == 2:
+            if tid < 0x39:  # Duals always start at 0x39
+                print('Error: Setting a dual tech too early.')
+                quit()
+
+            mmp_start = (tid-0x39)*2
+            self.menu_mp_reqs[mmp_start:mmp_start+2] = tech['mmp'][0:2]
+        elif grp_count == 3:
+            first_trip = self.group_sizes[self.first_trip_grp]
+            if tid < first_trip:
+                print('Error: Setting a triple tech too early.')
+                quit()
+
+            mmp_start = (tid-0x39)+(tid-first_trip)
+            self.menu_mp_reqs[mmp_start:mmp_start+3] = tech['mmp'][0:3]
 
         if grp_count == 3:
             num_trips = \
@@ -734,7 +807,6 @@ class TechDB:
 
         self.descs.extend(tech['desc'] + bytearray([0]))
 
-        print(tech_id-39)
         set_record(self.lrn_reqs, tech_id-0x39, self.lrn_req_size,
                    tech['lrn_req'])
 

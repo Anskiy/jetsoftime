@@ -67,7 +67,10 @@ def max_expand_empty_db(orig_db, reassign):
 
             # If orig_ind is None it means we have a Magus involved.
             # If len(orig_set) != 2, then i,j are the same pc now
-            if(orig_ind is not None and len(orig_set) == 2):
+
+            # We're going to allow same-char-pairs
+            # Same char pairs will be found in orig_db as a single tech group
+            if orig_ind is not None and len(orig_set) == 2:
                 new_menu_grps.append(grp)
 
                 # dummy battle group gets overwritten once we start adding
@@ -397,17 +400,15 @@ def change_single_techs(from_ind, to_ind, orig_db, new_db):
 
         tech = orig_db.get_tech(from_i)
 
-        # print("Writing from Tech %2.2X to Tech %2.2X" % (from_i, to_i))
-        from_x80 = tech['control'][0] & 0x80
-        tech['control'][0] = to_ind | from_x80  # Change perf group to target
-
+        tech['bat_grp'] = bytearray([to_ind, 0xFF, 0xFF])
+        
         # In the menu (and only the menu) the game expects the effect
         # headers to be in tech_id order.  This is deep in menu code and
         # I'm worried that fixing it will make menus slower.  So for now
         # we'll shuffle the effect headers.  This means updating dual/trip
         # control headers later!
 
-        fix_effect_ind(tech['control'], bytearray([to_ind, 0xFF, 0xFF]))
+        fix_effect_ind(tech['control'], tech['bat_grp'])
 
         x = get_record(orig_db.effects, from_i, TechDB.effect_size)
         set_record(new_db.effects, x, to_i, TechDB.effect_size)
@@ -430,6 +431,82 @@ def change_single_techs(from_ind, to_ind, orig_db, new_db):
             new_db.pc_target[from_i] = 0xFF
 
 
+def get_aa_beast_toss(old_db, new_pcs):
+    beast_toss = old_db.get_tech(0x5F)
+    beast_toss['bat_grp'] = new_pcs[:]
+
+    beast_toss['control'][6] = 0x2C
+    beast_toss['lrn_req'] = [4, 4, 0xFF]
+    beast_toss['mmp'] = [0x2C, 0x2C]
+
+
+    # This will need to change as we add more scripts
+    beast_toss['gfx'][0] = 0x80
+
+    
+            
+# Tech is the vanilla tech that needs reassignment.
+# New PCs should be a battle group for the tech (may need shuffling)
+def reassign_tech(tech, new_pcs, reassign):
+    # redo battle group
+    bat_grp = tech['bat_grp']
+    new_grp = bat_grp[:]
+
+    num_chars = 3 - bat_grp.count(0xFF)
+
+    # Redo battle group
+    for el in range(num_chars):
+        pc = bat_grp[el]
+
+        for z in new_pcs[0:num_chars]:
+            if reassign[z] == pc:
+                new_grp[el] = z
+
+                # The break is for same-char duals.  For example, Ayla beast
+                # toss would have battle group [5, 5, 0xFF].  We only want
+                # to replace one of the 5s with each reassigned Ayla.  So
+                # stop looking after the first.
+                break
+
+    # Update special targetting info
+    if tech['pc_target'] != 0xFF:
+        for z in new_pcs[0:num_chars]:
+            if reassign[z] == tech['pc_target']:
+                tech['pc_target'] = z
+
+    # For effect indices between 1 and 0x38, replace with the equivalent
+    # effect of the reassign char
+    tech['bat_grp'] = new_grp[:]
+    fix_effect_ind(tech['control'], tech['bat_grp'])
+
+    # Learn requirements and menu reqs need to be resorted by pc-index
+    if tech['lrn_req'] is not None:
+        lrn_req = tech['lrn_req']
+    else:
+        lrn_req = [0, 0, 0]  # dummy values
+    mmp = tech['mmp']
+
+    if len(mmp) == 2:
+        mmp.append(0xFF)
+    
+    bat_grp, new_grp = zip(*sorted(zip(bat_grp, new_grp)))
+    new_grp, lrn_req, mmp = zip(*sorted(zip(new_grp, lrn_req, mmp)))
+
+    if mmp[-1] == 0xFF:
+        mmp = mmp[0:2]
+    
+    if tech['lrn_req'] is not None:
+        tech['lrn_req'] = lrn_req
+
+    # Now apply reassign to mmp
+    new_mmp = bytearray()
+
+    for el in range(0, 2):
+        pc = (mmp[el]-1) // 8
+        tech = (mmp[el]-1) % 8
+        new_mmp.append(reassign[pc]*8+tech+1)
+
+
 def update_dual_techs(old_db, new_db, reassign):
     # print_bytes(old_db.menu_grps, 8)
     for i in range(0, 7):
@@ -446,13 +523,26 @@ def update_dual_techs(old_db, new_db, reassign):
             to_mg_ind = new_db.get_menu_grp_ind(to_grp)
             if reassign[i] == reassign[j]:
                 if(to_mg_ind is None):
+                    print("Skipping.")
                     pass
-                    # print("Skipping.")
+                elif reassign[i] == 5:  # Just Ayla for now
+                    to_mg_ind = new_db.add_menu_grp(to_grp)
+                    to_start_id = new_db.group_sizes[to_mg_ind]
+
+                    print("Found a Ayla-Ayla Beast Toss.")
+                    beast_toss = get_aa_beast_toss(old_db, [i, j, 0xFF])
+                    reassign_tech(beast_toss, [i, j, 0xFF], reassign)
+                    new_db.set_tech(beast_toss, to_start_id)
+
+                    # Make the rest unlearnable
+                    for k in range(1, 3):
+                        id = to_start_id + k
+                        new_db.controls[id*TechDB.control_size] |= 0x80
                 else:
                     to_start_id = new_db.group_sizes[to_mg_ind]
 
-                    # print('Making techs %2.2X to %2.2X unlearnable'
-                    #       % (to_mg_ind, to_mg_ind+3))
+                    print('Making techs %2.2X to %2.2X unlearnable'
+                          % (to_mg_ind, to_mg_ind+3))
 
                     for k in range(3):
                         id = to_start_id + k
@@ -491,67 +581,8 @@ def update_dual_techs(old_db, new_db, reassign):
             for k in range(3):
                 # print("Reading tech_id %2.2X" % (from_start_id+k))
                 tech = old_db.get_tech(from_start_id + k)
-
-                # Redo battle group
-                bat_grp = tech['bat_grp']
-                new_grp = bat_grp[:]
-
-                for el in range(2):
-                    pc = bat_grp[el]
-
-                    for z in [i, j]:
-                        if reassign[z] == pc:
-                            new_grp[el] = z
-
-                # for attacks which are centered around
-                target = old_db.pc_target[from_start_id+k]
-                if target != 0xFF:
-                    for z in [i, j]:
-                        if reassign[z] == target:
-                            # print('Changing target to ', z)
-                            new_db.pc_target[to_start_id+k] = z
-
-                new_grp[2] = 0xFF
-
-                new_bat_ind = new_db.add_bat_grp(new_grp)
-                tech_x80 = tech['control'][0] & 0x80
-                tech['control'][0] = new_bat_ind | tech_x80
-
-                # Effect references should be OK as-is.
-                # Nevermind.  Had to reorder so that the menu works.
-                fix_effect_ind(tech['control'], new_grp)
-
-                # Learn Reqs need to be re-sorted based on pc-index
-                lrn_req = tech['lrn_req']
-
-                bat_grp, new_grp = zip(*sorted(zip(bat_grp, new_grp)))
-                new_grp, lrn_req = zip(*sorted(zip(new_grp, lrn_req)))
-
-                tech['lrn_req'] = lrn_req
-                # set_tech takes care of control, gfx, target, name
+                reassign_tech(tech, [i, j, 0xFF], reassign)
                 new_db.set_tech(tech, to_start_id+k)
-
-                old_desc_ptr = get_record(old_db.desc_ptrs,
-                                          from_start_id+k,
-                                          TechDB.desc_ptr_size)
-                set_record(new_db.desc_ptrs, old_desc_ptr,
-                           to_start_id+k, 2)
-
-                # menu mp reqs need to be transferred
-                from_st = ((from_start_id+k)-0x39)*2
-                from_mmp = old_db.menu_mp_reqs[from_st:from_st+2]
-
-                to_mmp = bytearray()
-
-                for el in range(0, 2):
-                    pc = (from_mmp[el]-1) // 8
-                    tech = (from_mmp[el]-1) % 8
-                    to_mmp.append(reassign[pc]*8+tech+1)
-
-                to_st = ((to_start_id+k)-0x39)*2
-                new_db.menu_mp_reqs[to_st:to_st+2] = to_mmp[0:2]
-
-                # TODO: atb_pen
 
 
 def update_trip_techs(old_db, new_db, reassign):
@@ -579,7 +610,6 @@ def update_trip_techs(old_db, new_db, reassign):
         if len(from_set) != 3 or from_grp_ind is None:
             # print('No triple for %2.2X ' % from_grp)
             # print('Making %2.2X unlearnable' % to_tech_id)
-
             ctl_start = to_tech_id*TechDB.control_size
             new_db.controls[ctl_start] |= 0x80
         else:
@@ -589,70 +619,8 @@ def update_trip_techs(old_db, new_db, reassign):
             #       % (from_tech_id, to_tech_id))
 
             tech = old_db.get_tech(from_tech_id)
-
-            bat_grp = tech['bat_grp']
-            new_grp = bat_grp
-
-            # make the roles in new_grp match the orig group
-
-            new_db.pc_target[to_tech_id] = 0xFF
-            for el in range(0, 3):
-                pc = bat_grp[el]
-
-                for z in sorted(to_bat_grp):
-                    if reassign[z] == pc:
-                        new_grp[el] = z
-                        if reassign[z] == old_db.pc_target[from_tech_id]:
-                            # print('Changing target to ', z)
-                            new_db.pc_target[to_tech_id] = z
-
-            is_rock = (i >= new_db.first_rock_grp)
-            new_bat_ind = new_db.add_bat_grp(new_grp, is_rock)
-            tech_x80 = tech['control'][0] & 0x80
-            tech['control'][0] = new_bat_ind | tech_x80
-
-            # Fix effect references.  We had to shuffle them so the menu techs
-            # work.
-            fix_effect_ind(tech['control'], new_grp)
-
-            if not is_rock:
-                lrn_req = tech['lrn_req']
-
-                new_grp, bat_grp = zip(*sorted(zip(new_grp, bat_grp)))
-                bat_grp, lrn_req = zip(*sorted(zip(bat_grp, lrn_req)))
-
-                tech['lrn_req'] = lrn_req
-            else:
-                tech['lrn_req'] = bytearray()
-
-            # set_tech takes care of control, gfx, target, name
+            reassign_tech(tech, to_bat_grp, reassign)
             new_db.set_tech(tech, to_tech_id)
-
-            old_desc_ptr = get_record(old_db.desc_ptrs,
-                                      from_tech_id,
-                                      TechDB.desc_ptr_size)
-            set_record(new_db.desc_ptrs, old_desc_ptr,
-                       to_tech_id, 2)
-
-            # menu mp reqs
-            from_first_trip = old_db.group_sizes[old_db.first_trip_grp]
-            from_st = ((from_tech_id-0x39)*2
-                       + (from_tech_id-from_first_trip))
-
-            from_mmp = old_db.menu_mp_reqs[from_st:from_st+3]
-            to_mmp = bytearray()
-
-            # apply reassign to menu reqs
-            for el in range(0, 3):
-                pc = (from_mmp[el] - 1) // 8
-                tech = (from_mmp[el] - 1) % 8
-                to_mmp.append(reassign[pc]*8+tech+1)
-
-            to_first_trip = new_db.group_sizes[new_db.first_trip_grp]
-            to_st = ((to_tech_id-0x39)*2
-                     + (to_tech_id-to_first_trip))
-
-            new_db.menu_mp_reqs[to_st:to_st+3] = to_mmp[0:3]
 
 
 # This one is a doozy.  Now that the same triple tech may be repeated for
@@ -979,7 +947,26 @@ def copy_update_graphics_ptrs(rom, anim_new_start, unk_new_start, reassign):
                                                + endpt_bytes.hex()
                                                + '38 EA')
 
-    anim_ptrs = [0x0CE9F0, 0x0CE9F6, 0x02F4CF]
+    """
+    Again for monster anims!
+    $C0/4746 C8          INY
+    $C0/4747 C8          INY
+    $C0/4748 B7 B5       LDA [$B5],y[$E4:260E]
+    $C0/474A 88          DEY
+    $C0/474B 88          DEY
+    $C0/474C 38          SEC
+
+    End point loading
+    $CC/EB34 BF 00 26 E4 LDA $E42600,x[$E4:260E]
+    $CC/EB38 85 88       STA $88    [$00:0088]
+    $CC/EB3A BF 00 28 E4 LDA $E42800,x[$E4:280E]
+    """
+
+    rom[0x004746:0x00474D] = bytearray.fromhex('BB BF'
+                                               + endpt_bytes.hex()
+                                               + '38 EA')
+
+    anim_ptrs = [0x0CE9F0, 0x0CE9F6, 0x02F4CF, 0x0CEB35]
     update_ptrs(rom, anim_ptrs, anim_start, anim_new_start)
 
     """
@@ -993,7 +980,7 @@ def copy_update_graphics_ptrs(rom, anim_new_start, unk_new_start, reassign):
     $C2/F4E6 BF 00 00 E4 LDA $E40000,x[$E4:280A] <--need this?  Seems not.
     """
 
-    unk_ptrs = [0x0CE9FC, 0x0CEA02]
+    unk_ptrs = [0x0CE9FC, 0x0CEA02, 0x0CEB3B]
     update_ptrs(rom, unk_ptrs, unk_start, unk_new_start)
 
 
@@ -1573,6 +1560,7 @@ if __name__ == '__main__':
     random.seed(1234567890)
     reassign = [random.randrange(0, 7) for i in range(7)]
 
+    print(reassign)
     # reassign[2] = 1
 
     new_db = get_reassign_techdb(orig_db, reassign)
@@ -1590,7 +1578,7 @@ if __name__ == '__main__':
 
     reassign_stats(rom, reassign)
 
-    techrandomizer.randomize_single_techs_uniform(new_db)
+    # techrandomizer.randomize_single_techs_uniform(new_db)
 
     TechDB.write_db_internal(new_db, rom)
 
@@ -1598,8 +1586,6 @@ if __name__ == '__main__':
     # new_rom[0x01BDF5:0x01BDF5+4] = bytearray.fromhex('A9 00 EA EA')
     # new_rom[0x01BE71:0x01BE71+4] = bytearray.fromhex('A9 00 EA EA')
     # new_rom[0x01BEEE:0x01BEEE+4] = bytearray.fromhex('A9 00 EA EA')
-
-    print(reassign)
 
     # print_bytes(new_db.lrn_reqs, 9)
     # print_bytes(new_db.lrn_refs, 5)
