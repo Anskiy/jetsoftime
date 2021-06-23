@@ -105,7 +105,7 @@ class TechDB:
     def get_default_db_file(filename):
         with open(filename, 'rb') as infile:
             rom = bytearray(infile.read())
-            return get_default_db(rom)
+            return TechDB.get_default_db(rom)
 
     def get_default_db(vanilla_rom):
         db = TechDB.db_from_rom(vanilla_rom,
@@ -323,7 +323,8 @@ class TechDB:
 
         # Each tech has an entry, triple techs have two
         atb_pen_count = num_techs+num_trip_techs
-        
+
+        """
         for x in [control_start, control_count,
                   effect_start, effect_count,
                   gfx_start, gfx_count,
@@ -341,7 +342,7 @@ class TechDB:
                   group_begin_start, group_begin_count,
                   atb_pen_start, atb_pen_count]:
             print('%X' % x)
-        
+        """
 
         return TechDB.db_from_rom(rom,
                                   control_start, control_count,
@@ -714,6 +715,7 @@ class TechDB:
         else:
             # If desc_ptr is not set, just add the desc to the end and set the
             # pointer to the new text.
+            
             new_ptr = self.desc_start+len(self.descs)
             new_ptr_b = to_little_endian(new_ptr, 2)
 
@@ -1343,6 +1345,15 @@ class TechDB:
         # index to the last menu group.
         rom[0x3ff864] = len(db.menu_grps)-1
 
+        # $FF/F910 C9 0F       CMP #$0F
+        # Looks like a count of the dual groups.  Needs to be altered.
+        rom[0x3FF911] = db.first_trip_grp - db.first_dual_grp
+
+        # $FF/F936 C9 0F       CMP #$0F
+        # This is the same but for triple techs.  It's hard but not impossible
+        # to get more than 15 triples, so fix it!
+        rom[0x3FF937] = len(db.menu_grps) - db.first_trip_grp
+
         # These two need more care since the relative location of trip/rock
         # will vary depending on the reassignment
         # $FF/F97A BF 83 29 CC LDA $CC2983,x  --> 0x3FF97B  (Rock Techs)
@@ -1473,7 +1484,10 @@ class TechDB:
 
         rom[0x02BD68] = db.first_trip_grp-db.first_dual_grp
         rom[0x02BD69] = db.first_trip_grp
-        rom[0x02BD6A] = len(db.menu_grps)-db.first_trip_grp
+
+        # Weird menu bug if this is 0.  Make it 1, and it will just fail
+        # to find a triple and quit.
+        rom[0x02BD6A] = max(len(db.menu_grps)-db.first_trip_grp, 1)
 
         # Ranges for battle menu to pick up techs
         # The battle menu will always be broken when there are too many techs.
