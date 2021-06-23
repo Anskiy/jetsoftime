@@ -79,6 +79,8 @@ def command_line():
      global boss_rando
      global shop_prices
      global duplicate_chars
+     global same_char_techs
+     global char_choices
      
      flags = ""
      sourcefile = input("Please enter ROM name or drag it onto the screen.")
@@ -166,6 +168,11 @@ def command_line():
      duplicate_chars = duplicate_chars.upper()
      if duplicate_chars == "Y":
          flags = flags + "dc"
+         same_char_techs = \
+             input("Should duplicate characters learn dual techs? Y/N ")
+     else:
+         same_char_techs = "N"
+
      tab_treasures = input("Do you want all treasures to be tabs(tb)? Y/N ")
      tab_treasures = tab_treasures.upper()
      if tab_treasures == "Y":
@@ -221,6 +228,8 @@ def handle_gui(datastore):
   global boss_rando
   global shop_prices
   global duplicate_chars
+  global same_char_techs
+  global char_choices
   
   # Get the user's chosen difficulty
   difficulty = datastore.difficulty.get()
@@ -263,6 +272,17 @@ def handle_gui(datastore):
   chronosanity = get_flag_value(datastore.flags['cr'])
   tab_treasures = get_flag_value(datastore.flags['tb'])
   duplicate_chars = get_flag_value(datastore.flags['dc'])
+
+  # dc settings
+  char_choices = []
+  for i in range(7):
+      char_choices.append([])
+      for j in range(7):
+          if datastore.char_choices[i][j].get() == 1:
+              char_choices[i].append(j)
+
+  
+  same_char_techs = get_flag_value(datastore.dup_techs)
   
   # source ROM
   sourcefile = datastore.inputFile.get()
@@ -306,6 +326,8 @@ def generate_rom():
      global tab_treasures
      global shop_prices
      global duplicate_chars
+     global same_char_techs
+     global char_choices
      
      # isolate the ROM file name
      inputPath = pathlib.Path(sourcefile)
@@ -393,7 +415,9 @@ def generate_rom():
          boss_shuffler.randomize_dualbosses(outfile,difficulty)
      # going to handle techs differently for dup chars
      if duplicate_chars == "Y":
-         charrando.reassign_characters_file(outfile, tech_list,
+         charrando.reassign_characters_file(outfile, char_choices,
+                                            same_char_techs == "Y",
+                                            tech_list,
                                             lost_worlds == "Y")
      else:
          if tech_list == "Fully Random":
