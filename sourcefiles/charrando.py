@@ -15,7 +15,20 @@ from techdb import TechDB
 from byteops import get_record, set_record, to_little_endian, \
     update_ptrs, to_rom_ptr, print_bytes
 from statcompute import PCStats as PC
+import scriptextend as scripts
 
+
+def to_ct_str(string):
+    ret = bytearray()
+    for x in string:
+        if x.isupper():
+            ret.append(ord(x)-65+0xA0)
+        elif x.islower():
+            ret.append(ord(x)-97+0xBA)
+        elif x == ' ':
+            ret.append(0xEF)
+        elif x == ',':
+            ret.append(0xED)
 
 # Given the base TechDB and the pc reassignment list return an empty DB with
 # all of the needed groups and empty space
@@ -23,7 +36,7 @@ from statcompute import PCStats as PC
 #   reassign is a 7 element list saying how the PCs get reassigned
 #     Ex: [ 0 0 0 1 2 3 4 ] means Crono, Marle, Lucca are now Crono, Robo is
 #       Marle, Frog is Lucca, Ayla is Robo, and Magus is Frog
-def max_expand_empty_db(orig_db, reassign):
+def max_expand_empty_db(orig_db, reassign, dup_duals=False):
     new_menu_grps = bytearray()
     new_bat_grps = bytearray()
     new_grp_thresh = bytearray()
@@ -70,7 +83,10 @@ def max_expand_empty_db(orig_db, reassign):
 
             # We're going to allow same-char-pairs
             # Same char pairs will be found in orig_db as a single tech group
-            if orig_ind is not None and len(orig_set) == 2:
+            if orig_ind is not None \
+               and (len(orig_set) == 2
+                    or (dup_duals and
+                        set([0, 1, 3, 2, 4, 5]).intersection(orig_set))):
                 new_menu_grps.append(grp)
 
                 # dummy battle group gets overwritten once we start adding
@@ -430,21 +446,85 @@ def change_single_techs(from_ind, to_ind, orig_db, new_db):
         else:
             new_db.pc_target[from_i] = 0xFF
 
+def get_ll_prot_all(old_db):
+    prot_all = old_db.get_tech(0x15)
+    prot_all['bat_grp'] = [2, 2, 0xFF]
 
-def get_aa_beast_toss(old_db, new_pcs):
+    prot_all['control'][0] &= 0x7F
+    prot_all['control'][6] = 0x80 | 0x15
+    prot_all['lrn_req'] = [5, 5, 0xFF]
+    prot_all['mmp'] = [0x15, 0x15]
+
+    prot_all['target'][0] = 0x81
+    prot_all['target'][1] = 0x00
+
+    prot_all['gfx'][0] = 0x81
+
+    return prot_all
+
+def get_ff_hex_mist(old_db):
+    hex_mist = old_db.get_tech(0x26)  # water 2 base
+    hex_mist['bat_grp'] = [4, 4, 0xFF]
+    hex_mist['control'][0] &= 0x7F
+    hex_mist['control'][6] = 0x26
+    hex_mist['control'][8:10] = [9, 9]
+
+    hex_mist['lrn_req'] = [6, 6]
+    hex_mist['mmp'] = [0x26, 0x26]
+    hex_mist['gfx'][0] = 0x82
+    hex_mist['gfx'][6] = 0x4
+
+    hex_mist['name'] = \
+        bytearray.fromhex('A5 C5 BE D1 C0 C8 C7 AC C2 CC CD')
+
+    return hex_mist
+
+def get_rr_supervolt(old_db):
+    sv = old_db.get_tech(0x41)
+
+    sv['bat_grp'] = [3, 3, 0xFF]
+    sv['control'][6] = 0x20
+
+    sv['lrn_req'] = [8, 8]
+    sv['mmp'] = [0x20, 0x20]
+    sv['gfx'][0] = 0x83
+
+    return sv
+
+
+def get_mm_haste_all(old_db):
+
+    ha = old_db.get_tech(0x0D)
+
+    ha['bat_grp'] = [1, 1, 0xFF]
+    ha['control'][0] &= 0x7F
+    ha['control'][6] = 0x80 | 0x0D
+
+    ha['lrn_req'] = [5, 5, 0xFF]
+    ha['mmp'] = [0x20, 0x20]
+
+    ha['target'][0] = 0x81
+
+    ha['gfx'][0] = 0x84
+    ha['gfx'][6] = 0x15
+
+    return ha
+
+
+def get_aa_beast_toss(old_db):
     beast_toss = old_db.get_tech(0x5F)
-    beast_toss['bat_grp'] = new_pcs[:]
 
+    beast_toss['bat_grp'] = [5,5,0xFF]
     beast_toss['control'][6] = 0x2C
     beast_toss['lrn_req'] = [4, 4, 0xFF]
     beast_toss['mmp'] = [0x2C, 0x2C]
 
-
     # This will need to change as we add more scripts
     beast_toss['gfx'][0] = 0x80
 
-    
-            
+    return beast_toss
+
+
 # Tech is the vanilla tech that needs reassignment.
 # New PCs should be a battle group for the tech (may need shuffling)
 def reassign_tech(tech, new_pcs, reassign):
@@ -458,15 +538,19 @@ def reassign_tech(tech, new_pcs, reassign):
     for el in range(num_chars):
         pc = bat_grp[el]
 
-        for z in new_pcs[0:num_chars]:
+        # find one of the new_pcs to fill the role of pc
+        for (ind, z) in enumerate(new_pcs):
             if reassign[z] == pc:
                 new_grp[el] = z
-
+                del(new_pcs[ind])
                 # The break is for same-char duals.  For example, Ayla beast
                 # toss would have battle group [5, 5, 0xFF].  We only want
                 # to replace one of the 5s with each reassigned Ayla.  So
                 # stop looking after the first.
                 break
+
+    while len(new_grp) < 3:
+        new_grp.append(0xFF)
 
     # Update special targetting info
     if tech['pc_target'] != 0xFF:
@@ -507,7 +591,7 @@ def reassign_tech(tech, new_pcs, reassign):
         new_mmp.append(reassign[pc]*8+tech+1)
 
 
-def update_dual_techs(old_db, new_db, reassign):
+def update_dual_techs(old_db, new_db, reassign, dup_duals):
     # print_bytes(old_db.menu_grps, 8)
     for i in range(0, 7):
         for j in range(i+1, 7):
@@ -525,14 +609,46 @@ def update_dual_techs(old_db, new_db, reassign):
                 if(to_mg_ind is None):
                     print("Skipping.")
                     pass
-                elif reassign[i] == 5:  # Just Ayla for now
-                    to_mg_ind = new_db.add_menu_grp(to_grp)
+                elif dup_duals and reassign[i] in set([0, 1, 2, 3, 4, 5]):
                     to_start_id = new_db.group_sizes[to_mg_ind]
+                    if reassign[i] == 0:
+                        # Cr-Cr X-strike
+                        x_strike = old_db.get_tech(0x42)
+                        x_strike['bat_grp'] = [0, 0, 0xFF]
+                        x_strike['lrn_req'] = [1, 1, 0xFF]
+                        x_strike['control'][6] = 1
+                        x_strike['mmp'] = [1, 1]
 
-                    print("Found a Ayla-Ayla Beast Toss.")
-                    beast_toss = get_aa_beast_toss(old_db, [i, j, 0xFF])
-                    reassign_tech(beast_toss, [i, j, 0xFF], reassign)
-                    new_db.set_tech(beast_toss, to_start_id)
+                        reassign_tech(x_strike, [i, j], reassign)
+                        new_db.set_tech(x_strike, to_start_id)
+                    elif reassign[i] == 1:
+                        # Ma-Ma Haste all
+                        ha = get_mm_haste_all(old_db)
+                        reassign_tech(ha, [i, j], reassign)
+                        new_db.set_tech(ha, to_start_id)
+                    elif reassign[i] == 2:
+                        # Lu-Lu Prot All
+                        prot_all = get_ll_prot_all(old_db)
+                        reassign_tech(prot_all, [i, j], reassign)
+                        new_db.set_tech(prot_all, to_start_id)
+                    elif reassign[i] == 3:
+                        # Ro-Ro Supervolt
+                        sv = get_rr_supervolt(old_db)
+                        reassign_tech(sv, [i, j], reassign)
+                        new_db.set_tech(sv, to_start_id)
+                    elif reassign[i] == 4:
+                        # Fr-Fr Hex Mist
+                        hex_mist = get_ff_hex_mist(old_db)
+                        reassign_tech(hex_mist, [i, j], reassign)
+                        new_db.set_tech(hex_mist, to_start_id)
+                    elif reassign[i] == 5:
+                        # Ayla-Ayla Beast Toss
+                        # to_mg_ind = new_db.add_menu_grp(to_grp)
+
+                        print("Found an Ayla-Ayla Beast Toss.")
+                        beast_toss = get_aa_beast_toss(old_db)
+                        reassign_tech(beast_toss, [i, j], reassign)
+                        new_db.set_tech(beast_toss, to_start_id)
 
                     # Make the rest unlearnable
                     for k in range(1, 3):
@@ -542,7 +658,7 @@ def update_dual_techs(old_db, new_db, reassign):
                     to_start_id = new_db.group_sizes[to_mg_ind]
 
                     print('Making techs %2.2X to %2.2X unlearnable'
-                          % (to_mg_ind, to_mg_ind+3))
+                          % (to_mg_ind, to_mg_ind+2))
 
                     for k in range(3):
                         id = to_start_id + k
@@ -581,7 +697,7 @@ def update_dual_techs(old_db, new_db, reassign):
             for k in range(3):
                 # print("Reading tech_id %2.2X" % (from_start_id+k))
                 tech = old_db.get_tech(from_start_id + k)
-                reassign_tech(tech, [i, j, 0xFF], reassign)
+                reassign_tech(tech, [i, j], reassign)
                 new_db.set_tech(tech, to_start_id+k)
 
 
@@ -1031,20 +1147,21 @@ def reassign_pc_magic(from_ind, to_ind, rom, db, magic_thresh):
     # I imagine there's a different patch needed for lost worlds?
 
 
-def get_reassign_techdb(orig_db, reassign):
+def get_reassign_techdb(orig_db, reassign, dup_duals=False):
     # Make a db with the right menu/battle groups but no techs added yet
-    new_db = max_expand_empty_db(orig_db, reassign)
+    new_db = max_expand_empty_db(orig_db, reassign, dup_duals)
 
     for i in range(7):
         change_single_techs(reassign[i], i, orig_db, new_db)
         change_basic_attacks(reassign[i], i, orig_db, new_db)
 
-    update_dual_techs(orig_db, new_db, reassign)
+    update_dual_techs(orig_db, new_db, reassign, dup_duals)
+
     update_trip_techs(orig_db, new_db, reassign)
 
     # hardcode the new starts for the db here.  I have the free space manager
     # but integrating it with the rest of the randomizer is an ordeal.
-    # max 0xFF techs (we never really get close)
+    # Should be max 0xFE techs now?  Should never exceed 0x9A.
 
     new_db.control_start = 0x5F0000
     new_db.effect_start = 0x5F1000
@@ -1056,7 +1173,7 @@ def get_reassign_techdb(orig_db, reassign):
 
     # new_db.desc_new_start = 0x5F5100
     new_db.set_desc_start(0x5F5100)
-    new_db.desc_ptr_start = 0x5F5000
+    new_db.desc_ptr_start = 0x5F4600
 
     new_db.techs_learned_start = 0x4F0230
 
@@ -1485,12 +1602,101 @@ def reassign_items(rom, reassign):
                      acc_dat, acc_start)
 
 
-def reassign_characters_file(filename, tech_rando_type, lost_worlds):
+# The game limits you to 0x7F techs.  As far as I can tell, the only
+# real issue is when building the battle menu.  The game wants to test if
+# a value is 0xFF but instead checks if a value is negative so it catches
+# 0x80 and up.
+# Basically we just replace a bunch of BMI (branch minus) with CMP 0xFF, BEQ
+def extend_techs(rom):
+    # $CC/E75B BF 95 F3 CC LDA $CCF395,x
+    # $CC/E75F 85 80       STA $80
+    # $CC/E761 BF 96 F3 CC LDA $CCF396,x
+    # $CC/E765 85 81       STA $81
+    # $CC/E767 A6 80       LDX $80
+    # $CC/E769 BD C6 1A    LDA $1AC6,x
+    # $CC/E76C 30 05       BMI $05    [$E773]
+    # $CC/E76E A9 01       LDA #$01
+    # $CC/E770 99 25 9F    STA $9F25,y
+    # $CC/E773 BD FE 1A    LDA $1AFE,x  # Trip tech spot of menu
+    # $CC/E776 30 05       BMI $05      # should be CMP #$FF, BEQ
+    # $CC/E778 A9 01       LDA #$01
+    # $CC/E77A 99 28 9F    STA $9F28,y
+    # $CC/E77D 88          DEY          # Should return here
+
+    # This BMI needs to be CMP #$FF, BEQ $05
+    rom[0x0CE75B:0x0CE75B+4] = bytearray.fromhex('5C 00 F0 5F')
+
+    rt = bytearray.fromhex('BF 95 F3 CC' +
+                           '85 80' +
+                           'BF 96 F3 CC' +
+                           '85 81' +
+                           'A6 80' +
+                           'BD C6 1A' +
+                           '30 05' +
+                           'A9 01' +
+                           '99 25 9F' +
+                           'BD FE 1A' +
+                           'C9 FF' +        # CMP #$FF
+                           'F0 05' +
+                           'A9 01' +
+                           '99 28 9F' +
+                           '5C 7D E7 CC')    # JMP back to the DEY (see above)
+
+    rom[0x5FF000:0x5FF000+len(rt)] = rt[:]
+    # TODO:  See if there's a way to save 2 stupid bytes to avoid jumping.
+
+    '''
+    Same story as above
+    $CC/E887 BF 95 F3 CC LDA $CCF395,x
+    $CC/E88B 85 84       STA $84
+    $CC/E88D BF 96 F3 CC LDA $CCF396,x
+    $CC/E891 85 85       STA $85
+    $CC/E893 A6 84       LDX $84
+    $CC/E895 BD FE 1A    LDA $1AFE,x
+    $CC/E898 99 D0 94    STA $94D0,y
+    $CC/E89B 30 05       BMI $05    [$E8A2]
+    $CC/E89D A9 12       LDA #$12
+    $CC/E89F 99 51 95    STA $9551,y
+    $CC/E8A2 E6 83       INC $83
+    '''
+
+    rt2_st = 0x5FF000 + len(rt)
+    rt2_st_b = to_little_endian(rt2_st, 3)
+    rom[0x0CE887:0x0CE887+4] = bytearray.fromhex('5C'+rt2_st_b.hex())
+    rt2 = bytearray.fromhex('BF 95 F3 CC 85 84 BF 96 F3 CC 85 85 A6 84' +
+                            'BD FE 1A 99 D0 94' +
+                            'C9 FF F0 05' +
+                            'A9 12 99 51 95' +
+                            '5C A2 E8 CC')
+    rom[rt2_st:rt2_st+len(rt2)] = rt2[:]
+
+    '''
+    $C2/BD9A E2 20       SEP #$20
+    $C2/BD9C AD 4C 0F    LDA $0F4C
+    $C2/BD9F 30 05       BMI $05    [$BDA6]
+    '''
+
+    rt3_st = rt2_st+len(rt2)
+    rt3_st_b = to_little_endian(rt3_st, 3)
+    rom[0x02BD9A:0x02BD9A+4] = bytearray.fromhex('5C' + rt3_st_b.hex())
+    rom[0x02BD9F] = 0xF0
+
+    rt3 = bytearray.fromhex('E2 20 AD 4C 0F' +
+                            'C9 FF' +
+                            '5C 9F BD C2')
+
+    rom[rt3_st:rt3_st+len(rt3)] = rt3[:]
+
+
+def reassign_characters_file(filename, char_choices, dup_duals,
+                             tech_rando_type, lost_worlds):
     with open(filename, 'rb') as infile:
         rom = bytearray(infile.read())
 
-    reassign = [random.randrange(7) for i in range(7)]
-    reassign_characters(rom, reassign, tech_rando_type, lost_worlds)
+    extend_techs(rom)
+
+    reassign = [random.choice(char_choices[i]) for i in range(7)]
+    reassign_characters(rom, reassign, dup_duals, tech_rando_type, lost_worlds)
 
     with open(filename, 'wb') as outfile,\
          open('patches/chardup_telepod_patch.ips', 'rb') as telepod_patch,\
@@ -1505,13 +1711,20 @@ def reassign_characters_file(filename, tech_rando_type, lost_worlds):
 
 # Do everything to apply the reassignment list to the rom
 # Assume db is created from get_reassign_techdb with the provided reassign list
-def reassign_characters(rom, reassign, tech_rando_type, lost_worlds):
+def reassign_characters(rom, reassign, dup_duals,
+                        tech_rando_type, lost_worlds):
 
-    # print(reassign)
+    print(reassign)
+
+    # Technically we can do this regardless...Maybe when we're sure it works!
+    if dup_duals:
+        scripts.script_extend(rom, 0x5F8100, 0x5F8200)
+        scripts.add_dup_dual_scripts(rom, 0x5F8100, 0x5F8200, 0x5F8400)
 
     orig_db = TechDB.get_default_db(rom)
 
-    new_db = get_reassign_techdb(orig_db, reassign)
+    new_db = get_reassign_techdb(orig_db, reassign, dup_duals)
+
     reassign_tech_refs(rom, new_db, reassign)
     reassign_magic(rom, new_db, reassign)
 
@@ -1555,6 +1768,13 @@ if __name__ == '__main__':
         rom = bytearray(infile.read())
 
     orig_db = TechDB.get_default_db(rom)
+
+    haste = orig_db.get_tech(0x0D)
+    print_bytes(haste['control'], 16)
+
+    ha = get_mm_haste_all(orig_db)
+    print_bytes(ha['control'], 16)
+    quit()
     # orig_db = TechDB.db_from_rom_internal(rom)
 
     random.seed(1234567890)
@@ -1563,7 +1783,7 @@ if __name__ == '__main__':
     print(reassign)
     # reassign[2] = 1
 
-    new_db = get_reassign_techdb(orig_db, reassign)
+    new_db = get_reassign_techdb(orig_db, dup_duals, reassign)
 
     # These actually do some work on the rom to fix references
     reassign_tech_refs(rom, new_db, reassign)
