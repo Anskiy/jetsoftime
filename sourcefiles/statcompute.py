@@ -1,4 +1,5 @@
 from byteops import get_value_from_bytes, to_little_endian, print_bytes
+import copy
 
 # Methods for computing character stats at different levels
 
@@ -382,7 +383,7 @@ class PCStats:
 
 # For stats other than hp/mp
 def compute_stat(base_stat, stat_growth, level):
-    return (level*stat_growth) // 100 + base_stat
+    return ((level-1)*stat_growth) // 100 + base_stat
 
 
 # returns the stats in base stat order.
@@ -458,16 +459,27 @@ def get_stat_cur_order(base_stat_list):
 
 
 if __name__ == '__main__':
-    with open('ct_vanilla.sfc', 'rb') as infile:
+    with open('jets_test.sfc', 'rb') as infile:
         rom = bytearray(infile.read())
 
-    crono = PCStats.stats_from_rom_default(rom, 0)
-    marle = PCStats.stats_from_rom_default(rom, 1)
-    crono.print_data()
+    reassign = [1,1,1,1,1,1,1]
 
-    print('Setting Level to 15')
-    crono.set_level(15)
+    # All of the heavy lifting is done by PCStats class
+    orig_pcs = [PCStats.stats_from_rom_default(rom, i) for i in range(7)]
+    new_pcs = [copy.deepcopy(orig_pcs[reassign[i]]) for i in range(7)]
 
-    marle.set_level(15)
-    crono.print_data()
-    marle.print_data()
+    # Now each new_pc needs to be releveled/tech leveled
+    for i in range(7):
+        # correct pc index
+        new_pcs[i].stat_block[0] = i
+
+        orig_lvl = orig_pcs[i].level
+        new_pcs[i].set_level(3)
+
+        orig_tech_lvl = orig_pcs[i].tech_level
+        new_pcs[i].set_tech_level(orig_tech_lvl)
+
+        # new_pcs[i].write_to_rom_default(rom, i)
+
+        new_pcs[i].print_data()
+
