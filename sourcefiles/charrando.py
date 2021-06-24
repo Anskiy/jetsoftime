@@ -18,6 +18,20 @@ from statcompute import PCStats as PC
 import scriptextend as scripts
 
 
+def get_ct_name(string):
+    return fix_ct_str_len(to_ct_str(string), TechDB.name_size)
+
+
+def fix_ct_str_len(str_bytes, length):
+    if len(str_bytes) >= length:
+        str_bytes = str_bytes[0:length]
+    else:
+        while len(str_bytes) < length:
+            str_bytes.append(0xEF)
+
+    return str_bytes
+
+
 def to_ct_str(string):
     ret = bytearray()
     for x in string:
@@ -29,6 +43,8 @@ def to_ct_str(string):
             ret.append(0xEF)
         elif x == ',':
             ret.append(0xED)
+
+    return ret
 
 # Given the base TechDB and the pc reassignment list return an empty DB with
 # all of the needed groups and empty space
@@ -460,7 +476,10 @@ def get_ll_prot_all(old_db):
 
     prot_all['gfx'][0] = 0x81
 
+    prot_all['name'] = get_ct_name('Protect All')
+
     return prot_all
+
 
 def get_ff_hex_mist(old_db):
     hex_mist = old_db.get_tech(0x26)  # water 2 base
@@ -469,15 +488,15 @@ def get_ff_hex_mist(old_db):
     hex_mist['control'][6] = 0x26
     hex_mist['control'][8:10] = [9, 9]
 
-    hex_mist['lrn_req'] = [6, 6]
+    hex_mist['lrn_req'] = [6, 6, 0xFF]
     hex_mist['mmp'] = [0x26, 0x26]
     hex_mist['gfx'][0] = 0x82
     hex_mist['gfx'][6] = 0x4
 
-    hex_mist['name'] = \
-        bytearray.fromhex('A5 C5 BE D1 C0 C8 C7 AC C2 CC CD')
+    hex_mist['name'] = get_ct_name('FlexgonMist')
 
     return hex_mist
+
 
 def get_rr_supervolt(old_db):
     sv = old_db.get_tech(0x41)
@@ -485,7 +504,7 @@ def get_rr_supervolt(old_db):
     sv['bat_grp'] = [3, 3, 0xFF]
     sv['control'][6] = 0x20
 
-    sv['lrn_req'] = [8, 8]
+    sv['lrn_req'] = [8, 8, 0xFF]
     sv['mmp'] = [0x20, 0x20]
     sv['gfx'][0] = 0x83
 
@@ -508,13 +527,15 @@ def get_mm_haste_all(old_db):
     ha['gfx'][0] = 0x84
     ha['gfx'][6] = 0x15
 
+    ha['name'] = get_ct_name('Haste All')
+
     return ha
 
 
 def get_aa_beast_toss(old_db):
     beast_toss = old_db.get_tech(0x5F)
 
-    beast_toss['bat_grp'] = [5,5,0xFF]
+    beast_toss['bat_grp'] = [5, 5, 0xFF]
     beast_toss['control'][6] = 0x2C
     beast_toss['lrn_req'] = [4, 4, 0xFF]
     beast_toss['mmp'] = [0x2C, 0x2C]
@@ -535,6 +556,7 @@ def reassign_tech(tech, new_pcs, reassign):
     num_chars = 3 - bat_grp.count(0xFF)
 
     # Redo battle group
+    temp_grp = new_pcs[:]
     for el in range(num_chars):
         pc = bat_grp[el]
 
@@ -554,9 +576,10 @@ def reassign_tech(tech, new_pcs, reassign):
 
     # Update special targetting info
     if tech['pc_target'] != 0xFF:
-        for z in new_pcs[0:num_chars]:
+        for z in new_grp[0:num_chars]:
             if reassign[z] == tech['pc_target']:
                 tech['pc_target'] = z
+                break
 
     # For effect indices between 1 and 0x38, replace with the equivalent
     # effect of the reassign char
@@ -584,11 +607,21 @@ def reassign_tech(tech, new_pcs, reassign):
 
     # Now apply reassign to mmp
     new_mmp = bytearray()
-
-    for el in range(0, 2):
+    
+    for el in range(len(mmp)):
         pc = (mmp[el]-1) // 8
-        tech = (mmp[el]-1) % 8
-        new_mmp.append(reassign[pc]*8+tech+1)
+        tech_num = (mmp[el]-1) % 8
+        temp_grp = tech['bat_grp'][:]
+        for z in temp_grp:
+            if z == 0xFF:
+                continue
+            elif reassign[z] == pc:
+                new_pc = z
+                temp_grp.remove(z)
+                new_mmp.append(new_pc*8+tech_num+1)
+                break
+
+    tech['mmp'] = new_mmp[:]
 
 
 def update_dual_techs(old_db, new_db, reassign, dup_duals):
@@ -1270,7 +1303,7 @@ def change_pc_graphics(from_ind, to_ind,
 
     # Again, the next ptr is used as an endpoint sometimes
     rom[unk_new_start+2*(to_ind+1):unk_new_start+2*(to_ind+2)] = \
-        orig_unk[2*(to_ind+1):2*(to_ind+2)]
+        orig_unk[2*(from_ind+1):2*(from_ind+2)]
 
     # $C2/B4F0 BF 19 B5 C2 LDA $C2B519,x[$C2:B51A]
     # This is something loaded when processing graphics.  No idea what, but it
@@ -1625,7 +1658,7 @@ def extend_techs(rom):
 
     # This BMI needs to be CMP #$FF, BEQ $05
     rom[0x0CE75B:0x0CE75B+4] = bytearray.fromhex('5C 00 F0 5F')
-
+    
     rt = bytearray.fromhex('BF 95 F3 CC' +
                            '85 80' +
                            'BF 96 F3 CC' +
@@ -1697,7 +1730,7 @@ def reassign_characters_file(filename, char_choices, dup_duals,
 
     reassign = [random.choice(char_choices[i]) for i in range(7)]
     reassign_characters(rom, reassign, dup_duals, tech_rando_type, lost_worlds)
-
+    
     with open(filename, 'wb') as outfile,\
          open('patches/chardup_telepod_patch.ips', 'rb') as telepod_patch,\
          open('patches/chardup_spekkio_patch.ips', 'rb') as spek_patch:
@@ -1730,7 +1763,7 @@ def reassign_characters(rom, reassign, dup_duals,
 
     reassign_graphics(rom, 0x5F7000, 0x5F7200, reassign)
     fix_menu_graphics(rom, reassign)
-
+        
     reassign_stats(rom, reassign)
     fix_ayla_fist(rom, reassign)
 
@@ -1740,7 +1773,7 @@ def reassign_characters(rom, reassign, dup_duals,
         techrandomizer.randomize_single_techs_uniform(new_db)
     elif tech_rando_type == "Balanced Random":
         techrandomizer.randomize_single_techs_balanced(new_db)
-
+    
     # Nuke the old db to make sure we're using only newly written data
     TechDB.write_db_ff_internal(orig_db, rom)
 
@@ -1754,6 +1787,8 @@ def reassign_characters(rom, reassign, dup_duals,
 
     if reassign[1] != 1:
         rom[0x36F1F2] = 0x1A  # Should be laughing now
+
+    
 
     # Probably need one for Frog cutting the mountain.
 
@@ -1769,11 +1804,9 @@ if __name__ == '__main__':
 
     orig_db = TechDB.get_default_db(rom)
 
-    haste = orig_db.get_tech(0x0D)
-    print_bytes(haste['control'], 16)
-
-    ha = get_mm_haste_all(orig_db)
-    print_bytes(ha['control'], 16)
+    x = get_ct_name('FlexgonMist')
+    print_bytes(x, 16)
+    
     quit()
     # orig_db = TechDB.db_from_rom_internal(rom)
 
