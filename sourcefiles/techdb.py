@@ -738,7 +738,7 @@ class TechDB:
                 print('Error: Setting a triple tech too early.')
                 quit()
 
-            mmp_start = (tid-0x39)+(tid-first_trip)
+            mmp_start = (tid-0x39)*2+(tid-first_trip)
             self.menu_mp_reqs[mmp_start:mmp_start+3] = tech['mmp'][0:3]
 
         if grp_count == 3:
@@ -1381,6 +1381,12 @@ class TechDB:
         # $FF/F947 BF 35 29 CC LDA $CC2935,x --> 0x3FF948
         rom[0x3FF948:0x3FF948+3] = trip_menu_mp_start_b
 
+        # There's a very weird bug where if there are too many techs the menu
+        # reqs will write over graphics pointers in memory.  For now, kill
+        # the write.
+        if db.group_sizes[-1] > 0x7f:
+            rom[0x3FF94B:0x3FF94D] = [0xEA, 0xEA]
+
         # $FF/F98C BF 53 29 CC LDA $CC2953,x
         # $CC2953 is the start of the rock part of the menu_mp_req
         num_non_rock_trips = db.first_rock_grp-db.first_trip_grp
@@ -1396,6 +1402,7 @@ class TechDB:
             mmp_offset = \
                 2*(db.group_sizes[db.first_rock_grp]-0x39)\
                 + num_non_rock_trips
+
 
         rock_mmp_start = menu_mp_req_start + mmp_offset
         rom[0x3FF98D:0x3FF98D+3] = to_little_endian(rock_mmp_start, 3)
