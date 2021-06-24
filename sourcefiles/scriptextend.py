@@ -467,7 +467,6 @@ def add_dup_dual_scripts(rom, bank_st, scr_ptrs_st, scr_st):
 def get_ff_hex_mist_scr(rom, bank_st, scr_ptrs_st):
 
     hex_cast_0 = TechScript.get_obj_script(rom, 0x0DC32C)
-    TechScript.print_obj(hex_cast_0)
 
     hex_cast_2 = \
         bytearray.fromhex('720A' +  # facing
@@ -622,9 +621,6 @@ def get_ll_prot_all_scr(rom, bank_st, scr_ptrs_st):
                              + get_value_from_bytes(ptr))
 
     pa_scr = TechScript.from_rom(rom, script_ptr)
-    print_bytes(pa_scr.header, 16)
-
-    print_bytes(pa_scr.header, 16)
 
     cast_0_obj =\
         bytearray.fromhex('72 0B' +   # Face caster 1?
