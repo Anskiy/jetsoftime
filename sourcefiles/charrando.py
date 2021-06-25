@@ -676,9 +676,7 @@ def update_dual_techs(old_db, new_db, reassign, dup_duals):
                         new_db.set_tech(hex_mist, to_start_id)
                     elif reassign[i] == 5:
                         # Ayla-Ayla Beast Toss
-                        # to_mg_ind = new_db.add_menu_grp(to_grp)
 
-                        print("Found an Ayla-Ayla Beast Toss.")
                         beast_toss = get_aa_beast_toss(old_db)
                         reassign_tech(beast_toss, [i, j], reassign)
                         new_db.set_tech(beast_toss, to_start_id)
@@ -1730,7 +1728,7 @@ def reassign_characters_file(filename, char_choices, dup_duals,
 
     reassign = [random.choice(char_choices[i]) for i in range(7)]
     reassign_characters(rom, reassign, dup_duals, tech_rando_type, lost_worlds)
-    
+
     with open(filename, 'wb') as outfile,\
          open('patches/chardup_telepod_patch.ips', 'rb') as telepod_patch,\
          open('patches/chardup_spekkio_patch.ips', 'rb') as spek_patch:
@@ -1747,7 +1745,7 @@ def reassign_characters_file(filename, char_choices, dup_duals,
 def reassign_characters(rom, reassign, dup_duals,
                         tech_rando_type, lost_worlds):
 
-    print(reassign)
+    # print(reassign)
 
     # Technically we can do this regardless...Maybe when we're sure it works!
     if dup_duals:
@@ -1763,7 +1761,7 @@ def reassign_characters(rom, reassign, dup_duals,
 
     reassign_graphics(rom, 0x5F7000, 0x5F7200, reassign)
     fix_menu_graphics(rom, reassign)
-        
+
     reassign_stats(rom, reassign)
     fix_ayla_fist(rom, reassign)
 
@@ -1773,7 +1771,7 @@ def reassign_characters(rom, reassign, dup_duals,
         techrandomizer.randomize_single_techs_uniform(new_db)
     elif tech_rando_type == "Balanced Random":
         techrandomizer.randomize_single_techs_balanced(new_db)
-    
+
     # Nuke the old db to make sure we're using only newly written data
     TechDB.write_db_ff_internal(orig_db, rom)
 
@@ -1813,7 +1811,7 @@ if __name__ == '__main__':
     random.seed(1234567890)
     reassign = [random.randrange(0, 7) for i in range(7)]
 
-    print(reassign)
+    # print(reassign)
     # reassign[2] = 1
 
     new_db = get_reassign_techdb(orig_db, dup_duals, reassign)

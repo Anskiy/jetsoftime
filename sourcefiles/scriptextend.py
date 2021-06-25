@@ -263,7 +263,9 @@ class TechScript:
         self.num_objs = 0
 
     def __len__(self):
-        return 4+sum([len(x) for x in self.obj_scripts])
+        return (4 +
+                2*len(self.obj_scripts) +
+                sum([len(x) for x in self.obj_scripts]))
 
     def from_rom(rom, start):
         ret = TechScript()
@@ -604,8 +606,8 @@ def get_ff_hex_mist_scr(rom, bank_st, scr_ptrs_st):
 
     ff_hex_scr.num_objs = len(ff_hex_scr.obj_scripts)
 
-    # 2 cast, 2 target, 0 eff | 1 cast
-    # 110 11000 00000000 | 1000 0000 0000 0000
+    # 2 cast, 2 target, 8 eff | 1 cast
+    # 110 11000 11111111 | 1000 0000 0000 0000
     ff_hex_scr.header = bytearray.fromhex('D8FF8000')
 
     return ff_hex_scr
