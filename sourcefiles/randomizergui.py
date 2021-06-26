@@ -24,6 +24,9 @@ class DataStore:
     self.outputFolder = None
     self.techRando = None
     self.shopPrices = None
+
+    self.char_choices = None
+    self.dup_techs = None
     
   #
   # Get a path to the settings file.
@@ -67,6 +70,15 @@ class DataStore:
       # textboxes
       data["inputFile"] = self.inputFile.get()
       data["outputFolder"] = self.outputFolder.get()
+
+      choices = [[0 for i in range(7)] for j in range(7)]
+      for i in range(7):
+          for j in range(7):
+              choices[i][j] = self.char_choices[i][j].get()
+      data["charChoices"] = choices
+
+      data['dupDuals'] = self.dup_techs.get()
+
       
       file = open(str(filePath), "wb")
       pickle.dump(data, file)
@@ -94,6 +106,27 @@ class DataStore:
         self.shopPrices.set(settings["shopPrices"])
         for flag in settings["flags"]:
           self.flags[flag].set(settings["flags"][flag])
+
+        try:
+            cc = settings["charChoices"]
+        except KeyError:
+            cc = [[1 for i in range(7)] for j in range(7)]
+
+        try:
+            dt = settings['dupDuals']
+        except KeyError:
+            dt = 0
+
+        self.dup_techs = tk.IntVar(value=dt)
+
+        self.char_choices = []
+        for i in range(7):
+            self.char_choices.append([])
+            for j in range(7):
+                self.char_choices[i].append(tk.IntVar(value=cc[i][j]))
+
+        # self.dup_techs.set(settings['dupDuals'].get())
+                
     except:
       # Swallow any exceptions here. We don't want failures here
       # to break the randomizer.
@@ -439,16 +472,48 @@ def getRandomizerOptionsFrame(window):
   # row = row + 1
 
   # Duplicate Characters
+  def dcEnable():
+      if datastore.flags['dc'].get() == 1:
+          dcSettingsButton.config(state=tk.ACTIVE)
+      else:
+          dcSettingsButton.config(state=tk.DISABLED)
+
   var = tk.IntVar()
   datastore.flags['dc'] = var
   checkButton = \
-      tk.Checkbutton(frame, text="Duplicate Characters (dc)", variable = var)
+      tk.Checkbutton(frame, text="Duplicate Characters (dc)",
+                     variable=var,
+                     command=dcEnable)
   checkButton.grid(row=row, column=2, sticky=tk.W, columnspan=2)
   CreateToolTip(checkButton,
                 "Characters can now show up more than once.  "
                 + "Quests are activated and turned in based on the default "
                 + "NAME of the character.")
   row = row + 1
+
+  dcSettingsButton = tk.Button(frame, text='Duplicate Settings',
+                               command=lambda: getDupOptionsWindow(window))
+  # The datastore flags are not set yet, so we read directly from the settings
+  # file to see if the dc settings should start off active or not.
+  filePath = datastore.getSettingsFile()
+  if filePath.exists():
+      with open(str(filePath), 'rb') as setFile:
+          settings = pickle.load(setFile)
+          try:
+              dc_enabled = settings['flags']['dc']
+          except:
+              dc_enabled = False
+  else:
+      dc_enabled = False
+
+  if not dc_enabled:
+      dcSettingsButton.config(state=tk.DISABLED)
+
+  dcSettingsButton.grid(row=row, column=2, sticky=tk.W, columnspan=2)
+  CreateToolTip(dcSettingsButton,
+                'Settings for duplicate characters.  Must have dc flag ' +
+                'enabled to activate this.')
+  row += 1
   
   # Dropdown for shop price settings
   shopPriceValues = ["Normal", "Free", "Mostly Random", "Fully Random"]
@@ -485,7 +550,124 @@ def getRandomizerOptionsFrame(window):
   row = row + 1
   
   return frame
-  
+
+# Make the options window when someone clicks the DC Settings button.
+# Will lock out input from other windows while open.
+# Will preset an error message given invalid settings
+def getDupOptionsWindow(window):
+    dc_set = tk.Toplevel(window)
+
+    def onClose():
+        for i in range(len(datastore.char_choices)):
+            isset = False
+            for j in datastore.char_choices[i]:
+                if j.get() == 1:
+                    isset = True
+
+            if isset is False:
+                tk.messagebox.showerror('Error.',
+                                        'Each character must have at least' +
+                                        'one choice selected.')
+                return
+
+        dc_set.destroy()
+
+    dc_set.protocol('WM_DELETE_WINDOW', onClose)
+
+    dcframe = tk.Frame(dc_set, borderwidth=1, highlightbackground='black',
+                       highlightthickness=1)
+
+    row = 0
+    col = 0
+
+    char_names = ['Crono', 'Marle', 'Lucca', 'Robo', 'Frog', 'Ayla', 'Magus']
+
+    tk.Label(dcframe,
+             text='Indicate what each character is allowed to be randomized '
+             + 'into using the checkboxes below.').grid(row=row, column=0,
+                                                        columnspan=8)
+
+    row += 1
+
+    initialize = (datastore.char_choices is None)
+
+    if initialize:
+        datastore.char_choices = []
+        for i in range(7):
+            datastore.char_choices.append([])
+            for j in range(7):
+                datastore.char_choices[i].append(tk.IntVar(value=1))
+
+        datastore.dup_techs = tk.IntVar(value=0)
+
+    for i in range(7):
+        tk.Label(dcframe,
+                 text=char_names[i]+' choices:',
+                 anchor="w").grid(row=row, column=0)
+
+        col += 1
+
+        for j in range(7):
+            var = datastore.char_choices[i][j]
+            tk.Checkbutton(dcframe, text=char_names[j],
+                           variable=var).grid(row=row, column=col)
+
+            col += 1
+
+        col = 0
+        row += 1
+
+    dcframe.pack(expand=1, fill='both')
+
+    dcframe = tk.Frame(dc_set, borderwidth=1, highlightbackground='black',
+                       highlightthickness=1)
+
+    def setAll(val):
+        for i in range(len(datastore.char_choices)):
+            for j in datastore.char_choices[i]:
+                j.set(val)
+
+    # Is it dumb to use argumentless lambdas for the commands?
+    # Look into functools.partial
+    button = tk.Button(dcframe, text='Check All',
+                       command=lambda: setAll(1))
+    button.grid(row=row, column=0, columnspan=2)
+
+    button = tk.Button(dcframe, text='Uncheck All',
+                       command=lambda: setAll(0))
+    button.grid(row=row, column=2, columnspan=2)
+
+    dcframe.pack(expand=1, fill='both')
+
+    dcframe = tk.Frame(dc_set, borderwidth=1, highlightbackground='black',
+                       highlightthickness=1)
+
+    label = tk.Label(dcframe, text='Additional Options')
+    label.grid(row=0, column=0)
+
+    var = datastore.dup_techs
+    checkbutton = tk.Checkbutton(dcframe, text='Duplicate Duals',
+                                 variable=var)
+    checkbutton.grid(row=1, column=0)
+    CreateToolTip(checkbutton,
+                  'Check this to enable dual techs betweeen copies of the '
+                  + 'same character (e.g. Ayla+Ayla beast toss).')
+
+    dcframe.pack(expand=1, fill='both')
+
+    dcframe = tk.Frame(dc_set, borderwidth=1, highlightbackground='black',
+                       highlightthickness=1)
+
+    button = tk.Button(dcframe, text='Return',
+                       command=dc_set.destroy)
+    button.grid()
+
+    dcframe.pack(expand=1, fill='both')
+
+    # Is this the right way to lock focus?
+    dc_set.focus_get()
+    dc_set.grab_set()
+
 #
 # Get the frame with the generate button and ROM selection
 #
