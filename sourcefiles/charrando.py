@@ -640,7 +640,7 @@ def update_dual_techs(old_db, new_db, reassign, dup_duals):
             to_mg_ind = new_db.get_menu_grp_ind(to_grp)
             if reassign[i] == reassign[j]:
                 if(to_mg_ind is None):
-                    print("Skipping.")
+                    # print("Skipping.")
                     pass
                 elif dup_duals and reassign[i] in set([0, 1, 2, 3, 4, 5]):
                     to_start_id = new_db.group_sizes[to_mg_ind]
@@ -1063,8 +1063,10 @@ def copy_update_graphics_ptrs(rom, anim_new_start, unk_new_start, reassign):
     rom[unk_new_start:unk_new_end] = rom[unk_start:unk_end]
 
     """
-    Anims:  These are the loads for the endpoint.  So to fix it we need to move
-    these pointers to be relative to the new block.
+    Anims:  Animation data is divided into 4 chunks, one for each direction the
+    character can face.  To determine where these chunks begin/end, the game
+    finds the size of the anim data by subtracting the ptr from the next ptr.
+    We are going to move the end points to the new block and read from there.
 
     $CC/E9EF BF 00 26 E4 LDA $E42600,x[$E4:2602]
     $CC/E9F3 85 86       STA $86    [$00:0086]
@@ -1117,14 +1119,16 @@ def copy_update_graphics_ptrs(rom, anim_new_start, unk_new_start, reassign):
     update_ptrs(rom, anim_ptrs, anim_start, anim_new_start)
 
     """
-    Unknown Anim data: Same as above.
+    Unknown Anim data: Similar to the above.  The beginning of the next 
+    object's data is used to determine length sometimes.  It's not divided by
+    four like animations.  Someone online said this data counts how many frames
+    to display each part of the animation.
+
+    This is the next object's data being read
     $CC/E9FB BF 00 28 E4 LDA $E42800,x[$E4:2802]
     $CC/E9FF 85 88       STA $88    [$00:0088]
     $CC/EA01 BF 01 28 E4 LDA $E42801,x[$E4:280B]
     $CC/EA05 85 89       STA $89    [$00:0089]
-
-    In X-menu
-    $C2/F4E6 BF 00 00 E4 LDA $E40000,x[$E4:280A] <--need this?  Seems not.
     """
 
     unk_ptrs = [0x0CE9FC, 0x0CEA02, 0x0CEB3B]
@@ -1513,13 +1517,101 @@ def fix_palettes(rom, reassign):
     pals = \
         [rom[pal_start+i*pal_size:pal_start+(i+1)*pal_size] for i in range(7)]
 
+    cr_st = pal_start
+    mg_st = pal_start+6*pal_size
+    ma_st = pal_start + pal_size
+    lu_st = pal_start + 2*pal_size
+
     # The biggest issue is that lucca's bright pink hair occurs in in a slot
     # that is dark for everyone else.  It is in slot 11, and the color right
     # before is dark, so we'll just copy that one over.
-    if reassign[2] != 2:
-        pals[2][10*2:11*2] = pals[2][9*2:10*2]
+    if reassign[2] == 6:
+        # It's not perfect, but at least he has flowing pink hair now.
+        rom[lu_st+4*2:lu_st+5*2] = pals[2][10*2:11*2]
+        rom[lu_st+5*2:lu_st+6*2] = pals[2][8*2:9*2]
+        rom[lu_st+9*2:lu_st+10*2] = pals[2][4*2:5*2]
+        rom[lu_st+8*2:lu_st+9*2] = pals[2][6*2:7*2]
+        rom[lu_st+6*2:lu_st+7*2] = pals[2][5*2:6*2]
+        rom[lu_st+10*2:lu_st+11*2] = pals[2][11*2:12*2]
+    elif reassign[2] == 0:
+        rom[lu_st+4*2:lu_st+5*2] = pals[2][10*2:11*2]
+        rom[lu_st+5*2:lu_st+6*2] = pals[2][8*2:9*2]
+        rom[lu_st+6*2:lu_st+7*2] = pals[2][5*2:6*2]
+        rom[lu_st+7*2:lu_st+8*2] = pals[2][4*2:5*2]
+        rom[lu_st+8*2:lu_st+9*2] = pals[2][7*2:8*2]
+        #rom[lu_st+9*2:lu_st+10*2] = pals[2][6*2:7*2]
+        rom[lu_st+10*2:lu_st+11*2] = pals[2][9*2:10*2]
+    elif reassign[2] == 5:
+        rom[lu_st+4*2:lu_st+5*2] = pals[2][10*2:11*2]
+        # rom[lu_st+5*2:lu_st+6*2] = pals[2][8*2:9*2]
+        rom[lu_st+5*2:lu_st+6*2] = to_little_endian(0x5D37, 2)
+        rom[lu_st+6*2:lu_st+7*2] = pals[2][8*2:9*2]
+        rom[lu_st+7*2:lu_st+8*2] = pals[2][9*2:10*2]
 
-    rom[pal_start+2*pal_size:pal_start+3*pal_size] = pals[2][:]
+        rom[lu_st+8*2:lu_st+9*2] = pals[2][5*2:5*2]
+        rom[lu_st+9*2:lu_st+10*2] = pals[2][6*2:8*2]
+
+        rom[lu_st+10*2:lu_st+11*2] = pals[2][9*2:10*2]
+    elif reassign[2] == 1:
+        # Hair
+        rom[lu_st+4*2:lu_st+5*2] = pals[6][1*2:2*2]  # light
+        rom[lu_st+5*2:lu_st+6*2] = pals[2][10*2:11*2]    # mid
+        rom[lu_st+6*2:lu_st+7*2] = pals[2][8*2:9*2]   # dark
+        rom[lu_st+7*2:lu_st+8*2] = pals[2][9*2:10*2]   # darkest
+
+        # Tunic
+        rom[lu_st+8*2:lu_st+9*2] = pals[2][4*2:5*2]
+        rom[lu_st+9*2:lu_st+10*2] = pals[2][7*2:8*2]
+        rom[lu_st+10*2:lu_st+11*2] = pals[2][6*2:7*2]
+    elif reassign[2] == 3:
+        rom[lu_st+4*2:lu_st+5*2] = pals[2][10*2:11*2]
+        rom[lu_st+5*2:lu_st+6*2] = pals[2][8*2:9*2]
+        rom[lu_st+10*2:lu_st+11*2] = pals[2][9*2:10*2]
+        rom[lu_st+9*2:lu_st+10*2] = pals[2][7*2:8*2]
+        rom[lu_st+7*2:lu_st+8*2] = pals[2][4*2:5*2]
+
+        rom[lu_st+6*2:lu_st+7*2] = pals[2][5*2:6*2]
+        rom[lu_st+8*2:lu_st+9*2] = pals[2][6*2:7*2]
+    elif reassign[2] != 2:
+        pals[2][10*2:11*2] = pals[2][9*2:10*2]
+        rom[pal_start+2*pal_size:pal_start+3*pal_size] = pals[2][:]
+
+    # When Crono becomes Marle, there are a few problems.
+    #  (1) The light blue in Crono's shirt (#7) becomes the outline of Marle's
+    #      face.
+    #  (2) The tan color of Crono's pants gets put into Marle's hair. Marle
+    #      uses 3 colors for hair while Crono only uses two.
+
+    if reassign[0] == 1:
+        # Make a dark Crono color the Marle face outline
+        rom[pal_start + 2*7:pal_start + 2*8] = pals[0][10*2:11*2]
+
+        # Use a dark red from Marle's palette as the missing dark red from
+        # Crono's palette since he only has two hair colors
+        rom[pal_start+2*6:pal_start+2*7] = pals[1][7*2:8*2]
+
+        # Move the light blue of Crono's shirt to Marle's clothes shadow
+        rom[pal_start+2*8:pal_start+2*11] = pals[0][7*2:10*2]
+    elif reassign[0] == 5:
+        rom[cr_st+8*2:cr_st+11*2] = pals[0][7*2:10*2]
+        rom[cr_st+7*2:cr_st+8*2] = pals[0][10*2:11*2]
+        rom[cr_st+2*6:cr_st+2*7] = pals[1][7*2:8*2]
+
+    if reassign[1] == 0:
+        # shirt color
+        rom[ma_st+7*2:ma_st+10*2] = pals[1][8*2:11*2]
+
+        rom[ma_st+10*2:ma_st+11*2] = pals[1][7*2:8*2]
+
+        # hair color shift to remove the lightest color
+        rom[ma_st+4*2:ma_st+6*2] = pals[1][5*2:7*2]
+
+        # pants
+        rom[ma_st+6*2:ma_st+7*2] = pals[1][4*2:5*2]
+
+    if reassign[6] == 0:
+        # shirt color
+        rom[mg_st+7*2:mg_st+10*2] = pals[6][8*2:11*2]
 
     # Many of the character portraits are gross but they require more care.
 
@@ -1569,6 +1661,30 @@ def reassign_graphics(rom, anim_new_start, unk_new_start, reassign):
     # 3 bytes per char, but it goes in groups of 7
     atk_byte_size = 3
     atk_bytes = rom[atk_byte_start:atk_byte_start+7*atk_byte_size]
+
+    # If a player is killed by an attack, there is a little script that says
+    # what animations to play.  After days of searching, I finally found how
+    # it gets loaded.
+    """
+    $C1/417A AD 81 29    LDA $2981  [$7E:2981]
+    $C1/417D 0A          ASL A
+    $C1/417E 0A          ASL A
+    $C1/417F 18          CLC
+    $C1/4180 6D DC 96    ADC $96DC  [$7E:96DC]
+    $C1/4183 AA          TAX
+    $C1/4184 BF 42 5F D1 LDA $D15F42,x[$D1:5F57]
+
+    The above snippet is for the second party member ($2981).  The index is
+    multiplied by 4 and then an offset ($96DC) is taken from within those four
+    bytes.
+    """
+
+    pc_scripts = rom[0x115F42:0x115F42+4*7]
+
+    for i in range(7):
+        start = 0x115F42 + 4*i
+        j = reassign[i]
+        rom[start:start+4] = pc_scripts[4*j:4*(j+1)]
 
     for i in range(7):
         change_pc_graphics(reassign[i], i, rom,
