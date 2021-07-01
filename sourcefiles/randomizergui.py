@@ -659,7 +659,7 @@ def getDupOptionsWindow(window):
                        highlightthickness=1)
 
     button = tk.Button(dcframe, text='Return',
-                       command=dc_set.destroy)
+                       command=onClose)
     button.grid()
 
     dcframe.pack(expand=1, fill='both')
