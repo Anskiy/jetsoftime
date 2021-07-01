@@ -1606,6 +1606,10 @@ class TechDB:
         # $C1/B367 8D 93 AE    STA $AE93  [$7E:AE93]
         rom[0x01B366] = db.gfx_count-6
 
+        # This is poison ticking
+        # $C1/8943 A9 7F       LDA #$7F
+        rom[0x018944] = db.gfx_count-1
+
         # undo the changes to lrn_req and desc
         db.set_lrn_req_start(old_lrn_req_start)
         db.set_desc_start(old_desc_start)
