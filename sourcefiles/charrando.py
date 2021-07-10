@@ -46,6 +46,7 @@ def to_ct_str(string):
 
     return ret
 
+
 # Given the base TechDB and the pc reassignment list return an empty DB with
 # all of the needed groups and empty space
 #   orig_db should be the vanilla (or rando-vanilla) db
@@ -433,7 +434,7 @@ def change_single_techs(from_ind, to_ind, orig_db, new_db):
         tech = orig_db.get_tech(from_i)
 
         tech['bat_grp'] = bytearray([to_ind, 0xFF, 0xFF])
-        
+
         # In the menu (and only the menu) the game expects the effect
         # headers to be in tech_id order.  This is deep in menu code and
         # I'm worried that fixing it will make menus slower.  So for now
@@ -461,6 +462,7 @@ def change_single_techs(from_ind, to_ind, orig_db, new_db):
             new_db.pc_target[to_i] = to_ind
         else:
             new_db.pc_target[from_i] = 0xFF
+
 
 def get_ll_prot_all(old_db):
     prot_all = old_db.get_tech(0x15)
@@ -595,19 +597,19 @@ def reassign_tech(tech, new_pcs, reassign):
 
     if len(mmp) == 2:
         mmp.append(0xFF)
-    
+
     bat_grp, new_grp = zip(*sorted(zip(bat_grp, new_grp)))
     new_grp, lrn_req, mmp = zip(*sorted(zip(new_grp, lrn_req, mmp)))
 
     if mmp[-1] == 0xFF:
         mmp = mmp[0:2]
-    
+
     if tech['lrn_req'] is not None:
         tech['lrn_req'] = lrn_req
 
     # Now apply reassign to mmp
     new_mmp = bytearray()
-    
+
     for el in range(len(mmp)):
         pc = (mmp[el]-1) // 8
         tech_num = (mmp[el]-1) % 8
@@ -1119,7 +1121,7 @@ def copy_update_graphics_ptrs(rom, anim_new_start, unk_new_start, reassign):
     update_ptrs(rom, anim_ptrs, anim_start, anim_new_start)
 
     """
-    Unknown Anim data: Similar to the above.  The beginning of the next 
+    Unknown Anim data: Similar to the above.  The beginning of the next
     object's data is used to determine length sometimes.  It's not divided by
     four like animations.  Someone online said this data counts how many frames
     to display each part of the animation.
@@ -1521,6 +1523,9 @@ def fix_palettes(rom, reassign):
     mg_st = pal_start+6*pal_size
     ma_st = pal_start + pal_size
     lu_st = pal_start + 2*pal_size
+    ro_st = pal_start + 3*pal_size
+    fr_st = pal_start + 4*pal_size
+    ay_st = pal_start + 5*pal_size
 
     # The biggest issue is that lucca's bright pink hair occurs in in a slot
     # that is dark for everyone else.  It is in slot 11, and the color right
@@ -1539,7 +1544,7 @@ def fix_palettes(rom, reassign):
         rom[lu_st+6*2:lu_st+7*2] = pals[2][5*2:6*2]
         rom[lu_st+7*2:lu_st+8*2] = pals[2][4*2:5*2]
         rom[lu_st+8*2:lu_st+9*2] = pals[2][7*2:8*2]
-        #rom[lu_st+9*2:lu_st+10*2] = pals[2][6*2:7*2]
+        # rom[lu_st+9*2:lu_st+10*2] = pals[2][6*2:7*2]
         rom[lu_st+10*2:lu_st+11*2] = pals[2][9*2:10*2]
     elif reassign[2] == 5:
         rom[lu_st+4*2:lu_st+5*2] = pals[2][10*2:11*2]
@@ -1592,10 +1597,28 @@ def fix_palettes(rom, reassign):
 
         # Move the light blue of Crono's shirt to Marle's clothes shadow
         rom[pal_start+2*8:pal_start+2*11] = pals[0][7*2:10*2]
+    elif reassign[0] == 2:
+        rom[pal_start+4*2:pal_start+5*2] = pals[0][7*2:8*2]
+        rom[pal_start+5*2:pal_start+7*2] = pals[0][4*2:6*2]
+        rom[pal_start+7*2:pal_start+8*2] = pals[0][8*2:9*2]
+        rom[pal_start+7*2:pal_start+10*2] = pals[0][8*2:11*2]
+        rom[pal_start+10*2:pal_start+11*2] = pals[0][5*2:6*2]
+    elif reassign[0] == 4:
+        # Tongue color from Frog
+        rom[cr_st+6*2:cr_st+7*2] = pals[4][6*2:7*2]
+        rom[cr_st+7*2:cr_st+8*2] = pals[4][7*2:8*2]
     elif reassign[0] == 5:
         rom[cr_st+8*2:cr_st+11*2] = pals[0][7*2:10*2]
         rom[cr_st+7*2:cr_st+8*2] = pals[0][10*2:11*2]
         rom[cr_st+2*6:cr_st+2*7] = pals[1][7*2:8*2]
+    elif reassign[0] == 6:
+        # rom[cr_st+4*2:cr_st+5*2] = pals[0][5*2:6*2]
+        # rom[cr_st+5*2:cr_st+6*2] = pals[1][7*2:8*2]
+
+        rom[cr_st+6*2:cr_st+7*2] = pals[0][7*2:8*2]
+        # rom[cr_st+7*2:cr_st+8*2] = pals[0][4*2:5*2]
+
+        rom[cr_st+7*2:cr_st+8*2] = pals[1][7*2:8*2]
 
     if reassign[1] == 0:
         # shirt color
@@ -1608,10 +1631,171 @@ def fix_palettes(rom, reassign):
 
         # pants
         rom[ma_st+6*2:ma_st+7*2] = pals[1][4*2:5*2]
+    elif reassign[1] == 2:
+        rom[ma_st+10*2:ma_st+11*2] = pals[1][4*2:5*2]
+        rom[ma_st+8*2:ma_st+9*2] = pals[1][6*2:7*2]
+
+        rom[ma_st+9*2:ma_st+10*2] = pals[1][7*2:8*2]
+        rom[ma_st+5*2:ma_st+7*2] = pals[1][8*2:10*2]
+    elif reassign[1] == 3:
+        rom[ma_st+7*2:ma_st+8*2] = pals[1][8*2:9*2]
+        rom[ma_st+8*2:ma_st+9*2] = pals[1][7*2:8*2]
+    elif reassign[1] == 4:
+        pass
+    elif reassign[1] == 6:
+        rom[ma_st+6*2:ma_st+7*2] = pals[1][8*2:9*2]
+        rom[ma_st+7*2:ma_st+8*2] = pals[1][6*2:7*2]
+        rom[ma_st+8*2:ma_st+10*2] = pals[1][9*2:11*2]
+        rom[ma_st+10*2:ma_st+11*2] = pals[1][7*2:8*2]
+
+    if reassign[3] == 0:
+        rom[ro_st+8*2:ro_st+10*2] = pals[3][9*2:11*2]
+        rom[ro_st+10*2:ro_st+11*2] = pals[3][8*2:9*2]
+    elif reassign[3] == 1:
+        rom[ro_st+6*2:ro_st+8*2] = pals[1][9*2:11*2]
+        rom[ro_st+8*2:ro_st+9*2] = pals[3][7*2:8*2]
+    elif reassign[3] == 5:
+        rom[ro_st+6*2:ro_st+8*2] = pals[1][9*2:11*2]
+        rom[ro_st+8*2:ro_st+9*2] = pals[3][7*2:8*2]
+
+    if reassign[4] == 6:
+        # skin from glenn
+        rom[fr_st+2*2:fr_st+3*2] = to_little_endian(0x579F, 2)
+        rom[fr_st+3*2:fr_st+4*2] = to_little_endian(0x367F, 2)
+
+        # hair from glenn
+        rom[fr_st+4*2:fr_st+5*2] = to_little_endian(0x26D1, 2)
+        rom[fr_st+5*2:fr_st+6*2] = to_little_endian(0x158B, 2)
+
+        # armor main color
+        # rom[fr_st+6*2:fr_st+7*2] = pals[4][4*2:5*2]
+        rom[fr_st+6*2:fr_st+7*2] = to_little_endian(0x728C, 2)
+
+        # cape color
+        rom[fr_st+7*2:fr_st+8*2] = pals[4][8*2:9*2]
+
+        # darker face, boot accent
+        # rom[fr_st+8*2:fr_st+9*2] = to_little_endian(0x1D34, 2)
+        rom[fr_st+8*2:fr_st+9*2] = to_little_endian(0x3967, 2)
+
+        # pant darker color
+        # rom[fr_st+9*2:fr_st+10*2] = pals[4][3*2:4*2]
+    elif reassign[4] == 0:
+        # skin from glenn
+        rom[fr_st+2*2:fr_st+3*2] = to_little_endian(0x367F, 2)
+        rom[fr_st+3*2:fr_st+4*2] = to_little_endian(0x579F, 2)
+
+        # hair from glenn
+        rom[fr_st+4*2:fr_st+5*2] = to_little_endian(0x26D1, 2)
+        rom[fr_st+5*2:fr_st+6*2] = to_little_endian(0x158B, 2)
+
+        rom[fr_st+6*2:fr_st+7*2] = pals[4][5*2:6*2]
+
+        # rom[fr_st+7*2:fr_st+8*2] = to_little_endian(0x728C, 2)
+        # rom[fr_st+8*2:fr_st+9*2] = to_little_endian(0x3967, 2)
+        rom[fr_st+7*2:fr_st+8*2] = pals[4][2*4:2*5]
+        rom[fr_st+8*2:fr_st+9*2] = pals[4][2*7:2*8]
+
+        rom[fr_st+9*2:fr_st+10*2] = pals[0][2*9:2*10]
+    elif reassign[4] == 1:
+        # skin from glenn
+        rom[fr_st+2*2:fr_st+3*2] = to_little_endian(0x579F, 2)
+        rom[fr_st+3*2:fr_st+4*2] = to_little_endian(0x367F, 2)
+
+        # same issue where Marle has 4 hair shades.
+        rom[fr_st+4*2:fr_st+5*2] = pals[4][2*2:2*3]
+
+        # hair from glenn
+        rom[fr_st+5*2:fr_st+6*2] = to_little_endian(0x26D1, 2)
+        rom[fr_st+6*2:fr_st+7*2] = to_little_endian(0x158B, 2)
+
+        rom[fr_st+7*2:fr_st+8*2] = pals[4][2*10:2*11]
+
+        rom[fr_st+8*2:fr_st+9*2] = pals[4][4*2:5*2]
+        rom[fr_st+9*2:fr_st+10*2] = pals[4][7*2:8*2]
+    elif reassign[4] == 2:
+        # skin from glenn
+        rom[fr_st+2*2:fr_st+3*2] = to_little_endian(0x579F, 2)
+        rom[fr_st+3*2:fr_st+4*2] = to_little_endian(0x367F, 2)
+
+        # hair from glenn
+        rom[fr_st+10*2:fr_st+11*2] = to_little_endian(0x26D1, 2)
+        rom[fr_st+8*2:fr_st+9*2] = to_little_endian(0x158B, 2)
+
+        rom[fr_st+5*2:fr_st+6*2] = to_little_endian(0x728C, 2)
+        rom[fr_st+6*2:fr_st+7*2] = to_little_endian(0x3967, 2)
+
+        rom[fr_st+4*2:fr_st+5*2] = pals[4][4*2:5*2]
+        rom[fr_st+7*2:fr_st+8*2] = pals[4][7*2:8*2]
+
+        # rom[fr_st+4*2:fr_st+5*2] = to_little_endian(0x579F, 2)
+        # rom[fr_st+7*2:fr_st+8*2] = to_little_endian(0x1ADD, 2)
+
+        rom[fr_st+9*2:fr_st+10*2] = pals[4][10*2:11*2]
+    elif reassign[4] == 5:
+        # skin from glenn
+        rom[fr_st+2*2:fr_st+3*2] = to_little_endian(0x579F, 2)
+        rom[fr_st+3*2:fr_st+4*2] = to_little_endian(0x367F, 2)
+
+        # same issue where Ayla has 4 hair shades.
+        rom[fr_st+4*2:fr_st+5*2] = pals[4][2*2:2*3]
+
+        # hair from glenn
+        rom[fr_st+5*2:fr_st+6*2] = to_little_endian(0x26D1, 2)
+        rom[fr_st+6*2:fr_st+7*2] = to_little_endian(0x158B, 2)
+
+        rom[fr_st+7*2:fr_st+8*2] = pals[4][2*10:2*11]
+
+        # clothes
+        rom[fr_st+8*2:fr_st+9*2] = to_little_endian(0x728C, 2)
+        rom[fr_st+9*2:fr_st+10*2] = to_little_endian(0x3967, 2)
+        rom[fr_st+10*2:fr_st+11*2] = pals[0][2*9:2*10]
+
+    if reassign[5] == 6:
+        rom[ay_st+6*2:ay_st+7*2] = pals[5][2*8:2*9]
+        rom[ay_st+7*2:ay_st+8*2] = pals[5][2*6:2*7]
+        rom[ay_st+8*2:ay_st+9*2] = pals[5][2*9:2*10]
+        rom[ay_st+9*2:ay_st+10*2] = pals[5][2*10:2*11]
+        rom[ay_st+10*2:ay_st+11*2] = pals[5][2*7:2*8]
+    elif reassign[5] == 0:
+        # rom[ay_st+5*2:ay_st+6*2] = pals[5][2*6:2*7]
+        # rom[ay_st+6*2:ay_st+7*2] = pals[5][2*4:2*5]
+        rom[ay_st+7*2:ay_st+10*2] = pals[5][2*8:2*11]
+        rom[ay_st+10*2:ay_st+11*2] = pals[5][2*7:2*8]
+    elif reassign[5] == 2:
+        rom[ay_st+4*2:ay_st+5*2] = pals[5][2*5:2*6]
+        rom[ay_st+5*2:ay_st+7*2] = pals[5][2*8:2*10]
+        rom[ay_st+7*2:ay_st+8*2] = pals[5][2*6:2*7]
+        rom[ay_st+8*2:ay_st+9*2] = pals[5][2*7:2*8]
+        rom[ay_st+9*2:ay_st+10*2] = pals[5][2*10:2*11]
+        rom[ay_st+10*2:ay_st+11*2] = pals[5][2*4:2*5]
 
     if reassign[6] == 0:
         # shirt color
         rom[mg_st+7*2:mg_st+10*2] = pals[6][8*2:11*2]
+    elif reassign[6] == 1:
+        rom[mg_st+6*2:mg_st+7*2] = pals[6][7*2:8*2]
+        rom[mg_st+7*2:mg_st+8*2] = pals[6][10*2:11*2]
+
+        rom[mg_st+8*2:mg_st+9*2] = pals[6][6*2:7*2]
+        rom[mg_st+9*2:mg_st+10*2] = pals[6][8*2:9*2]
+        rom[mg_st+10*2:mg_st+11*2] = pals[6][9*2:10*2]
+    elif reassign[6] == 2:
+        rom[mg_st+5*2:mg_st+6*2] = pals[6][6*2:7*2]
+        rom[mg_st+6*2:mg_st+7*2] = pals[6][8*2:9*2]
+
+        rom[mg_st+8*2:mg_st+9*2] = pals[6][5*2:6*2]
+        rom[mg_st+9*2:mg_st+10*2] = pals[6][10*2:11*2]
+        rom[mg_st+10*2:mg_st+11*2] = pals[6][4*2:5*2]
+
+        rom[mg_st+4*2:mg_st+5*2] = pals[6][9*2:10*2]
+    elif reassign[6] == 5:
+        rom[mg_st+6*2:mg_st+7*2] = pals[6][7*2:8*2]
+        rom[mg_st+7*2:mg_st+8*2] = pals[6][10*2:11*2]
+
+        rom[mg_st+8*2:mg_st+9*2] = pals[6][6*2:7*2]
+        rom[mg_st+9*2:mg_st+10*2] = pals[6][8*2:9*2]
+        rom[mg_st+10*2:mg_st+11*2] = pals[6][9*2:10*2]
 
     # Many of the character portraits are gross but they require more care.
 
@@ -1772,7 +1956,7 @@ def extend_techs(rom):
 
     # This BMI needs to be CMP #$FF, BEQ $05
     rom[0x0CE75B:0x0CE75B+4] = bytearray.fromhex('5C 00 F0 5F')
-    
+
     rt = bytearray.fromhex('BF 95 F3 CC' +
                            '85 80' +
                            'BF 96 F3 CC' +
@@ -1835,6 +2019,52 @@ def extend_techs(rom):
     rom[rt3_st:rt3_st+len(rt3)] = rt3[:]
 
 
+def fix_burrow(rom, outfile):
+    '''
+    Old refs:  All of them should have the pc-index except for the one which
+    loads the PC into the party.
+    0x38932D
+    0x389275
+    0x389323
+    0x389336
+    0x389352 <-- known to be PC id
+    0x389353 <-- load PC in party
+    '''
+
+    # Use the old references to read the pc that should be in the burrow
+    pc = rom[0x389352:0x389352+1]
+    pc_load = rom[0x389353:0x389353+1]
+
+    pc_refs = [0x3892A3, 0x389350, 0x38935A, 0x389363, 0x38937F]
+
+    for (i, x) in enumerate(pc_refs):
+        outfile.seek(x)
+
+        # The enter name dialog has the upper 4 bits as C and the lower four
+        # as the pc index
+        if i == 2:
+            temp = pc[0]
+            pc[0] |= 0xC0
+            outfile.write(pc)
+            pc[0] = temp
+        else:
+            outfile.write(pc)
+
+    outfile.seek(0x389380)
+    outfile.write(pc_load)
+
+    # Now do the key item
+    # old key refs are 0x3891DE 0x3891E0.  Both hold the key item id
+
+    key = rom[0x3891DE:0x3891DE+1]
+
+    key_refs = [0x38920C, 0x38920E]
+
+    for x in key_refs:
+        outfile.seek(x)
+        outfile.write(key)
+
+
 def reassign_characters_file(filename, char_choices, dup_duals,
                              tech_rando_type, lost_worlds):
     with open(filename, 'rb') as infile:
@@ -1847,10 +2077,14 @@ def reassign_characters_file(filename, char_choices, dup_duals,
 
     with open(filename, 'wb') as outfile,\
          open('patches/chardup_telepod_patch.ips', 'rb') as telepod_patch,\
-         open('patches/chardup_spekkio_patch.ips', 'rb') as spek_patch:
+         open('patches/chardup_spekkio_patch.ips', 'rb') as spek_patch, \
+         open('patches/chardup_burrow_patch.ips', 'rb') as burrow_patch:
 
         outfile.write(rom)
         ipswriter.write_patch_objs(telepod_patch, outfile)
+        ipswriter.write_patch_objs(burrow_patch, outfile)
+
+        fix_burrow(rom, outfile)
 
         if not lost_worlds:
             ipswriter.write_patch_objs(spek_patch, outfile)
@@ -1902,8 +2136,6 @@ def reassign_characters(rom, reassign, dup_duals,
     if reassign[1] != 1:
         rom[0x36F1F2] = 0x1A  # Should be laughing now
 
-    
-
     # Probably need one for Frog cutting the mountain.
 
 
@@ -1920,7 +2152,7 @@ if __name__ == '__main__':
 
     x = get_ct_name('FlexgonMist')
     print_bytes(x, 16)
-    
+
     quit()
     # orig_db = TechDB.db_from_rom_internal(rom)
 
