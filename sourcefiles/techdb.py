@@ -1384,7 +1384,7 @@ class TechDB:
         # There's a very weird bug where if there are too many techs the menu
         # reqs will write over graphics pointers in memory.  For now, kill
         # the write.
-        if db.group_sizes[-1] > 0x7f:
+        if db.group_sizes[-1] > 0x75:
             rom[0x3FF94B:0x3FF94D] = [0xEA, 0xEA]
 
         # $FF/F98C BF 53 29 CC LDA $CC2953,x
