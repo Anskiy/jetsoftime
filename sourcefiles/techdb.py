@@ -715,7 +715,7 @@ class TechDB:
         else:
             # If desc_ptr is not set, just add the desc to the end and set the
             # pointer to the new text.
-            
+
             new_ptr = self.desc_start+len(self.descs)
             new_ptr_b = to_little_endian(new_ptr, 2)
 
@@ -1373,28 +1373,17 @@ class TechDB:
         rom[0x3FF97B:0x3FF97B+3] = rock_grp_start_b[:]
 
         # Menu Req references that depend on number of techs
-        num_dual_techs = 3*(db.first_dual_grp-7)
-        trip_menu_mp_start = menu_mp_req_start + 3*2*num_dual_techs
+        num_dual_techs = 3*(db.first_trip_grp-7)
+        trip_menu_mp_start = menu_mp_req_start + 2*num_dual_techs
         trip_menu_mp_start_b = to_little_endian(trip_menu_mp_start, 3)
 
         # Menu MP start of trips
         # $FF/F947 BF 35 29 CC LDA $CC2935,x --> 0x3FF948
         rom[0x3FF948:0x3FF948+3] = trip_menu_mp_start_b
 
-        # There's a very weird bug where if there are too many techs the menu
-        # reqs will write over graphics pointers in memory.  For now, kill
-        # the write.
-        if db.group_sizes[-1] > 0x75:
-            rom[0x3FF94B:0x3FF94D] = [0xEA, 0xEA]
-
         # $FF/F98C BF 53 29 CC LDA $CC2953,x
         # $CC2953 is the start of the rock part of the menu_mp_req
         num_non_rock_trips = db.first_rock_grp-db.first_trip_grp
-
-        # Loading menu page + a value to get menu page descs
-        # $C2/BE2F 69 76       ADC #$76
-        # Should be num desc ptrs - 3
-        rom[0x02BE30] = db.desc_ptr_count - 3
 
         if(db.first_rock_grp >= len(db.menu_grps)):
             mmp_offset = 0
@@ -1403,33 +1392,46 @@ class TechDB:
                 2*(db.group_sizes[db.first_rock_grp]-0x39)\
                 + num_non_rock_trips
 
-
         rock_mmp_start = menu_mp_req_start + mmp_offset
         rom[0x3FF98D:0x3FF98D+3] = to_little_endian(rock_mmp_start, 3)
 
-        """
-        (db.orig_control_start, db.orig_effect_start,
-         db.orig_gfx_start, db.orig_target_start,
-         db.orig_bat_grp_start, db.orig_menu_grp_start,
-         db.orig_name_start, db.orig_desc_ptr_start,
-         db.orig_desc_start, db.orig_techs_learned_start,
-         db.orig_lrn_req_start, db.orig_lrn_ref_start,
-         db.orig_mp_start, db.orig_menu_req_start,
-         db.orig_group_sizes_start, db.orig_atb_pen_start) = \
-            (control_start, effect_start,
-             gfx_start, target_start,
-             bat_grp_start, menu_grp_start,
-             name_start, desc_ptr_start,
-             desc_start, techs_learned_start,
-             lrn_req_start, lrn_ref_start,
-             mp_start, menu_mp_req_start,
-             group_sizes_start, atb_pen_start)
-        """
+        # There's a very weird bug where if there are too many techs the menu
+        # reqs will write over graphics pointers in memory.  We are going to
+        # expand the list and shift it backwards.
+
+        # Set the start of the menu reqs 7*0x40 back.  Somehow this is all free
+        # at the time we need it to be.
+
+        # $FF/F8C1 A9 40 16    LDA #$1640
+        rom[0x3FF8C2:0x3FF8C2+2] = to_little_endian(0x1480, 2)
+
+        # Originally pc-id was obtained as 0xID00 and then LSR'd twice to
+        # get an index into the 0x40 byte range for each PC.  We're doubling it
+        # so remove one LSR.
+        # $FF/F8E9 4A          LSR A
+        rom[0x3FF8E9] = 0xEA   # NOP
+
+        # $FF/F8DE 4A          LSR A
+        rom[0x3FF8DE] = 0xEA
+
+        # $FF/F941 4A          LSR A
+        rom[0x3FF941] = 0xEA
+
+        # Now when reading.
+        # $C2/BC3A 4A          LSR A
+        rom[0x02BC3A] = 0xEA   # NOP
+
+        # $C2/BC46 BD 07 16    LDA $1607,x[$7E:1640]   A:0000 X:0039 Y:0001
+        # Note X has an absolute tech_id in it, so we need to go 0x39 spots
+        # before the new start (0x1480)
+        rom[0x02BC47:0x02BC47+2] = to_little_endian(0x1480-0x39, 2)
+
+        # Loading menu page + a value to get menu page descs
+        # $C2/BE2F 69 76       ADC #$76
+        # Should be num desc ptrs - 3
+        rom[0x02BE30] = db.desc_ptr_count - 3
 
         db.orig_techs_learned_start = techs_learned_start
-
-        # After writing, the orig starts should be changed?  Otherwise
-        # writing twice would break things.
 
         # When the characters have no duals and/or no triples some of the menus
         # get weird because they look at the start of the next group for loop
