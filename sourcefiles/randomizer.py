@@ -22,6 +22,7 @@ import randomizergui as gui
 import tabchange as tabwriter
 import fastmagic
 import charrando
+import roboribbon
 
 def read_names():
         p = open("names.txt","r")
@@ -388,6 +389,7 @@ def generate_rom():
      if difficulty == "hard":
          bigpatches.write_patch_alt("patches/hard.ips",outfile)
      tabwriter.rewrite_tabs(outfile)#Psuedoarc's code to rewrite Power and Magic tabs and make them more impactful
+     roboribbon.robo_ribbon_speed_file(outfile)
      print("Randomizing treasures...")
      treasures.randomize_treasures(outfile,difficulty,tab_treasures)
      hardcoded_items.randomize_hardcoded_items(outfile,tab_treasures)

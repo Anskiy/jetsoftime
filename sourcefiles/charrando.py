@@ -106,10 +106,31 @@ def max_expand_empty_db(orig_db, reassign, dup_duals=False):
                         set([0, 1, 3, 2, 4, 5]).intersection(orig_set))):
                 new_menu_grps.append(grp)
 
-                # dummy battle group gets overwritten once we start adding
-                # the tech data in
-                new_bat_grps.extend([0, 0, 0])
+                # Menu Req order is given by the battle group which matches
+                # the menu group's index.  So we need to match that order when
+                # we reassign.
 
+                # Look up the old representative bat grp
+                if reassign[i] == reassign[j]:
+                    rep_grp = [reassign[i], reassign[j], 0xFF]
+                else:
+                    rep_grp = get_record(orig_db.bat_grps, orig_ind, 3)
+
+                new_rep_grp = bytearray()
+                pcs = [i, j]
+
+                # Find the reassign version of the old representative group
+                for el in rep_grp:
+                    if el == 0xFF:
+                        new_rep_grp.append(0xFF)
+                    else:
+                        for x in pcs:
+                            if reassign[x] == el:
+                                new_rep_grp.append(x)
+                                pcs.remove(x)
+                                continue
+
+                new_bat_grps.extend(new_rep_grp)
                 # There are always 3 techs in a dual group
                 new_grp_thresh.append(new_grp_thresh[-1]+3)
                 cur_grp_ind += 1
@@ -593,26 +614,26 @@ def reassign_tech(tech, new_pcs, reassign):
         lrn_req = tech['lrn_req']
     else:
         lrn_req = [0, 0, 0]  # dummy values
-    mmp = tech['mmp']
-
-    if len(mmp) == 2:
-        mmp.append(0xFF)
 
     bat_grp, new_grp = zip(*sorted(zip(bat_grp, new_grp)))
-    new_grp, lrn_req, mmp = zip(*sorted(zip(new_grp, lrn_req, mmp)))
-
-    if mmp[-1] == 0xFF:
-        mmp = mmp[0:2]
+    dummy, lrn_req = zip(*sorted(zip(new_grp, lrn_req)))
 
     if tech['lrn_req'] is not None:
         tech['lrn_req'] = lrn_req
 
     # Now apply reassign to mmp
+    mmp = tech['mmp'][:]
+
+    # Triple techs need mmp in pc order, so sort them before reassigning
+    if len(mmp) == 3:
+        dummy, mmp = zip(*sorted(zip(new_grp, mmp)))
+
     new_mmp = bytearray()
 
     for el in range(len(mmp)):
         pc = (mmp[el]-1) // 8
         tech_num = (mmp[el]-1) % 8
+
         temp_grp = tech['bat_grp'][:]
         for z in temp_grp:
             if z == 0xFF:
