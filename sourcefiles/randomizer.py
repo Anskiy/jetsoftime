@@ -37,8 +37,8 @@ sourcefile = ""
 outputfolder = ""
 difficulty = ""
 glitch_fixes = ""
-fast_move = ""
-sense_dpad = ""
+#fast_move = ""
+#sense_dpad = ""
 lost_worlds = ""
 boss_scaler = ""
 zeal_end = ""
@@ -63,8 +63,8 @@ def command_line():
      global outputfolder
      global difficulty
      global glitch_fixes
-     global fast_move
-     global sense_dpad
+#     global fast_move
+#     global sense_dpad
      global lost_worlds
      global boss_scaler
      global zeal_end
@@ -108,14 +108,14 @@ def command_line():
      glitch_fixes = glitch_fixes.upper()
      if glitch_fixes == "Y":
         flags = flags + "g" 
-     fast_move = input("Would you like to move faster on the overworld/Epoch(s)? Y/N ")
-     fast_move = fast_move.upper()
-     if fast_move == "Y":
-        flags = flags + "s"
-     sense_dpad = input("Would you like faster dpad inputs in menus(d)? Y/N ")
-     sense_dpad = sense_dpad.upper()
-     if sense_dpad == "Y":
-        flags = flags + "d"
+     #fast_move = input("Would you like to move faster on the overworld/Epoch(s)? Y/N ")
+     #fast_move = fast_move.upper()
+     #if fast_move == "Y":
+     #   flags = flags + "s"
+     #sense_dpad = input("Would you like faster dpad inputs in menus(d)? Y/N ")
+     #sense_dpad = sense_dpad.upper()
+     #if sense_dpad == "Y":
+     #   flags = flags + "d"
      lost_worlds = input("Would you want to activate Lost Worlds(l)? Y/N ")
      lost_worlds = lost_worlds.upper()
      if lost_worlds == "Y":
@@ -213,8 +213,8 @@ def handle_gui(datastore):
   global outputfolder
   global difficulty
   global glitch_fixes
-  global fast_move
-  global sense_dpad
+#  global fast_move
+#  global sense_dpad
   global lost_worlds
   global boss_scaler
   global zeal_end
@@ -260,8 +260,8 @@ def handle_gui(datastore):
   
   # Set the flag variables based on what the user chose
   glitch_fixes = get_flag_value(datastore.flags['g'])
-  fast_move = get_flag_value(datastore.flags['s'])
-  sense_dpad = get_flag_value(datastore.flags['d'])
+  #fast_move = get_flag_value(datastore.flags['s'])
+  #sense_dpad = get_flag_value(datastore.flags['d'])
   lost_worlds = get_flag_value(datastore.flags['l'])
   boss_scaler = get_flag_value(datastore.flags['b'])
   boss_rando = get_flag_value(datastore.flags['ro'])
@@ -275,15 +275,19 @@ def handle_gui(datastore):
   duplicate_chars = get_flag_value(datastore.flags['dc'])
 
   # dc settings
-  char_choices = []
-  for i in range(7):
-      char_choices.append([])
-      for j in range(7):
-          if datastore.char_choices[i][j].get() == 1:
-              char_choices[i].append(j)
+  if datastore.char_choices is None:
+      char_choices = [[1 for i in range(0,7)] for j in range(0,7)]
+      same_char_techs = "N"
+  else:
+      char_choices = []
+      for i in range(7):
+          char_choices.append([])
+          for j in range(7):
+              if datastore.char_choices[i][j].get() == 1:
+                  char_choices[i].append(j)
 
+      same_char_techs = get_flag_value(datastore.dup_techs)
   
-  same_char_techs = get_flag_value(datastore.dup_techs)
   
   # source ROM
   sourcefile = datastore.inputFile.get()
@@ -370,11 +374,9 @@ def generate_rom():
         patches.patch_file("patches/unequip_patch.txt",outfile)
         patches.patch_file("patches/fadeout_patch.txt",outfile)
         patches.patch_file("patches/hp_overflow_patch.txt",outfile)
-     if fast_move == "Y":
-        patches.patch_file("patches/fast_overworld_walk_patch.txt",outfile)
-        patches.patch_file("patches/faster_epoch_patch.txt",outfile)
-     if sense_dpad == "Y":
-        patches.patch_file("patches/faster_menu_dpad.txt",outfile)
+     patches.patch_file("patches/fast_overworld_walk_patch.txt",outfile)
+     patches.patch_file("patches/faster_epoch_patch.txt",outfile)
+     patches.patch_file("patches/faster_menu_dpad.txt",outfile)
      if zeal_end == "Y":
         patches.patch_file("patches/zeal_end_boss.txt",outfile)
      if lost_worlds == "Y":

@@ -71,14 +71,18 @@ class DataStore:
       data["inputFile"] = self.inputFile.get()
       data["outputFolder"] = self.outputFolder.get()
 
-      choices = [[0 for i in range(7)] for j in range(7)]
-      for i in range(7):
-          for j in range(7):
-              choices[i][j] = self.char_choices[i][j].get()
+      if self.char_choices is None:  # DC settings has never been opened before
+          choices = [[1 for i in range(7)] for j in range(7)]
+          dup_techs = 0
+      else:
+          choices = [[1 for i in range(7)] for j in range(7)]
+          for i in range(7):
+              for j in range(7):
+                  choices[i][j] = self.char_choices[i][j].get()
+          dup_techs = self.dup_techs.get()
+          
       data["charChoices"] = choices
-
-      data['dupDuals'] = self.dup_techs.get()
-
+      data['dupDuals'] = dup_techs
       
       file = open(str(filePath), "wb")
       pickle.dump(data, file)
@@ -256,8 +260,8 @@ def presetRace():
     flagClear()
     datastore.difficulty.set("normal")
     datastore.flags['g'].set(1)
-    datastore.flags['s'].set(1)
-    datastore.flags['d'].set(1)
+#    datastore.flags['s'].set(1)
+#    datastore.flags['d'].set(1)
     datastore.flags['z'].set(1)
     datastore.flags['p'].set(1)
     datastore.techRando.set("Fully Random")
@@ -266,8 +270,8 @@ def presetNew():
     flagClear()
     datastore.difficulty.set("easy")
     datastore.flags['g'].set(1)
-    datastore.flags['s'].set(1)
-    datastore.flags['d'].set(1)
+#    datastore.flags['s'].set(1)
+#    datastore.flags['d'].set(1)
     datastore.flags['z'].set(1)
     datastore.flags['p'].set(1)
     datastore.flags['m'].set(1)
@@ -277,8 +281,8 @@ def presetLost():
     flagClear()
     datastore.difficulty.set("normal")
     datastore.flags['g'].set(1)
-    datastore.flags['s'].set(1)
-    datastore.flags['d'].set(1)
+#    datastore.flags['s'].set(1)
+#    datastore.flags['d'].set(1)
     datastore.flags['z'].set(1)
     datastore.flags['l'].set(1)
     datastore.techRando.set("Fully Random")
@@ -287,8 +291,8 @@ def presetHard():
     flagClear()
     datastore.difficulty.set("hard")
     datastore.flags['g'].set(1)
-    datastore.flags['s'].set(1)
-    datastore.flags['d'].set(1)
+#    datastore.flags['s'].set(1)
+#    datastore.flags['d'].set(1)
     datastore.flags['b'].set(1)
     datastore.flags['c'].set(1)
     datastore.techRando.set("Balanced Random")
@@ -327,19 +331,19 @@ def getGameOptionsFrame(window):
   CreateToolTip(checkButton, "Disables common glitches such as the unequip and save anywhere glitches.")
   
   # Faster overworld movement
-  var = tk.IntVar()
-  datastore.flags['s'] = var
-  checkButton = tk.Checkbutton(frame, text="Fast overworld movement (s)", variable = var)
-  checkButton.grid(row=row, column=2, sticky=tk.W, columnspan=2)
-  CreateToolTip(checkButton, "Move faster on the overworld while walking and riding in the Epoch.")
-  row = row + 1
+#  var = tk.IntVar()
+#  datastore.flags['s'] = var
+#  checkButton = tk.Checkbutton(frame, text="Fast overworld movement (s)", variable = var)
+#  checkButton.grid(row=row, column=2, sticky=tk.W, columnspan=2)
+#  CreateToolTip(checkButton, "Move faster on the overworld while walking and riding in the Epoch.")
+#  row = row + 1
   
   # faster dpad inputs in menus
-  var = tk.IntVar()
-  datastore.flags['d'] = var
-  checkButton = tk.Checkbutton(frame, text="Fast dpad in menus (d)", variable = var)
-  checkButton.grid(row=row, column=0, sticky=tk.W, columnspan=2)
-  CreateToolTip(checkButton, "Dpad inputs in menus are faster and more responsive.")
+#  var = tk.IntVar()
+#  datastore.flags['d'] = var
+#  checkButton = tk.Checkbutton(frame, text="Fast dpad in menus (d)", variable = var)
+#  checkButton.grid(row=row, column=0, sticky=tk.W, columnspan=2)
+#  CreateToolTip(checkButton, "Dpad inputs in menus are faster and more responsive.")
   
   # Quiet Mode (No Music)
   var = tk.IntVar()
