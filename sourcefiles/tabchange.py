@@ -80,13 +80,13 @@ def rewrite_tabs(filename, rt_start=0x5F7450):
     rt_start_addr = to_little_endian(rt_start,3)
 
     # Change these, make them function parameters, etc to alter the magnitudes
-    random_num = rand.randrange(0,101,1)
-    if random_num < 50:
+    random_num = rand.randrange(0,100,1)
+    if random_num < 33:
+        pow_add = bytearray([2])
+    elif random_num > 32 and random_num < 66:
         pow_add = bytearray([3])
-    elif random_num > 50 and random_num < 91:
-        pow_add = bytearray([5])
     else:
-        pow_add = bytearray([7])
+        pow_add = bytearray([4])
     random_num = rand.randrange(0,101,1)
     if random_num < 33:
         mag_add = bytearray([2])
