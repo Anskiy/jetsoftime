@@ -508,6 +508,11 @@ def get_ff_hex_mist(old_db):
     hex_mist = old_db.get_tech(0x26)  # water 2 base
     hex_mist['bat_grp'] = [4, 4, 0xFF]
     hex_mist['control'][0] &= 0x7F
+
+    # Every (?) magic dual tech has this set to 0x61.
+    # It was 0x00 left over from the water 2 base and damage was not right.
+    hex_mist['control'][1] = 0x61
+
     hex_mist['control'][6] = 0x26
     hex_mist['control'][8:10] = [9, 9]
 
@@ -2099,11 +2104,13 @@ def reassign_characters_file(filename, char_choices, dup_duals,
     with open(filename, 'wb') as outfile,\
          open('patches/chardup_telepod_patch.ips', 'rb') as telepod_patch,\
          open('patches/chardup_spekkio_patch.ips', 'rb') as spek_patch, \
-         open('patches/chardup_burrow_patch.ips', 'rb') as burrow_patch:
+         open('patches/chardup_burrow_patch.ips', 'rb') as burrow_patch, \
+         open('patches/chardup_choras_inn_patch.ips', 'rb') as choras_patch:
 
         outfile.write(rom)
         ipswriter.write_patch_objs(telepod_patch, outfile)
         ipswriter.write_patch_objs(burrow_patch, outfile)
+        ipswriter.write_patch_objs(choras_patch, outfile)
 
         fix_burrow(rom, outfile)
 
