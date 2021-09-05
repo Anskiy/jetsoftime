@@ -440,10 +440,9 @@ def generate_rom():
      if lost_worlds == "Y":         
        f = open(outfile,"r+b")
        bigpatches.write_patch_alt("patches/mysticmtnfix.ips",outfile)
-       bigpatches.write_patch_alt("patches/losteot.ips",outfile)
      #Bangor Dome event fix if character locks are on
-       if locked_chars == "Y":
-         bigpatches.write_patch_alt("patches/bangorfix.ips",outfile)
+ #      if locked_chars == "Y":
+ #        bigpatches.write_patch_alt("patches/bangorfix.ips",outfile)
        f.close()
      print("Randomization completed successfully.")
 
