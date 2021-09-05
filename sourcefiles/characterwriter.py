@@ -102,13 +102,16 @@ def write_chars(file_pointer,char_dict,locked_chars,lost_worlds,outfile):
           charnames[1] = 0x39CD1
           chars[0] = 0x39CD3
           chars[1] = 0x39CD5
-      if locked_chars == "Y":
+      if locked_chars == "Y":    
           charnames[4] = 0x372AB9
           chars2[4] = 0x372AAF
           chars3[4] = 0x372AC3
           chars4[4] = 0x372ADD
           charloads[4] = 0x372ADE
-          patch.write_patch("patches/locked_chars.ips",outfile)		  
+          if lost_worlds == "Y":
+              patch.write_patch("patches/lw_locked_chars.ips",outfile)
+          else:
+              patch.write_patch("patches/locked_chars.ips",outfile)		  
       i = 0
       while i < 7:
             char = char_dict[char_keys[i]][0]
