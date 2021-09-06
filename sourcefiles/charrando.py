@@ -2108,14 +2108,15 @@ def reassign_characters_file(filename, char_choices, dup_duals,
          open('patches/chardup_choras_inn_patch.ips', 'rb') as choras_patch:
 
         outfile.write(rom)
-        ipswriter.write_patch_objs(telepod_patch, outfile)
-        ipswriter.write_patch_objs(burrow_patch, outfile)
-        ipswriter.write_patch_objs(choras_patch, outfile)
-
-        fix_burrow(rom, outfile)
 
         if not lost_worlds:
             ipswriter.write_patch_objs(spek_patch, outfile)
+
+            ipswriter.write_patch_objs(telepod_patch, outfile)
+            ipswriter.write_patch_objs(burrow_patch, outfile)
+            ipswriter.write_patch_objs(choras_patch, outfile)
+            
+            fix_burrow(rom, outfile)
 
 
 # Do everything to apply the reassignment list to the rom
