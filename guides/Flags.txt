@@ -53,7 +53,7 @@ tb: Turns all loot from chests into tabs. Note that shops and monster drops are 
 
 cr: An alternate mode, where key items can be found from chests and are not limited to specific bosses or quests. Note that key items can never be in chests that are lost or made inaccessible through events, like the Prison sequence or Magus' Castle. They will also never show up in the endgame dungeons of Ocean Palace and Black Omen either. Further information here: https://docs.google.com/document/d/1wA4TlxOiVNS-WvPRRNnOIS4toF8bpgElaf1hz9HT3As/edit?usp=sharing.
 
-dc: This flag places duplicates of characters. Note that this mostly affects combat gameplahy only; for progression purposes you will still require the characters initially named Frog, Robo etc to complete their respective quests. This flag also has options to control how many duplicates get placed, and of what characters.
+dc: This flag places duplicates of characters. Note that this mostly affects combat gameplay only; for progression purposes you will still require the characters initially named Frog, Robo etc to complete their respective quests. This flag also has options to control how many duplicates get placed, and of what characters.
 
 Shop Prices:
 
