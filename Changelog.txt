@@ -1053,3 +1053,12 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 - Mammon Machine's level lowered to 37 from 48
 - Mammon Machine now raises its magic by 5 rather than 20 when hit by a spell.
 - Grand Dream power upped to 30.
+03/10/2021
+- Added dual boss randomization
+- Added duplicate characters as an option
+- Removed the "s" and "d" flags, made them always apply to every seed
+- Upped Falcon Hit's power to 1.5x Spincut
+- Altered Robo's Rbn to give + 3 speed in addition to its other boosts
+- Changed distribution of Power on Power Tabs to 2/3/4, 33% chance
+- Made the Pendant open up the portals in Lost Worlds. They all lead to the Millenial Fair now.
+- Removed some duplicate names, thanks iamcorvidae!
