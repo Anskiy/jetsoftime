@@ -2,9 +2,9 @@ The randomizer features several flags to provide flexible options. Some of them 
 
 g: This flag disables most well known glitches, like emptying equipment slots, saving anywhere you can, and using quick menu switching to activate scripted encounters from a distance and skip them. Tricks that aren't blocked by this flag are generally accepted as valid for races, the most notable one being the menu glitch.
 
-s: This flag speeds up the Epoch and overworld movement speed.
+s: Depreciated flag, this used to choose whether to speed up overworld movement or not, but is now on for all seeds.
 
-d: This flag makes dpad inputs faster and more responsive.
+d: Depreciated flag, this used to choose whether to make dpad inputs faster and more responsive, but is now on for all seeds.
 
 q: Stops all music from playing.
 
@@ -20,7 +20,7 @@ You start out in 2300 AD, and can explore it, 12000 BC and Prehistory freely.
 
 Your characters start at level 15, have three techs learnt, and have magic unlocked.
 
-You can buy from the guarantee shop in the fair before starting, but can't access it afterwards until either Zeal 2 or the Lavos shell is defeated.
+You can buy from the guarantee shop in the fair before starting, but can't access it afterwards until either Zeal 2 or the Lavos shell is defeated or you have the Pendant.
 
 To access the Ocean Palace, you need to defeat Black Tyrano and collect the Ruby Knife.
 
@@ -52,6 +52,8 @@ m: Unlocks magic for all relevant characters from the start.
 tb: Turns all loot from chests into tabs. Note that shops and monster drops are unaffected.
 
 cr: An alternate mode, where key items can be found from chests and are not limited to specific bosses or quests. Note that key items can never be in chests that are lost or made inaccessible through events, like the Prison sequence or Magus' Castle. They will also never show up in the endgame dungeons of Ocean Palace and Black Omen either. Further information here: https://docs.google.com/document/d/1wA4TlxOiVNS-WvPRRNnOIS4toF8bpgElaf1hz9HT3As/edit?usp=sharing.
+
+dc: This flag places duplicates of characters. Note that this mostly affects combat gameplahy only; for progression purposes you will still require the characters initially named Frog, Robo etc to complete their respective quests. This flag also has options to control how many duplicates get placed, and of what characters.
 
 Shop Prices:
 
