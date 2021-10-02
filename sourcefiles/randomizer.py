@@ -26,7 +26,7 @@ import roboribbon
 
 def read_names():
         p = open("names.txt","r")
-        names = p.readline()
+        names = p.readline().strip()
         names = names.split(",")
         p.close()
         return names
