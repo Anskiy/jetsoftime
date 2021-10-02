@@ -1061,4 +1061,4 @@ Mid Ethers as a charm. Changed their Shadow resistance to normal.
 - Altered Robo's Rbn to give + 3 speed in addition to its other boosts
 - Changed distribution of Power on Power Tabs to 2/3/4, 33% chance
 - Made the Pendant open up the portals in Lost Worlds. They all lead to the Millenial Fair now.
-- Removed some duplicate names, thanks iamcorvidae!
+- Removed some duplicate names, thanks ianmcorvidae!
