@@ -32,9 +32,9 @@ Lastly, if you're having trouble running the executable, you can try using the o
 
 Designers: Anskiy, Abyssonym, Pseudoarc, Anguirel
 
-Developers: Anskiy, Abyssonym, Myself086, Anguirel, FutureForce14, gameboyf9, Psuedoarc
+Developers: Anskiy, Abyssonym, Myself086, Anguirel, FutureForce14, gameboyf9, Pseudoarc
 
-Technical Assistance: Mauron, Myself086, Lagolunatic, Psuedoarc
+Technical Assistance: Mauron, Myself086, Lagolunatic, Pseudoarc
 
 Notable Testers: Muppetsinspace, MisterLichTV, TheBigSalarius, proccy, boozewizard, Korenth, Taco Hero, silverneo, many others(Sorry if I forgot your name!)
 
