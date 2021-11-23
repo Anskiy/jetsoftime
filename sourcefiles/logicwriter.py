@@ -116,7 +116,8 @@ def randomize_keys(char_locs,outfile,locked_chars):
               lockeys.append("arris")
               lockeys.append("geno")
               lockeys.append("sun")
-              loclist.append("endoftime")
+              if "woe" not in lockeys:
+                  lockeys.append("woe")
               determine_char_locks(loclist,char_locs,"proto")
           if "endoftime" in loclist:
             if "woe" not in lockeys:
