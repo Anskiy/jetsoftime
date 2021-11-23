@@ -116,15 +116,16 @@ def randomize_keys(char_locs,outfile,locked_chars):
               lockeys.append("arris")
               lockeys.append("geno")
               lockeys.append("sun")
+              loclist.append("endoftime")
               determine_char_locks(loclist,char_locs,"proto")
-          if "endoftime" in loclist: 
+          if "endoftime" in loclist:
+            if "woe" not in lockeys:
+                lockeys.append("woe")          
             if "reptite" not in lockeys:
                 lockeys.append("reptite")
                 if locked_chars != "Y":                     
                     determine_char_locks(loclist,char_locs,"dactyl")
-            if "dream" in loclist and "woe" not in lockeys:
-                lockeys.append("woe")
-                if locked_chars == "Y":
+                if "dream" in loclist and locked_chars == "Y":
                     determine_char_locks(loclist,char_locs,"dactyl")
           if "giant" in loclist and "claw" not in lockeys:
               lockeys.append("claw")
@@ -135,9 +136,7 @@ def randomize_keys(char_locs,outfile,locked_chars):
           if "desert" in loclist and "desert" not in lockeys:
               lockeys.append("desert")
           if "sword1" in loclist and "sword2" in loclist:
-            if "sword3" in loclist and "woe" not in lockeys:
-                lockeys.append("woe")
-            determine_char_locks(loclist,char_locs,"burrow")
+              determine_char_locks(loclist,char_locs,"burrow")
           if "endoftime" in loclist and "trial" in lockeys \
           and "melchior" in loclist and 2300 in loclist and "melchior" not in lockeys:
                 lockeys.append("melchior")
