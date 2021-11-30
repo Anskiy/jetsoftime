@@ -201,9 +201,6 @@ class Game:
   def canAccessPrehistory(self):
     return self.hasKeyItem(KeyItems.gatekey) or self.lostWorlds
     
-  def canAccessTyranoLair(self):
-    return self.canAccessPrehistory() and self.hasKeyItem(KeyItems.dreamstone)
-    
   def hasMasamune(self):
     return (self.hasKeyItem(KeyItems.hilt) and 
             self.hasKeyItem(KeyItems.blade))
@@ -213,9 +210,9 @@ class Game:
             self.hasCharacter(Characters.Frog))
     
   def canAccessDarkAges(self):
-    return ((self.canAccessTyranoLair()) or
-           (self.canAccessMagusCastle()) or
-           (self.lostWorlds))
+    return (self.canAccessPrehistory() or
+           self.canAccessFuture() or
+           self.lostWorlds)
         
   def canAccessOceanPalace(self):
     return (self.canAccessDarkAges() and 
