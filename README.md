@@ -1,14 +1,14 @@
 Jets of Time: An Open Ended Chrono Trigger Randomizer
 
-Version: 3.1.0
+Version: 3.1.1
 
-Date: October 3, 2021
+Date: January 17, 2022
 
 URL: https://github.com/Anskiy/jetsoftime/
 
 https://sites.google.com/view/ctrandoinfo/home
 
-Online generator: http://ctjot.com/3_1_0/
+Online generator: http://ctjot.com/
 
 Contact: https://discord.gg/cKYjHwj
          
